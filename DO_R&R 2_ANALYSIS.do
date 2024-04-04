@@ -7,9 +7,9 @@ global output "E:\丢失文件\数据恢复\zkx\5. RUC\8. Spring 2024.2.19-7.30\
 use "$data\ANALYSIS_BASE_RAND_CVF_PHO_HOM_CLI_ANALYSIS.dta"
 
 
-********************************************************************************
+**************************************************************
 **# DURATION - TIME SPAN
-********************************************************************************
+**************************************************************
 * 1) BASELINE - FUP sessions
 	tab dateofinterview
 	
@@ -80,6 +80,7 @@ gen coun_fup_span = FUP_date_noCLI - COUN_interviewdate
 		capture drop CLIN_interviewdate
 	/*Generate Clinic date*/ todate CLIN_101A, gen(CLIN_interviewdate) p(yyyymmdd)
 
+	*** use FUP date which prioritizes PHO_date, followed by later HOM_date, followed by CLIN_date who were not reached by phone/home visits
 		capture drop coun_clin_span
 	gen coun_clin_span = CLIN_interviewdate - COUN_interviewdate
 		sum coun_clin_span
@@ -87,6 +88,219 @@ gen coun_fup_span = FUP_date_noCLI - COUN_interviewdate
 	replace coun_fup_span = coun_clin_span if mi(coun_fup_span) & !mi(coun_clin_span)
 		sum coun_fup_span if COUN__FV_1 == 1 
 
-	* use FUP_date to subtract COUN__FV_DATE
+	*** use FUP_date which prioritizes CLIN_date, followed by PHO_date, followed by later HOM_date to subtract COUN__FV_DATE
 	gen coun_fup_span2 = FUP_date - COUN_interviewdate
 		sum coun_fup_span2 if COUN__FV_1 == 1 
+
+**# 2) Prior knowledge about contraception
+sum w1_w03_w301*
+
+egen prior_knowledge = rowtotal(w1_w03_w3011-w1_w03_w30116)
+
+br w1_w03_w301* prior_knowledge if prior_knowledge != w1_w03_w3011 + w1_w03_w3012 + w1_w03_w3013 +w1_w03_w3014 +w1_w03_w3015 +w1_w03_w3016 +w1_w03_w3017 +w1_w03_w3018 +w1_w03_w3019 +w1_w03_w30110 +w1_w03_w30111 +w1_w03_w30112 +w1_w03_w30113 +w1_w03_w30114 +w1_w03_w30115 +w1_w03_w30116
+
+sum prior_knowledge,d
+
+	capture drop prior_knowledge_bi
+gen prior_knowledge_bi = (prior_knowledge > 4) if !mi(prior_knowledge)
+	ta prior_knowledge_bi
+label var prior_knowledge "Prior knowledge about contraception"
+
+global DESCVARS prior_knowledge
+
+* Table 1
+eststo allsample: quietly estpost summarize $DESCVARS 
+eststo w_husb: quietly estpost summarize $DESCVARS if HUSB_T ==1
+eststo wo_husb: quietly estpost summarize $DESCVARS if HUSB_T ==0
+eststo husb_diff: quietly estpost ttest $DESCVARS, by(HUSB_T)
+
+esttab allsample w_husb wo_husb husb_diff using "$output\summary_stats.tex",  booktabs fragment ///
+label cells("mean(pattern(1 1 1 0) fmt(2)) b(star pattern(0 0 0 1) fmt(2))") ///
+nonumbers replace collabels(none) compress style(tab) mtitles("All" "Yes" "No" "Difference")  ///
+prehead("\begin{table}\begin{center}\caption{Summary Statistics}\label{tab: husbandsummstats}\tabcolsep=0.2cm\scalebox{0.75}{\begin{tabular}{lcccc}\toprule") ///
+posthead("\midrule\textbf{A. Partner Invitation Group} \\\\[-1ex]") nogaps postfoot("\midrule")
+
+
+* 0) SHORT ITT
+eststo clear 
+eststo allsample: quietly estpost summarize $DESCVARS 
+eststo short_gp: quietly estpost summarize $DESCVARS if SHORT_T == 1 
+eststo long_gp: quietly estpost summarize $DESCVARS if SHORT_T == 0 
+eststo short_diff: quietly estpost ttest $DESCVARS, by(SHORT_T)
+
+esttab allsample short_gp long_gp short_diff using "$output\summary_stats.tex",  booktabs fragment ///
+label cells("mean(pattern(1 1 1 0) fmt(2)) b(star pattern(0 0 0 1) fmt(2))") nomtitles ///
+nonumbers append collabels(none) compress style(tab) ///
+posthead("\textbf{B. Short, Tailored Counseling Group} \\\\[-1ex]") nogaps ///
+postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Notes: Currently working refers to women's work status at the baseline. First cohabitation age is the age at which women started to live with her (first) husband. Current FP method: Injectables / Implants represents the proportion of women who were using injectables / Implants at baseline among all current users of contraception. Weight to top attribute refers to the number of counters (out of 20 counters) the woman assigned to their top method attribute. Intention to switch methods is woman's answer to the question: if you had the choice to switch to another method, would you like to switch? Husband support FP is defined from the question: on a scale of 1 to 5, with 1 being strongly supportive and 5 being strongly opposed, how do you believe your husband feels towards using family planning methods? This variable takes 1 if her husband was strongly supportive or supportive of contraceptive use, and 0 otherwise. *** 1\%, ** 5\%, * 10\%.}\end{table}") nogaps
+
+**# 3) short counseling group: counseling ideal method falls into the attribute-based counseling list
+version 13
+clear all
+
+use "E:\丢失文件\数据恢复\zkx\5. RUC\8. Spring 2024.2.19-7.30\1.1 MBBS\V2. Replication Package 2024.4.4\\MBBS_Analysis_data.dta"
+
+global balance_covariates "age_binary cont_use1 eff_attribute"
+
+global covariates "age_binary cont_use1 eff_attribute i.w1_area"
+
+global covariates1 "age_binary cont_use1 eff_attribute i.w1_area tot_child wom_work i.wom_educ ethnicity_Chewa"
+
+* Drop pregnant women at counseling
+	drop if COUN_118 == 1
+
+* Drop pregnant women at FUP
+	drop if PHO_103 == 1 | HOME_103 == 1 //638
+
+********************************************************************************************************************
+******************** Changing Ideal Methods from Counseling to Fup: which group is more likely afterwards? ***********************************
+********************************************************************************************************************
+* Drop pregnant women at counseling
+	drop if COUN_118 == 1
+
+* Drop pregnant women at FUP
+	drop if PHO_103 == 1 | HOME_103 == 1 //638
+
+********************************************************************************************************************
+******************** Changing Ideal Methods from Counseling to Fup: which group is more likely afterwards? ***********************************
+	keep if w1_mergeRand == 3
+
+	keep if COUN__FV_1 == 1
+
+* consent
+	keep if PHO_REC_4 == 1 | HOME_REV_20 == 1 | mergeCLI == 3 //675
+
+* ============================== Woman Concordance between Methods and Top Attribute ================================
+preserve
+keep if method_attribute_concordance1 == 1
+	eststo clear
+* Column 1
+eststo: reg diff_method_2 SHORT_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+summarize diff_method_2 if SHORT_T == 0 & COUN__FV_1 == 1
+estadd scalar ymean = r(mean)
+
+* Column 2
+eststo: reg diff_method_8 SHORT_T $covariates1 if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
+summarize diff_method_8 if SHORT_T == 0  & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
+estadd scalar ymean = r(mean)
+
+* Column 3
+eststo: reg diff_method_21 SHORT_T $covariates1, vce(robust) 
+summarize diff_method_21 if SHORT_T == 0 
+estadd scalar ymean = r(mean)
+
+* Column 4
+eststo: reg diff_method_18 SHORT_T $covariates1, vce(robust) 
+summarize diff_method_18 if SHORT_T == 0 
+estadd scalar ymean = r(mean)
+
+* Column 5
+eststo: reg diff_method_20 SHORT_T $covariates1, vce(robust) 
+summarize diff_method_20 if SHORT_T == 0 
+estadd scalar ymean = r(mean)
+
+* Panel B
+* Column 1
+eststo: reg diff_method_9 SHORT_T $covariates1, vce(robust) 
+summarize diff_method_9 if SHORT_T == 0
+estadd scalar ymean = r(mean)
+
+* Column 2
+eststo: reg diff_method_5 SHORT_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+summarize diff_method_5 if SHORT_T == 0 & COUN__FV_1 == 1
+estadd scalar ymean = r(mean)
+
+* Column 3
+eststo: reg diff_method_16 SHORT_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+summarize diff_method_16 if SHORT_T == 0 & COUN__FV_1 == 1
+estadd scalar ymean = r(mean)
+
+* Column 4
+eststo: reg diff_method_12 SHORT_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+summarize diff_method_12 if SHORT_T == 0 & COUN__FV_1 == 1
+estadd scalar ymean = r(mean)
+
+esttab est1 est2 est3 est4 est5 using  "$output\allwomen_short_ITT_COUNConcordance.tex", replace fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
+se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
+stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
+mtitles("\makecell{Pre-Counseling and \\ Post-Counseling}" "\makecell{Counseling and \\ Follow-Up}" "\makecell{Counseling and \\ Follow-Up \\ (Adoption)}" "\makecell{Counseling and \\ Follow-Up \\ (Switching)}" "\makecell{Counseling and \\ Follow-Up \\ (Discontinuation)}") ///
+mgroups("\makecell{Change to Stated Ideal Method \\ Between...}" "\makecell{Change in Method Use \\ Between...}", pattern(1 0 1 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
+prehead("\begin{table}\begin{center}\caption{Treatment Effect of the Short Counseling Intervention, among Women who were Concordant between Pre-counseling Ideal Method and Top Attribute}\label{tab: allwomenshortITTConcordance}\tabcolsep=0.1cm\scalebox{0.68}{\begin{tabular}{lccccc}\toprule\multicolumn{6}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
+postfoot("\bottomrule") nogaps
+
+esttab est6 est7 est8 est9 using  "$output\allwomen_short_ITT_COUNConcordance.tex", append fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
+se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
+stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
+mtitles("\makecell{Stated Ideal Method \\after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}" "\makecell{Stated Ideal Method \\ after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}") ///
+mgroups("\makecell{Whether Method Use at FUP \\ is Discordant with...}" "\makecell{Whether Method Use at Counseling \\ is Discordant with...}", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
+prehead("\multicolumn{6}{c}{\textbf{B. Discordance}}\\\midrule ") ///
+postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Other baseline covariates include: her total number of children, educational attainment (primary, secondary, higher), work status (1 = working), and ethnicity (1 = Chewa). Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+restore
+
+* ============================== Woman did not Want to Switch ================================
+preserve
+keep if method_attribute_concordance1 == 0
+	eststo clear
+* Column 1
+eststo: reg diff_method_2 SHORT_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+summarize diff_method_2 if SHORT_T == 0 & COUN__FV_1 == 1
+estadd scalar ymean = r(mean)
+
+* Column 2
+eststo: reg diff_method_8 SHORT_T $covariates1 if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
+summarize diff_method_8 if SHORT_T == 0  & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
+estadd scalar ymean = r(mean)
+
+* Column 3
+eststo: reg diff_method_21 SHORT_T $covariates1, vce(robust) 
+summarize diff_method_21 if SHORT_T == 0 
+estadd scalar ymean = r(mean)
+
+* Column 4
+eststo: reg diff_method_18 SHORT_T $covariates1, vce(robust) 
+summarize diff_method_18 if SHORT_T == 0 
+estadd scalar ymean = r(mean)
+
+* Column 5
+eststo: reg diff_method_20 SHORT_T $covariates1, vce(robust) 
+summarize diff_method_20 if SHORT_T == 0 
+estadd scalar ymean = r(mean)
+
+* Panel B
+* Column 1
+eststo: reg diff_method_9 SHORT_T $covariates1, vce(robust) 
+summarize diff_method_9 if SHORT_T == 0
+estadd scalar ymean = r(mean)
+
+* Column 2
+eststo: reg diff_method_5 SHORT_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+summarize diff_method_5 if SHORT_T == 0 & COUN__FV_1 == 1
+estadd scalar ymean = r(mean)
+
+* Column 3
+eststo: reg diff_method_16 SHORT_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+summarize diff_method_16 if SHORT_T == 0 & COUN__FV_1 == 1
+estadd scalar ymean = r(mean)
+
+* Column 4
+eststo: reg diff_method_12 SHORT_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+summarize diff_method_12 if SHORT_T == 0 & COUN__FV_1 == 1
+estadd scalar ymean = r(mean)
+
+esttab est1 est2 est3 est4 est5 using  "$output\allwomen_short_ITT_COUNDiscordance.tex", replace fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
+se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
+stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
+mtitles("\makecell{Pre-Counseling and \\ Post-Counseling}" "\makecell{Counseling and \\ Follow-Up}" "\makecell{Counseling and \\ Follow-Up \\ (Adoption)}" "\makecell{Counseling and \\ Follow-Up \\ (Switching)}" "\makecell{Counseling and \\ Follow-Up \\ (Discontinuation)}") ///
+mgroups("\makecell{Change to Stated Ideal Method \\ Between...}" "\makecell{Change in Method Use \\ Between...}", pattern(1 0 1 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
+prehead("\begin{table}\begin{center}\caption{Treatment Effect of the Short Counseling Intervention, among Women who were Discordant between Pre-counseling Ideal Method and Top Attribute}\label{tab: allwomenshortITTDiscordance}\tabcolsep=0.1cm\scalebox{0.68}{\begin{tabular}{lccccc}\toprule\multicolumn{6}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
+postfoot("\bottomrule") nogaps
+
+esttab est6 est7 est8 est9 using  "$output\allwomen_short_ITT_COUNDiscordance.tex", append fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
+se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
+stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
+mtitles("\makecell{Stated Ideal Method \\after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}" "\makecell{Stated Ideal Method \\ after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}") ///
+mgroups("\makecell{Whether Method Use at FUP \\ is Discordant with...}" "\makecell{Whether Method Use at Counseling \\ is Discordant with...}", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
+prehead("\multicolumn{6}{c}{\textbf{B. Discordance}}\\\midrule ") ///
+postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Other baseline covariates include: her total number of children, educational attainment (primary, secondary, higher), work status (1 = working), and ethnicity (1 = Chewa). Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+restore
+

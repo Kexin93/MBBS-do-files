@@ -79,5 +79,4 @@ run "$dofile\DO_11_TABLE_L4.do"
 
 * TABLES IN APPENDIX M
 run "$dofile\DO_12_TABLE_M1-M2.do"
-run "$dofile\DO_12_TABLE_M3-M4.do"
 
