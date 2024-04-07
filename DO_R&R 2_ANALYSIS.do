@@ -733,3 +733,14 @@ prehead("\multicolumn{6}{c}{\textbf{B. Discordance}}\\\midrule ") ///
 postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Other baseline covariates include: her total number of children, educational attainment (primary, secondary, higher), work status (1 = working), and ethnicity (1 = Chewa). Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
 restore
 
+**# 6) Husband participation
+use "$data\ANALYSIS_BASE_RAND_CVF_PHO_HOM_CLI_ANALYSIS.dta", clear
+********************************************************************************************************************
+******************** Changing Ideal Methods from Counseling to Fup: which group is more likely afterwards? ***********************************
+	keep if w1_mergeRand == 3
+
+	keep if COUN__FV_1 == 1
+
+gen not_available = (COUN__HUSB_209N1 ==1 | COUN__HUSB_209N4 == 1 | strpos(COUN__HUSB_209N_O, "busy")> 0 | strpos(COUN__HUSB_209N_O, "at work") > 0 | strpos(COUN__HUSB_209N_O, "sundays") > 0 | strpos(COUN__HUSB_209N_O, "builder") > 0 | strpos(COUN__HUSB_209N_O, "Mechanic") > 0 | strpos(COUN__HUSB_209N_O, "businessman") > 0 | strpos(COUN__HUSB_209N_O, "driver") > 0 | strpos(COUN__HUSB_209N_O, "willing to participate") > 0 | strpos(COUN__HUSB_209N_O, "home") > 0 | strpos(COUN__HUSB_209N_O, "south africa") > 0 | strpos(COUN__HUSB_209N_O, "business") > 0 | strpos(COUN__HUSB_209N_O, "sleeping") > 0 | strpos(COUN__HUSB_209N_O, "asalers") > 0 | strpos(COUN__HUSB_209N_O, "kasungu") > 0  | strpos(COUN__HUSB_209N_O, "job") > 0) if !mi(COUN__HUSB_209N1)
+
+ta COUN__HUSB_209N3
