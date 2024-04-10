@@ -14,8 +14,6 @@ global balance_covariates "age_binary cont_use1 eff_attribute"
 
 global covariates "age_binary cont_use1 eff_attribute i.w1_area"
 
-global covariates1 "age_binary cont_use1 eff_attribute i.w1_area tot_child wom_work i.wom_educ ethnicity_Chewa"
-
 * Drop pregnant women at counseling
 	drop if COUN_118 == 1
 
@@ -36,7 +34,7 @@ preserve
 keep if w1_w07_w724d == 1 | w1_w07_w724d == 2 //satisfied husband
 	eststo clear
 * Column 1
-eststo: ivregress 2sls diff_method_2 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_2 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_2 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -44,7 +42,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 2
-eststo: ivregress 2sls diff_method_8 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_8 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_8 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -52,7 +50,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 3
-eststo: ivregress 2sls diff_method_21 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_21 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_21 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -60,7 +58,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 4
-eststo: ivregress 2sls diff_method_18 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_18 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_18 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -68,7 +66,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 5
-eststo: ivregress 2sls diff_method_20 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_20 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_20 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -77,7 +75,7 @@ estadd scalar ymean = r(mean)
 
 * Panel B
 * Column 1
-eststo: ivregress 2sls diff_method_9 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_9 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_9 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -85,7 +83,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 2
-eststo: ivregress 2sls diff_method_5 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_5 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_5 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -93,7 +91,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 3
-eststo: ivregress 2sls diff_method_16 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_16 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_16 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -101,7 +99,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 4
-eststo: ivregress 2sls diff_method_12 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_12 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_12 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -122,7 +120,7 @@ stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 mtitles("\makecell{Stated Ideal Method \\after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}" "\makecell{Stated Ideal Method \\ after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}") ///
 mgroups("\makecell{Whether Method Use at FUP \\ is Discordant with...}" "\makecell{Whether Method Use at Counseling \\ is Discordant with...}", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
 prehead("\multicolumn{5}{c}{\textbf{B. Discordance}}\\\midrule") ///
-postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Other baseline covariates include: her total number of children, educational attainment (primary, secondary, higher), work status (1 = working), and ethnicity (1 = Chewa). Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
 restore
 
 * ============================== Husband Unsatisfied ================================
@@ -130,7 +128,7 @@ preserve
 keep if w1_w07_w724d == 4 | w1_w07_w724d == 5 //Dissatisfied husband
 	eststo clear
 * Column 1
-eststo: ivregress 2sls diff_method_2 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_2 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_2 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -138,7 +136,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 2
-eststo: ivregress 2sls diff_method_8 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_8 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_8 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -146,7 +144,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 3
-eststo: ivregress 2sls diff_method_21 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_21 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_21 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -154,7 +152,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 4
-eststo: ivregress 2sls diff_method_18 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_18 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_18 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -162,7 +160,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 5
-eststo: ivregress 2sls diff_method_20 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_20 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_20 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -171,7 +169,7 @@ estadd scalar ymean = r(mean)
 
 * Panel B
 * Column 1
-eststo: ivregress 2sls diff_method_9 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_9 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_9 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -179,7 +177,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 2
-eststo: ivregress 2sls diff_method_5 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_5 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_5 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -187,7 +185,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 3
-eststo: ivregress 2sls diff_method_16 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_16 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_16 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -195,7 +193,7 @@ estadd scalar ymean = r(mean)
 	estadd scalar fs = FS[1, 4]
 
 * Column 4
-eststo: ivregress 2sls diff_method_12 (COUN_207 = HUSB_T) $covariates1 if COUN__FV_1 == 1, vce(robust)
+eststo: ivregress 2sls diff_method_12 (COUN_207 = HUSB_T) $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_12 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
@@ -216,5 +214,5 @@ stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 mtitles("\makecell{Stated Ideal Method \\after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}" "\makecell{Stated Ideal Method \\ after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}") ///
 mgroups("\makecell{Whether Method Use at FUP \\ is Discordant with...}" "\makecell{Whether Method Use at Counseling \\ is Discordant with...}", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
 prehead("\multicolumn{5}{c}{\textbf{B. Discordance}}\\\midrule") ///
-postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Other baseline covariates include: her total number of children, educational attainment (primary, secondary, higher), work status (1 = working), and ethnicity (1 = Chewa). Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
 restore
