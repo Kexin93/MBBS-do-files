@@ -15,8 +15,6 @@ global balance_covariates "age_binary cont_use1 eff_attribute"
 
 global covariates "age_binary cont_use1 eff_attribute i.w1_area"
 
-global covariates1 "age_binary cont_use1 eff_attribute i.w1_area tot_child wom_work i.wom_educ ethnicity_Chewa"
-
 * Drop pregnant women at counseling
 	drop if COUN_118 == 1
 
@@ -36,43 +34,43 @@ keep if w1_mergeRand == 3
 	
 * Panel A
 * Column 1
-eststo: reg diff_method_2 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_2 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_2 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
 * Column 2
-eststo: reg diff_method_8 HUSB_T $covariates1 if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
+eststo: reg diff_method_8 HUSB_T $covariates if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
 summarize diff_method_8 if HUSB_T == 0  & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
 estadd scalar ymean = r(mean)
 
 * Column 3
-eststo: reg diff_method_18 HUSB_T $covariates1, vce(robust) 
+eststo: reg diff_method_18 HUSB_T $covariates, vce(robust) 
 summarize diff_method_18 if HUSB_T == 0 
 estadd scalar ymean = r(mean)
 
 * Column 4
-eststo: reg diff_method_20 HUSB_T $covariates1, vce(robust) 
+eststo: reg diff_method_20 HUSB_T $covariates, vce(robust) 
 summarize diff_method_20 if HUSB_T == 0 
 estadd scalar ymean = r(mean)
 
 * Panel B
 * Column 1
-eststo: reg diff_method_9 HUSB_T $covariates1, vce(robust) 
+eststo: reg diff_method_9 HUSB_T $covariates, vce(robust) 
 summarize diff_method_9 if HUSB_T == 0
 estadd scalar ymean = r(mean)
 
 * Column 2
-eststo: reg diff_method_5 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_5 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_5 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
 * Column 3
-eststo: reg diff_method_16 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_16 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_16 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
 * Column 4
-eststo: reg diff_method_12 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_12 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_12 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
@@ -90,45 +88,45 @@ stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 mtitles("\makecell{Stated Ideal Method \\after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}" "\makecell{Stated Ideal Method \\ after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}") ///
 mgroups("\makecell{Whether Method Use at FUP \\ is Discordant with...}" "\makecell{Whether Method Use at Counseling \\ is Discordant with...}", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
 prehead("\multicolumn{5}{c}{\textbf{B. Discordance}}\\\midrule") ///
-postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Other baseline covariates include: her total number of children, educational attainment (primary, secondary, higher), work status (1 = working), and ethnicity (1 = Chewa). Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
 
 preserve
 keep if coun_curr_method == 0 
 eststo clear
 * Panel A
 * Column 1
-eststo: reg diff_method_2 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_2 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_2 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
 * Column 2
-eststo: reg diff_method_8 HUSB_T $covariates1 if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
+eststo: reg diff_method_8 HUSB_T $covariates if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
 summarize diff_method_8 if HUSB_T == 0  & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
 estadd scalar ymean = r(mean)
 
 * Column 3
-eststo: reg diff_method_17 HUSB_T $covariates1, vce(robust) 
+eststo: reg diff_method_17 HUSB_T $covariates, vce(robust) 
 summarize diff_method_17 if HUSB_T == 0 
 estadd scalar ymean = r(mean)
 
 * Panel B
 * Column 1
-eststo: reg diff_method_9 HUSB_T $covariates1, vce(robust) 
+eststo: reg diff_method_9 HUSB_T $covariates, vce(robust) 
 summarize diff_method_9 if HUSB_T == 0
 estadd scalar ymean = r(mean)
 
 * Column 2
-eststo: reg diff_method_5 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_5 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_5 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
 * Column 3
-eststo: reg diff_method_16 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_16 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_16 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
 * Column 4
-eststo: reg diff_method_12 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_12 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_12 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
@@ -154,43 +152,43 @@ keep if coun_curr_method > 0 & !mi(coun_curr_method)
 	eststo clear
 * Panel A
 * Column 1
-eststo: reg diff_method_2 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_2 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_2 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
 * Column 2
-eststo: reg diff_method_8 HUSB_T $covariates1 if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
+eststo: reg diff_method_8 HUSB_T $covariates if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
 summarize diff_method_8 if HUSB_T == 0  & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
 estadd scalar ymean = r(mean)
 
 * Column 3
-eststo: reg diff_method_18 HUSB_T $covariates1, vce(robust) 
+eststo: reg diff_method_18 HUSB_T $covariates, vce(robust) 
 summarize diff_method_18 if HUSB_T == 0 
 estadd scalar ymean = r(mean)
 
 * Column 4
-eststo: reg diff_method_20 HUSB_T $covariates1, vce(robust) 
+eststo: reg diff_method_20 HUSB_T $covariates, vce(robust) 
 summarize diff_method_20 if HUSB_T == 0 
 estadd scalar ymean = r(mean)
 
 * Panel B
 * Column 1
-eststo: reg diff_method_9 HUSB_T $covariates1, vce(robust) 
+eststo: reg diff_method_9 HUSB_T $covariates, vce(robust) 
 summarize diff_method_9 if HUSB_T == 0
 estadd scalar ymean = r(mean)
 
 * Column 2
-eststo: reg diff_method_5 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_5 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_5 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
 * Column 3
-eststo: reg diff_method_16 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_16 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_16 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
 * Column 4
-eststo: reg diff_method_12 HUSB_T $covariates1 if COUN__FV_1 == 1, vce(robust) 
+eststo: reg diff_method_12 HUSB_T $covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_12 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
@@ -208,5 +206,5 @@ stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 mtitles("\makecell{Stated Ideal Method \\after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}" "\makecell{Stated Ideal Method \\ after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}") ///
 mgroups("\makecell{Whether Method Use at FUP \\ is Discordant with...}" "\makecell{Whether Method Use at Counseling \\ is Discordant with...}", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
 prehead("\multicolumn{5}{c}{\textbf{B. Discordance}}\\\midrule") ///
-postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Other baseline covariates include: her total number of children, educational attainment (primary, secondary, higher), work status (1 = working), and ethnicity (1 = Chewa). Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
 restore
