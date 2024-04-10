@@ -12,7 +12,7 @@
 version 13
 clear all
 
-global data "E:\丢失文件\数据恢复\zkx\5. RUC\8. Spring 2024.2.19-7.30\1.1 MBBS\V2. Replication Package 2024.4.4"
+global data "E:\5. Malawi Behavioral Biases Study"
 global output "$data\Results"
 global dofile "$data\GitHub\MBBS-do-files"
 
