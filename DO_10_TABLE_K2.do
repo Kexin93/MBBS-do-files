@@ -14,8 +14,6 @@ global balance_covariates "age_binary cont_use1 eff_attribute"
 
 global covariates "age_binary cont_use1 eff_attribute i.w1_area"
 
-global covariates1 "age_binary cont_use1 eff_attribute i.w1_area tot_child wom_work i.wom_educ ethnicity_Chewa pre_Coun_short"
-
 keep if w1_mergeRand == 3
 
 	keep if COUN__FV_1 == 1
@@ -31,19 +29,19 @@ keep if w1_mergeRand == 3
 
 ******************* 1. PANEL A: Husband Invitation on End-of-Counseling Ideal Method **********************************************
 	eststo clear														
-	eststo: reg postIdeal_implants SHORT_T $covariates1 if !mi(COUN_3081), vce(robust) 
+	eststo: reg postIdeal_implants SHORT_T $covariates if !mi(COUN_3081), vce(robust) 
 	summarize postIdeal_implants if SHORT_T == 0 & !mi(COUN_3081)
 	estadd scalar ymean = r(mean)
 
-	eststo: reg postIdeal_injectables SHORT_T $covariates1 if !mi(COUN_3081), vce(robust) 
+	eststo: reg postIdeal_injectables SHORT_T $covariates if !mi(COUN_3081), vce(robust) 
 	summarize postIdeal_injectables if SHORT_T == 0 & !mi(COUN_3081)
 	estadd scalar ymean = r(mean)
 
-	eststo: reg postIdeal_pills SHORT_T $covariates1 if !mi(COUN_3081), vce(robust) 
+	eststo: reg postIdeal_pills SHORT_T $covariates if !mi(COUN_3081), vce(robust) 
 	summarize postIdeal_pills if SHORT_T == 0 & !mi(COUN_3081)
 	estadd scalar ymean = r(mean)
 
-	eststo: reg postIdeal_Others SHORT_T $covariates1 if !mi(COUN_3081), vce(robust) 
+	eststo: reg postIdeal_Others SHORT_T $covariates if !mi(COUN_3081), vce(robust) 
 	summarize postIdeal_Others if SHORT_T == 0 & !mi(COUN_3081)
 	estadd scalar ymean = r(mean)
 
@@ -57,19 +55,19 @@ mgroups("Implants" "Injectables" "Pills" "Rhythm/Withdrawal/Traditional", patter
 
 *========================= 2. Follow-up Method Use =======================================
 	eststo clear													
-eststo: reg FUPmethod_implants SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg FUPmethod_implants SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize FUPmethod_implants if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg FUPmethod_injectables SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg FUPmethod_injectables SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize FUPmethod_injectables if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg FUPmethod_pills SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg FUPmethod_pills SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize FUPmethod_pills if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg FUPmethod_Others SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg FUPmethod_Others SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize FUPmethod_Others if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
@@ -80,19 +78,19 @@ posthead("\midrule \multicolumn{5}{c}{\textbf{B. Follow-up Method: Method Above}
 
 * ============================== 3. End-of-Counseling and FUP Method Use both being Implants =====================================
 	eststo clear
-eststo: reg uptake_implants SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg uptake_implants SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize uptake_implants if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg uptake_injectables SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg uptake_injectables SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize uptake_injectables if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg uptake_pills SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg uptake_pills SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize uptake_pills if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg uptake_Others SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg uptake_Others SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize uptake_Others if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
@@ -104,19 +102,19 @@ posthead("\midrule \multicolumn{5}{c}{\textbf{C. FUP Method = Post-Counseling St
 
 * ============================ 4. FUP ideal Method = injectables ========================================
 	eststo clear
-eststo: reg FUPIdeal_implants SHORT_T $covariates1 if !mi(COUN_3081), vce(robust) 
+eststo: reg FUPIdeal_implants SHORT_T $covariates if !mi(COUN_3081), vce(robust) 
 summarize FUPIdeal_implants if SHORT_T == 0 & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg FUPIdeal_injectables SHORT_T $covariates1 if !mi(COUN_3081), vce(robust) 
+eststo: reg FUPIdeal_injectables SHORT_T $covariates if !mi(COUN_3081), vce(robust) 
 summarize FUPIdeal_injectables if SHORT_T == 0 & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg FUPIdeal_pills SHORT_T $covariates1 if !mi(COUN_3081), vce(robust) 
+eststo: reg FUPIdeal_pills SHORT_T $covariates if !mi(COUN_3081), vce(robust) 
 summarize FUPIdeal_pills if SHORT_T == 0 & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg FUPIdeal_Others SHORT_T $covariates1 if !mi(COUN_3081), vce(robust) 
+eststo: reg FUPIdeal_Others SHORT_T $covariates if !mi(COUN_3081), vce(robust) 
 summarize FUPIdeal_Others if SHORT_T == 0 & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
@@ -127,19 +125,19 @@ posthead("\midrule \multicolumn{5}{c}{\textbf{D. Follow-up Stated Ideal Method: 
 
 * ====================== 5. Concordance at the FUP between ideal method and method use =========================================
 	eststo clear
-eststo: reg concordance_implants SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg concordance_implants SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize concordance_implants if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg concordance_injectables SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg concordance_injectables SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize concordance_injectables if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg concordance_pills SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg concordance_pills SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize concordance_pills if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
-eststo: reg concordance_Others SHORT_T $covariates1 if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
+eststo: reg concordance_Others SHORT_T $covariates if !mi(FUP_curr_method) & !mi(COUN_3081), vce(robust) 
 summarize concordance_Others if SHORT_T == 0 & !mi(FUP_curr_method) & !mi(COUN_3081)
 estadd scalar ymean = r(mean)
 
@@ -148,4 +146,4 @@ esttab est1 est2 est3 est4 using "$output\Mechanism_byMethod_Short_Husb.tex", ap
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean"))  ///
 posthead("\midrule \multicolumn{5}{c}{\textbf{E. FUP Method = FUP Stated Ideal Method: Method Above}} \\\\[-1ex]") nogaps ///
-postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: The dependent variable in Panel A indicates whether a woman's stated ideal method at the post-counseling stage is the method specified above. The dependent variable in Panel B indicates whether her method use at the follow-up is the method specified above. The dependent variable in Panel C takes 1 if both the post-counseling stated ideal method and the follow-up method use are the method specified above. The dependent variable in Panel D takes 1 if the follow-up stated ideal method is the method specified above. The dependent variable in Panel E takes 1 if both her stated ideal method and her method use at follow-up are the method specified above. Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Other baseline covariates include: her total number of children, educational attainment (primary, secondary, higher), work status (1 = working), ethnicity (1 = Chewa), and pre-couseling method being injectables, pills, or condoms (1 = yes). Area fixed effects are included in all specifications. Heteroskedasticity-robust standard deviations are in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: The dependent variable in Panel A indicates whether a woman's stated ideal method at the post-counseling stage is the method specified above. The dependent variable in Panel B indicates whether her method use at the follow-up is the method specified above. The dependent variable in Panel C takes 1 if both the post-counseling stated ideal method and the follow-up method use are the method specified above. The dependent variable in Panel D takes 1 if the follow-up stated ideal method is the method specified above. The dependent variable in Panel E takes 1 if both her stated ideal method and her method use at follow-up are the method specified above. Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Area fixed effects are included in all specifications. Heteroskedasticity-robust standard deviations are in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
