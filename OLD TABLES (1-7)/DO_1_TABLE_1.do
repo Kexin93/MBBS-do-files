@@ -12,6 +12,13 @@ keep if w1_mergeRand == 3
 
 global DESCVARS age tot_child wom_des_fam_size preprimary educ_primary educ_second educ_higher wom_work cohab_age curr_use baseline_inj baseline_implants top_attribute top_attribute_wgt want_to_switch husband_support prior_knowledge
 
+* Keep the 675 women that were available at follow-up
+keep if w1_mergeRand == 3
+keep if COUN__FV_1 == 1
+
+* consent
+	keep if PHO_REC_4 == 1 | HOME_REV_20 == 1 | mergeCLI == 3 //675
+
 *==============================================================================
 *=============================== TABLE 1 =======================================
 *==============================================================================
