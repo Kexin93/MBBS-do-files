@@ -56,7 +56,7 @@ estadd scalar ymean = r(mean)
 esttab est1 est2 est3 using "$output\allwomen_husband_toIV_IV.tex", replace fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(COUN_207) ///
 stats(N ymean fs, fmt(0 2) labels("N" "Control mean" "First Stage F"))  ///
-prehead("\begin{table}\begin{center}\caption{Instrumental Variable (IV-2SLS) Regression Results of Partner Invitation Intervention}\label{tab: allwomenhusbandIV}\tabcolsep=0.1cm\scalebox{0.88}{\begin{tabular}{lccc}\toprule") ///
+prehead("\begin{table}\begin{center}\caption{Instrumental Variable (IV-2SLS) Results of Partner Invitation}\label{tab: allwomenhusbandIV}\tabcolsep=0.1cm\scalebox{0.88}{\begin{tabular}{lccc}\toprule") ///
 posthead("\midrule \multicolumn{4}{c}{\textbf{A: Change in Stated Ideal Method from Counseling to Follow-up}} \\\\[-1ex]") nogaps ///
 collabels(none) nomtitles
 

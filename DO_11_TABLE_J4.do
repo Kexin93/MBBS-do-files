@@ -49,7 +49,7 @@ keep if w1_mergeRand == 3
 esttab est1 est2 est3 est4 using "$output\interaction_husband_toIV_implants_inj_pill_traditional_ITT.tex", replace fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T SHORT_T c.HUSB_T#c.SHORT_T) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean"))  ///
-prehead("\begin{table}[h!]\begin{center}\caption{Interaction Effects of the Short Counseling and Partner Invitation Interventions, by Method Type}\label{tab: interaction4methodsITT}\tabcolsep=0.3cm\scalebox{0.53}{\begin{tabular}{lcccc}\toprule") ///
+prehead("\begin{table}[h!]\begin{center}\caption{Interaction Effects of Short Counseling and Partner Invitation Interventions, by Method Type}\label{tab: interaction4methodsITT}\tabcolsep=0.3cm\scalebox{0.53}{\begin{tabular}{lcccc}\toprule") ///
 posthead("\midrule \multicolumn{5}{c}{\textbf{Post-Counseling Stated Ideal Method: Method Above}} \\\\[-1ex]") nogaps ///
 collabels(none) nonumbers nomtitles  ///
 mgroups("Implants" "Injectables" "Pills" "Rhythm/Withdrawal/Traditional", pattern(1 1 1 1))

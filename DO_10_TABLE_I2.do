@@ -48,7 +48,7 @@ keep if w1_mergeRand == 3
 esttab est1 est2 est3 est4 using "$output\Mechanism_byMethod_Short_Husb.tex", replace fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean"))  ///
-prehead("\begin{table}[h!]\begin{center}\caption{Treatment Effects of Short, Tailored Counseling by Method Type}\label{tab: mechanisms4methodsITTshort}\tabcolsep=0.3cm\scalebox{0.68}{\begin{tabular}{lcccc}\toprule") ///
+prehead("\begin{table}[h!]\begin{center}\caption{Treatment Effect of Short Counseling by Method Type}\label{tab: mechanisms4methodsITTshort}\tabcolsep=0.3cm\scalebox{0.68}{\begin{tabular}{lcccc}\toprule") ///
 posthead("\midrule \multicolumn{5}{c}{\textbf{A. Post-Counseling Stated Ideal Method: Method Above}} \\\\[-1ex]") nogaps ///
 collabels(none) nonumbers nomtitles  ///
 mgroups("Implants" "Injectables" "Pills" "Rhythm/Withdrawal/Traditional", pattern(1 1 1 1 ))

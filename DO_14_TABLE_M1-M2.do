@@ -1,6 +1,5 @@
-version 13
 
-use "$data\MBBS_Analysis_data.dta",replace
+use "$data\MBBS_Analysis_data.dta", replace
 
 global balance_covariates "age_binary cont_use1 eff_attribute"
 
@@ -30,9 +29,11 @@ global covariates "age_binary cont_use1 eff_attribute i.w1_area"
 * consent
 	keep if PHO_REC_4 == 1 | HOME_REV_20 == 1 | mergeCLI == 3 //675
 
+ta top_attribute_wgt
 * ============================== Woman Concordance between Methods and Top Attribute ================================
+* ============================== Less Prior Knowledge ================================
 preserve
-keep if method_attribute_concordance1 == 1
+keep if prior_knowledge_bi == 0
 	eststo clear
 * Column 1
 eststo: reg diff_method_2 SHORT_T $covariates if COUN__FV_1 == 1, vce(robust) 
@@ -80,26 +81,26 @@ eststo: reg diff_method_12 SHORT_T $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_12 if SHORT_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
-esttab est1 est2 est3 est4 est5 using  "$output\allwomen_short_ITT_COUNConcordance.tex", replace fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
-se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
+esttab est1 est2 est3 est4 est5 using  "$output\allwomen_short_ITT_lessPK.tex", replace fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
+se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T ) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 mtitles("\makecell{Pre-Counseling and \\ Post-Counseling}" "\makecell{Counseling and \\ Follow-Up}" "\makecell{Counseling and \\ Follow-Up \\ (Adoption)}" "\makecell{Counseling and \\ Follow-Up \\ (Switching)}" "\makecell{Counseling and \\ Follow-Up \\ (Discontinuation)}") ///
 mgroups("\makecell{Change to Stated Ideal Method \\ Between...}" "\makecell{Change in Method Use \\ Between...}", pattern(1 0 1 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
-prehead("\begin{table}\begin{center}\caption{Treatment Effect of the Short Counseling Intervention, among Women who were Counseled on their Pre-counseling Ideal Method in the Attribute-based Method List}\label{tab: allwomenshortITTConcordance}\tabcolsep=0.1cm\scalebox{0.68}{\begin{tabular}{lccccc}\toprule\multicolumn{6}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
+prehead("\begin{table}\begin{center}\caption{Treatment Effect of Short Counseling, among Women with Less Prior Contraceptive Knowledge}\label{tab: allwomenshortITTLessPK}\tabcolsep=0.1cm\scalebox{0.68}{\begin{tabular}{lccccc}\toprule \multicolumn{6}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
 postfoot("\bottomrule") nogaps
 
-esttab est6 est7 est8 est9 using  "$output\allwomen_short_ITT_COUNConcordance.tex", append fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
-se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
+esttab est6 est7 est8 est9 using  "$output\allwomen_short_ITT_lessPK.tex", append fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
+se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T ) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 mtitles("\makecell{Stated Ideal Method \\after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}" "\makecell{Stated Ideal Method \\ after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}") ///
 mgroups("\makecell{Whether Method Use at FUP \\ is Discordant with...}" "\makecell{Whether Method Use at Counseling \\ is Discordant with...}", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
-prehead("\multicolumn{6}{c}{\textbf{B. Discordance}}\\\midrule ") ///
-postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+prehead("\multicolumn{6}{c}{\textbf{B. Discordance}}\\\midrule") ///
+postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: The analysis is conducted among women who heard of no more than 4 contraceptive methods at baseline. Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
 restore
 
-* ============================== Woman did not Want to Switch ================================
+* ============================== More Prior Knowledge ================================
 preserve
-keep if method_attribute_concordance1 == 0
+keep if prior_knowledge_bi == 1
 	eststo clear
 * Column 1
 eststo: reg diff_method_2 SHORT_T $covariates if COUN__FV_1 == 1, vce(robust) 
@@ -147,19 +148,19 @@ eststo: reg diff_method_12 SHORT_T $covariates if COUN__FV_1 == 1, vce(robust)
 summarize diff_method_12 if SHORT_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 
-esttab est1 est2 est3 est4 est5 using  "$output\allwomen_short_ITT_COUNDiscordance.tex", replace fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
-se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
+esttab est1 est2 est3 est4 est5 using  "$output\allwomen_short_ITT_MorePK.tex", replace fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
+se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T ) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 mtitles("\makecell{Pre-Counseling and \\ Post-Counseling}" "\makecell{Counseling and \\ Follow-Up}" "\makecell{Counseling and \\ Follow-Up \\ (Adoption)}" "\makecell{Counseling and \\ Follow-Up \\ (Switching)}" "\makecell{Counseling and \\ Follow-Up \\ (Discontinuation)}") ///
 mgroups("\makecell{Change to Stated Ideal Method \\ Between...}" "\makecell{Change in Method Use \\ Between...}", pattern(1 0 1 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
-prehead("\begin{table}\begin{center}\caption{Treatment Effect of the Short Counseling Intervention, among Women who were Not Counseled on their Pre-counseling Ideal Method in the Attribute-based Method List}\label{tab: allwomenshortITTDiscordance}\tabcolsep=0.1cm\scalebox{0.68}{\begin{tabular}{lccccc}\toprule\multicolumn{6}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
+prehead("\begin{table}\begin{center}\caption{Treatment Effect of Short Counseling, among Women with More Prior Contraceptive Knowledge}\label{tab: allwomenshortITTMorePK}\tabcolsep=0.1cm\scalebox{0.68}{\begin{tabular}{lccccc}\toprule\multicolumn{6}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
 postfoot("\bottomrule") nogaps
 
-esttab est6 est7 est8 est9 using  "$output\allwomen_short_ITT_COUNDiscordance.tex", append fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
-se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
+esttab est6 est7 est8 est9 using  "$output\allwomen_short_ITT_MorePK.tex", append fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
+se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T ) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 mtitles("\makecell{Stated Ideal Method \\after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}" "\makecell{Stated Ideal Method \\ after Counseling}" "\makecell{Stated Ideal Method \\ at FUP}") ///
 mgroups("\makecell{Whether Method Use at FUP \\ is Discordant with...}" "\makecell{Whether Method Use at Counseling \\ is Discordant with...}", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
-prehead("\multicolumn{6}{c}{\textbf{B. Discordance}}\\\midrule ") ///
-postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+prehead("\multicolumn{6}{c}{\textbf{B. Discordance}}\\\midrule") ///
+postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: The analysis is conducted among women who heard of more than 4 contraceptive methods at baseline. Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Area fixed effects are included in all specifications. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
 restore

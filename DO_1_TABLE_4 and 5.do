@@ -78,7 +78,7 @@ se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab)
 stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 mtitles("\makecell{Pre-Counseling and \\ Post-Counseling}" "\makecell{Counseling and \\ Follow-Up}" "\makecell{Counseling and \\ Follow-Up (Adoption)}" "") ///
 mgroups("\makecell{Change to Stated Ideal Method \\ Between...}" "\makecell{Change in Method Use \\ Between...}", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
-prehead("\begin{table}\begin{center}\caption{Treatment Effect of the Short Counseling Intervention, among Non-Users of Contraception}\label{tab: allwomenshortITTnonusers}\tabcolsep=0.1cm\scalebox{0.77}{\begin{tabular}{lcccc}\toprule\multicolumn{5}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
+prehead("\begin{table}\begin{center}\caption{Treatment Effect of Short Counseling, among Non-Users}\label{tab: allwomenshortITTnonusers}\tabcolsep=0.1cm\scalebox{0.77}{\begin{tabular}{lcccc}\toprule\multicolumn{5}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
 postfoot("\bottomrule") nogaps
 
 esttab est4 est5 est6 est7 using  "$output\allwomen_short_ITT_nonusers.tex", append fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
@@ -144,7 +144,7 @@ se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab)
 stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 mtitles("\makecell{Pre-Counseling and \\ Post-Counseling}" "\makecell{Counseling and \\ Follow-Up}" "\makecell{Counseling and \\ Follow-Up \\ (Switching)}" "\makecell{Counseling and \\ Follow-Up \\ (Discontinuation)}") ///
 mgroups("\makecell{Change to Stated Ideal Method \\ Between...}" "\makecell{Change in Method Use \\ Between...}", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
-prehead("\begin{table}\begin{center}\caption{Treatment Effect of the Short Counseling Intervention, among Current Users of Contraception}\label{tab: allwomenshortITTusers}\tabcolsep=0.1cm\scalebox{0.77}{\begin{tabular}{lcccc}\toprule\multicolumn{5}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
+prehead("\begin{table}\begin{center}\caption{Treatment Effect of Short Counseling, among Current Users}\label{tab: allwomenshortITTusers}\tabcolsep=0.1cm\scalebox{0.77}{\begin{tabular}{lcccc}\toprule\multicolumn{5}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
 postfoot("\bottomrule") nogaps
 
 esttab est5 est6 est7 est8 using  "$output\allwomen_short_ITT_currentusers.tex", append fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///

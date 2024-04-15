@@ -48,7 +48,7 @@ estadd scalar ymean = r(mean)
 esttab est1 est2 est3 using "$output\interaction_short_husband_4col.tex", replace fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T HUSB_T c.SHORT_T#c.HUSB_T) ///
 stats(N ymean, fmt(0 2) labels("N" "Dep. mean"))  ///
-prehead("\begin{table}\begin{center}\caption{Interaction Effects of Short Tailored Counseling and Partner Invitation Interventions}\label{tab: allwomeninteraction}\tabcolsep=0.3cm\scalebox{0.65}{\begin{tabular}{lccc}\toprule") ///
+prehead("\begin{table}\begin{center}\caption{Interaction Effects of Short Counseling and Partner Invitation Interventions}\label{tab: allwomeninteraction}\tabcolsep=0.3cm\scalebox{0.65}{\begin{tabular}{lccc}\toprule") ///
 posthead("\midrule \multicolumn{4}{c}{\textbf{A: Change in Stated Ideal Method from Counseling to Follow-up}} \\\\[-1ex]") nogaps ///
 nomtitles collabels(none) 
 	

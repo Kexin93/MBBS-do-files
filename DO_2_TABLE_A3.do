@@ -25,5 +25,5 @@ eststo top_attribute: estpost summarize $top_attributes
 esttab top_attribute using "$output\top_attribute_distribution_table.tex", booktabs fragment ///
 label cells("mean(pattern(1) fmt(2))") ///
 replace collabels(none) compress style(tab) nomtitles ///
-prehead("\begin{table}\begin{center} \caption{Distribution of Method Use and Stated Ideal Contraceptive Method at Baseline}\label{tab: topattribute}\tabcolsep=0.3cm\begin{tabular}{lc}\toprule") ///
-postfoot("\bottomrule\end{tabular}\end{center}\footnotesize{Notes: The distribution presented in Column (1) is based on women’s responses to the question: “In choosing a contraceptive method, what feature(s) would be most important to you?”. Column (2) presents the colored flipchart that women who were assigned to the short counseling session received based on their reported top attribute.}\end{table}")
+prehead("\begin{table}\begin{center} \caption{Distribution of Top Attribute Desired in a Contraceptive Method at Baseline}\label{tab: topattribute}\tabcolsep=0.3cm\begin{tabular}{lc}\toprule") ///
+postfoot("\bottomrule\end{tabular}\end{center}\footnotesize{Notes:  The distribution presented in Column (1) is based on women's responses to the question: ``In choosing a contraceptive method, what feature(s) would be most important to you?''. Column (2) presents the colored flipchart that women who were assigned to the short counseling session received based on their reported top attribute.}\end{table}")

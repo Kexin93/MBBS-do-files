@@ -45,7 +45,7 @@ estadd scalar ymean = r(mean)
 esttab est1 est2 est3 using "$output\allwomen_husband_toIV_ITT_NoClinicIdeal.tex", replace fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean"))  ///
-prehead("\begin{table}\begin{center}\caption{Robustness Check: Treatment Effect of Partner Invitation, Excluding Clinic Visits}\label{tab: allwomenhusbandITTnoClinicIdeal}\tabcolsep=0.1cm\scalebox{0.85}{\begin{tabular}{lcccc}\toprule") ///
+prehead("\begin{table}\begin{center}\caption{Robustness Check: Treatment Effect of Partner Invitation, Excluding Women who Visited the Kauma Clinic}\label{tab: allwomenhusbandITTnoClinicIdeal}\tabcolsep=0.1cm\scalebox{0.85}{\begin{tabular}{lcccc}\toprule") ///
 posthead("\midrule \multicolumn{4}{c}{\textbf{A: Change in Stated Ideal Method from Counseling to Follow-up}} \\\\[-1ex]") nogaps ///
 collabels(none) nomtitles
 
