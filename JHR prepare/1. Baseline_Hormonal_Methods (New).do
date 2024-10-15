@@ -85,7 +85,7 @@ se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab)
 stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 mtitles("\makecell{Pre-Counseling and \\ Post-Counseling}" "\makecell{Counseling and \\ Follow-Up}" "\makecell{Counseling and \\ Follow-Up \\ (Adoption)}" "\makecell{Counseling and \\ Follow-Up \\ (Switching)}" "\makecell{Counseling and \\ Follow-Up \\ (Discontinuation)}") ///
 mgroups("\makecell{Change to Stated Ideal Method \\ Between...}" "\makecell{Change in Method Use \\ Between...}", pattern(1 0 1 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
-prehead("\begin{table}\begin{center}\caption{Treatment Effect of Short Counseling, among Injectable or Implants Users at Baseline}\label{tab: allwomenshortITTnonusers}\tabcolsep=0.1cm\scalebox{0.68}{\begin{tabular}{lccccc}\toprule \multicolumn{6}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
+prehead("\begin{table}\begin{center}\caption{Treatment Effect of Short Counseling, among Injectable or Implants Users at Baseline}\label{tab: allwomenshortITThormonal}\tabcolsep=0.1cm\scalebox{0.68}{\begin{tabular}{lccccc}\toprule \multicolumn{6}{c}{\textbf{A. Stated Ideal Method and Method Use}}\\\midrule") ///
 postfoot("\bottomrule") nogaps
 
 esttab est6 est7 est8 est9 using  "$output\allwomen_short_ITT_BL_hormonal.tex", append fragment label nonumbers nolines cells(b(star fmt(%9.3f)) ///
