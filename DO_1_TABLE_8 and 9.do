@@ -27,9 +27,6 @@ keep if w1_mergeRand == 3
 * consent
 	keep if PHO_REC_4 == 1 | HOME_REV_20 == 1 | mergeCLI == 3 //675
 
-* Baseline hormonal methods
-	gen baseline_hormonal = (baseline_inj == 1 | baseline_implants == 1) if !mi(w1_w03_w303)
-	
 * ============================== Woman Satisfied ================================
 preserve
 keep if baseline_hormonal == 1 

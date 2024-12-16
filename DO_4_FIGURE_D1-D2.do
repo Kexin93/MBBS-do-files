@@ -11,8 +11,6 @@ version 13
 
 use "$data\MBBS_Analysis_data.dta"
 
-dropmiss
-
 * SHORT Intervention
 			capture drop x y z
 		sum counseling_time3 if (HUSB_T == 0 | COUN_207 == 0) & counseling_time !=0 & counseling_time < 40 

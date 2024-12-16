@@ -27,9 +27,6 @@ global covariates "age_binary cont_use1 eff_attribute i.w1_area"
 * consent
 	keep if PHO_REC_4 == 1 | HOME_REV_20 == 1 | mergeCLI == 3 //675
 
-* Baseline hormonal methods
-	gen baseline_hormonal = (baseline_inj == 1 | baseline_implants == 1) if !mi(w1_w03_w303)
-
 ********************************************************************************************************************
 ******************** Changing Ideal Methods from Counseling to Fup: which group is more likely afterwards? ***********************************
 * ============================== Husband Satisfied ================================
