@@ -13,7 +13,7 @@ version 13
 clear all
 
 global data "E:\5. Malawi Behavioral Biases Study"
-global output "$data\Results\2024-12-16"
+global output "$data\Results\2025-5-1"
 global dofile "$data\GitHub\MBBS-do-files"
 
 * TABLES IN THE MAIN TEXT (TABLE 1 - TABLE 7)
@@ -38,6 +38,7 @@ run "$dofile\DO_2_TABLE_A9.do"
 run "$dofile\DO_2_TABLE_A10.do"
 run "$dofile\DO_2_TABLE_A11.do"
 run "$dofile\DO_2_TABLE_A12-A13.do"
+
 * FIGURES IN APPENDIX A
 run "$dofile\DO_2_FIGURE_A2.do"
 run "$dofile\DO_2_FIGURE_A6.do"
