@@ -21,6 +21,46 @@ keep if w1_mergeRand == 3
 drop *_form_number
 drop *_formid
 
+* Baseline-Follow-up time span creation
+	tab dateofinterview
+	format PHO_REC_DATE HOME_101A %20.0f //440 - at the very beginning, would record the date regardless of whether women consent or not
+		capture drop PHO_interviewdate
+	todate PHO_REC_DATE, gen(PHO_interviewdate) p(yyyymmdd) //440
+		capture drop HOM_interviewdate
+	todate HOME_101A, gen(HOM_interviewdate) p(yyyymmdd)
+
+	capture drop FUP_date_noCLI 
+gen FUP_date_noCLI = PHO_interviewdate  //427 changed (out of 440)
+		format FUP_date_noCLI %td //729
+replace FUP_date_noCLI = HOM_interviewdate if (missing(FUP_date_noCLI) & !missing(HOM_interviewdate)) | (!missing(PHO_interviewdate) & !missing(HOM_interviewdate) & (HOM_interviewdate > PHO_interviewdate)) //244
+	format FUP_date_noCLI
+	tab FUP_date_noCLI //684
+
+gen FUP_date = CLIN_start_date  //67
+replace FUP_date = PHO_interviewdate if mi(FUP_date) & !mi(PHO_interviewdate) //427 changed (out of 440)
+replace FUP_date = HOM_interviewdate if (missing(FUP_date) & !missing(HOM_interviewdate)) | (!missing(PHO_interviewdate) & !missing(HOM_interviewdate) & (HOM_interviewdate > PHO_interviewdate)) //244
+	format FUP_date %td //729
+	tab FUP_date
+
+* should not include clinic visits, which we cannot control
+	capture drop base_fup_span
+gen base_fup_span = FUP_date_noCLI - dateofinterview
+	tab base_fup_span
+	sum base_fup_span if base_fup_span > 0
+		/*Check the single observation whose followup date is earlier than baseline date*/br dateofinterview FUP_date if base_fup_span < 0
+		/*Correct the single followup date*/replace FUP_date_noCLI = date("12/3/19", "MDY", 2020) if year(FUP_date) == 2016
+		/*0 respondent received both HOM and PHO and receive HOM first*/count if !missing(PHO_interviewdate) & !missing(HOM_interviewdate) & (HOM_interviewdate < PHO_interviewdate)
+	capture drop base_fup_span
+gen base_fup_span = FUP_date_noCLI - dateofinterview
+	label var base_fup_span "\#Days b/w Baseline and Follow-up"
+	tab base_fup_span
+	sum base_fup_span
+	
+gen base_fup_span2 = FUP_date - dateofinterview
+	label var base_fup_span2 "\#Days b/w Baseline and Follow-up"
+	
+	drop PHO_interviewdate HOM_interviewdate FUP_date_noCLI FUP_date
+
 * Registration
 drop w1_reg_number w1_reg_fmid /*w1_reg_enumid_1*/ w1_reg_hhid_1
 

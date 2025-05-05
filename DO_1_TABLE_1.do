@@ -10,7 +10,7 @@ use "$data\MBBS_Analysis_data.dta"
 
 keep if w1_mergeRand == 3
 
-global DESCVARS age tot_child wom_des_fam_size preprimary educ_primary educ_second educ_higher wom_work cohab_age curr_use baseline_inj baseline_implants top_attribute top_attribute_wgt want_to_switch husband_support prior_knowledge
+global DESCVARS age tot_child wom_des_fam_size preprimary educ_primary educ_second educ_higher wom_work cohab_age curr_use baseline_inj baseline_implants top_attribute top_attribute_wgt want_to_switch husband_support prior_knowledge base_fup_span2
 
 * Keep the 675 women that were available at follow-up
 keep if w1_mergeRand == 3
