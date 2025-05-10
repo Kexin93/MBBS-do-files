@@ -949,8 +949,8 @@ drop  w1_hh1_number w1_hh1_survey_id_1 w1_hhsize num_guests w1_hh1_hr_3 w1_hh1_r
   order counselor counseling_start_dt counseling_comp_dt, after(COUN__FV_1)
   order COUN_124*, after(COUN_123)
   
-  label var HUSB_T "Husband Invitation Intervention"
-  label var SHORT_T "Short, Tailored Counseling Intervention"
+  label var HUSB_T "Partner Invitation"
+  label var SHORT_T "Tailored Counseling"
   label var w1_hh1_r_hr_7b_h "How old is the household head?"
 
   * Labelling of variables
@@ -1353,7 +1353,7 @@ label val w1_w01_w_102_conf w1_w01_w104 yes
 	label define HUSB_T 1 "Husband Invitation" 0 "No Husband Invitation"
 label val HUSB_T HUSB_T
 	capture label drop SHORT_T
-	label define SHORT_T 1 "Short, tailored counseling" 0 "Standard long counseling"
+	label define SHORT_T 1 "Tailored counseling" 0 "Standard long counseling"
 label val SHORT_T SHORT_T
 
 foreach var of varlist HOM_105N11-HOM_105N116{
@@ -2246,7 +2246,7 @@ label var diff_method_21 "FUP method use differs from counseling method use"
 	drop diff_method_r21
 	
 * TABLE A9
-lab var SHORT_T "Short, Targeted Counseling"
+lab var SHORT_T "Targeted Counseling"
 lab var HUSB_T "Partner Invitation"
 
 	label var COUN_207 "Partner Invitation Uptake"
