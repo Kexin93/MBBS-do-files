@@ -28,7 +28,7 @@ replace PHO_REC_4 = 0 if mi(PHO_REC_4)
 	gen home_cli_both = (HOME_REV_20 == 1 & mergeCLI == 3) //9
 	gen pho_cli_both = (PHO_REC_4 == 1 & mergeCLI == 3) //13
 
-global common_vars var104C var105_inj var105_imp var108A var112A var121A var124_0 var124_moreOp var124A_toomuch var124A_justright var125_impt var125_notImpt var126_attitudePos var126_attitudeNeg var114A_hassle var114A_nohassle var114B_moralwrong var114B_notwrong var114C_notwork var114C_work var114D_womendecision var114D_mendecision var112B_early var112B_middle var112B_end var112C var112D var112E_1to2y var112E_2to3y var112E_morethan3yr var113A_gainweight var113A_nogainweight var113B_FPchangeMenstrual var113B_FPnotchangeMC var113C_pregAbaffected var113C_pregAbNotaff
+global common_vars var104C var105_inj var105_imp var108A var112A var121A var124_0 var124_moreOp var124A_toomuch var124A_justright var125_impt var125_notImpt var126_attitudePos var126_attitudeNeg var114A_hassle var114A_nohassle var114B_moralwrong var114B_notwrong var114C_notwork var114C_work var114D_womendecision var114D_mendecision var112B_early var112B_middle var112B_end var112C var112D var112E_1to2y var112E_2to3y var112E_morethan3yr var113A_gainweight var113A_nogainweight var113B_FPchangeMenstrual var113B_FPnotchangeMC var113C_pregAbaffected var113C_pregAbNotaff var1151-var1157 var1161-var1163 var1165-var1169 var11611 var105I var105K var105L var105F
 
 * 1) Variable 1 - 104
 sum CLIN_104C HOME_104 PHO_104
@@ -245,7 +245,91 @@ sum CLIN_123C HOM_113C PHO_113C
 	gen var113C_pregAbNotaff = (var113C <= 2) if !mi(var113C)
 	label var var113C_pregAbaffected "FP affected pregnancy ability"
 	label var var113C_pregAbNotaff "FP won't affect pregnancy ability'"
-	
+
+* 23) FP advantages
+sum PHO_1151 PHO_1152 PHO_1153 PHO_1154 PHO_1155 PHO_1156 PHO_1157 
+sum HOM_1151 HOM_1152 HOM_1153 HOM_1154 HOM_1155 HOM_1156 HOM_1157 
+sum CLIN_123H1 CLIN_123H2 CLIN_123H3 CLIN_123H4 CLIN_123H5 CLIN_123H6 CLIN_123H7
+
+replace CLIN_123H3 = "" if CLIN_123H3 == "---"
+replace CLIN_123H5 = "" if CLIN_123H5 == "---"
+destring CLIN_123H3 CLIN_123H5, replace
+
+forvalues i = 1/7{
+	gen var115`i' = CLIN_123H`i'
+}
+
+forvalues i = 1/7{
+	replace var115`i' = HOM_115`i' if mi(var115`i')
+	replace var115`i' = PHO_115`i' if mi(var115`i')
+}
+	label var var1151 "FP advantage: Prevents unwanted pregnancy"
+	label var var1152 "FP advantage: Allows birth spacing"
+	label var var1153 "FP advantage: Protects against STI"
+	label var var1154 "FP advantage: Benefits health"
+	label var var1155 "FP advantage: Saves money"
+	label var var1156 "FP advantage: Allows more spending on children"
+	label var var1157 "FP advantage: Allows one to enjoy sex more"
+
+* 24) FP disadvantage
+sum CLIN_123J1 CLIN_123J2 CLIN_123J3 CLIN_123J4 CLIN_123J5 CLIN_123J6 CLIN_123J7 CLIN_123J8 CLIN_123J9 CLIN_123J10 CLIN_123J11
+sum PHO_1161 PHO_1162 PHO_1163 PHO_1164 PHO_1165 PHO_1166 PHO_1167 PHO_1168 PHO_1169 PHO_11610 PHO_11611
+sum  HOM_1161 HOM_1162 HOM_1163 HOM_1164 HOM_1165 HOM_1166 HOM_1167 HOM_1168 HOM_1169 HOM_11610 HOM_11611
+
+foreach var of varlist CLIN_123J4 CLIN_123J8 CLIN_123J9 CLIN_123J10 PHO_1164 PHO_11610 HOM_1164 {
+	replace `var' = "" if `var' == "---"
+	destring `var', replace
+}
+
+forvalues i = 1/11{
+	gen var116`i' = CLIN_123J`i'
+}
+
+forvalues i = 1/11{
+	replace var116`i' = HOM_116`i' if mi(var116`i')
+	replace var116`i' = PHO_116`i' if mi(var116`i')
+}
+
+label var var1161 "FP Disadv: Not effective"
+label var var1162 "FP Disadv: Expensive"
+label var var1163 "FP Disadv: Takes time to obtain"
+label var var1164 "FP Disadv: Embarrassing to use"
+label var var1165 "FP Disadv: Side effects"
+label var var1166 "FP Disadv: Risk of infertility"
+label var var1167 "FP Disadv: Harms health"
+label var var1168 "FP Disadv: Husband opposed"
+label var var1169 "FP Disadv: Others opposed"
+label var var11610 "FP Disadv: Religious opposition"
+label var var11611 "FP Disadv: Interferes with sex"
+
+* 25) How many minutes for getting the FP method
+sum CLIN_105I HOME_105I PHO_105I
+gen var105I = CLIN_105I
+replace var105I = HOME_105I if mi(var105I)
+replace var105I = PHO_105I if mi(var105I)
+label var var105I "#Minutes for travelling to the provider"
+
+* 26) Transportation costs
+sum PHO_105K HOME_105K CLIN_105K
+gen var105K = CLIN_105K
+replace var105K = HOME_105K if mi(var105K)
+replace var105K = PHO_105K if mi(var105K)
+label var var105K "Transportation costs"
+
+* 27) Waiting time
+sum PHO_105L HOME_105L CLIN_105L
+gen var105L = CLIN_105L
+replace var105L = HOME_105L if mi(var105L)
+replace var105L = PHO_105L if mi(var105L)
+label var var105L "Waiting time"
+
+* 28) Injectable use time
+sum  PHO_105F HOME_105F CLIN_105F
+gen var105F = CLIN_105F
+replace var105F = HOME_105F if mi(var105F)
+replace var105F = PHO_105F if mi(var105F)
+label var var105F "Months since last receipt of injectables"
+
 gen mergeCLI_neg = -mergeCLI
 gen HOME_REV_20_neg = -HOME_REV_20
 	
