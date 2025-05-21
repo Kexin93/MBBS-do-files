@@ -348,3 +348,7 @@ prehead("\begin{table}\begin{center}\caption{Summary Statistics by Survey Mode}\
 posthead("\midrule") nogaps ///
 postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Notes: The first three columns are women's responses to the same question through clinic visit, home visit, and phone surveys, respectively. Columns (4)-(6) are the differences across different survey modes. *** 1\%, ** 5\%, * 10\%.}\end{table}") nogaps
 
+esttab clinic home phone cli_home cli_phone home_phone using "$output\survey_mode_summary_stats.rtf", replace  ///
+label cells("mean(pattern(1 1 1 0 0 0) fmt(2)) b(star pattern(0 0 0 1 1 1) fmt(2))") mtitles("(1) Clinic" "(2) Home" "(3) Phone" "(1)-(2)" "(1)-(3)" "(2)-(3)")  ///
+title("Summary Statistics by Survey Mode") note("Notes: The first three columns are women's responses to the same question through clinic visit, home visit, and phone surveys, respectively. Columns (4)-(6) are the differences across different survey modes. *** 1\%, ** 5\%, * 10\%.") nogaps
+
