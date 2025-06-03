@@ -83,6 +83,21 @@ gen women_satisfaction = w1_w07_w724c == 1 | w1_w07_w724c == 2
 *** WOMEN's DISSATISFACTION WITH THEIR BL METHOD
 gen women_dissatisfaction = w1_w07_w724c == 4 | w1_w07_w724c == 5
 
+* Partner Invitation
+**DISCUSSED WITH HUSBAND HOW MANY MORE CHILDREN YOU WANT
+gen discuss_kids_husb = w1_w09_w916
+
+**HUSBAND SUPPORTS FP
+gen husb_supports_fp = w1_w09_w928==1
+
+**WOMAN DECIDES CONTRACEPTIVE USE / NON-USE
+gen cont_wom_decide = w1_w07_w718b < 3 | w1_w07_w718c < 3
+
+** HUSBAND SATISFIED WITH BL CONTRACEPTIVE USE
+gen husb_sat = w1_w07_w724d == 1 | w1_w07_w724d == 2
+
+gen husb_dissat = w1_w07_w724d == 4 | w1_w07_w724d == 5
+
 * Registration
 drop w1_reg_number w1_reg_fmid /*w1_reg_enumid_1*/ w1_reg_hhid_1
 
