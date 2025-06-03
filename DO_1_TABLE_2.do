@@ -10,10 +10,6 @@ clear all
 use "$data\MBBS_Analysis_data.dta"
 
 global balance_covariates "age_binary cont_use1 eff_attribute"
-
-global covariates "age_binary cont_use1 eff_attribute i.w1_area"
-
-global covariates1 "age_binary cont_use1 eff_attribute i.w1_area tot_child wom_work i.wom_educ ethnicity_Chewa"
 		
 ********************************************************************************************************************
 ******************** Changing Ideal Methods from Counseling to Fup: which group is more likely afterwards? ***********************************

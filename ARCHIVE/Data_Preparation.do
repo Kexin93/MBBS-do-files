@@ -11,8 +11,8 @@ clear all
 version 13
 clear all
 
-global data "E:\5. Malawi Behavioral Biases Study"
-global output "$data\Results"
+global data "F:\5. Malawi Behavioral Biases Study"
+global output "$data\Results\2025-6-3"
 global dofile "$data\GitHub\MBBS-do-files"
 
 use "$data\Archive\ANALYSIS_BASE_RAND_CVF_PHO_HOM_CLI_ANALYSIS.dta"
@@ -60,6 +60,28 @@ gen base_fup_span2 = FUP_date - dateofinterview
 	label var base_fup_span2 "\#Days b/w Baseline and Follow-up"
 	
 	drop PHO_interviewdate HOM_interviewdate FUP_date_noCLI FUP_date
+
+* Subgroup analysis variables
+***INJECTABLE USE IN THE PAST 3 MONTHS - HETEROGENEITY FOR SHORT COUNSELING BY SHORT
+gen inj_3_months = w1_w03_w308b < 4
+
+***WANT TO SWITCH (USERS) OR ADOPT (NON-USERS) AT BASELINE - HETEROGENEITY FOR SHORT
+gen want_switch_adopt = w1_w03_w331==1 | w1_w03_w338a==1
+
+***TOLD ABOUT SIDE EFFECTS - HETEROGENEITY FOR SHORT
+gen told_side_effects = w1_w03_w317==1 | w1_w03_w318==1
+
+***DEFERRAL: DO NOT FOLLOW THROUGH WITH ADVICE
+gen deferral = w1_w10_w1012_1==1 | w1_w10_w1012_2==1 | w1_w10_w1012_3==1
+
+***BASELINE ACCESS AND CHOICE: 325b-325d - MAJOR HETEROGENEITY HERE!!
+gen access_choice = w1_w03_w325b==1 & w1_w03_w325c==1 & w1_w03_w325d==0
+
+*** WOMEN's SATISFACTION WITH THEIR BL METHOD
+gen women_satisfaction = w1_w07_w724c == 1 | w1_w07_w724c == 2
+
+*** WOMEN's DISSATISFACTION WITH THEIR BL METHOD
+gen women_dissatisfaction = w1_w07_w724c == 4 | w1_w07_w724c == 5
 
 * Registration
 drop w1_reg_number w1_reg_fmid /*w1_reg_enumid_1*/ w1_reg_hhid_1

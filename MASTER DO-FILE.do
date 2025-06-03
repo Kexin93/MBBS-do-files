@@ -12,8 +12,8 @@
 version 13
 clear all
 
-global data "E:\5. Malawi Behavioral Biases Study"
-global output "$data\Results\2025-5-1"
+global data "F:\5. Malawi Behavioral Biases Study"
+global output "$data\Results\2025-6-3"
 global dofile "$data\GitHub\MBBS-do-files"
 
 * TABLES IN THE MAIN TEXT (TABLE 1 - TABLE 7)
