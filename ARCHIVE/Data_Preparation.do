@@ -2288,6 +2288,54 @@ lab var HUSB_T "Partner Invitation"
 
 	label var COUN_207 "Partner Invitation Uptake"
 	replace COUN_207 = 0 if mi(COUN_207)
+
+* LARCs & SARCs
+***IDEAL METHOD
+*CHANGED LARC
+gen FUP_ideal_LARC = (FUP_ideal_method < 4 | FUP_ideal_method==5) & FUP_ideal_method!=0
+gen COUN_ideal_LARC = (COUN_129 < 4 | COUN_129==5) & COUN_129!=0
+gen diff_method_ideal_LARC_r = FUP_ideal_LARC - COUN_ideal_LARC
+gen diff_method_ideal_LARC = (diff_method_ideal_LARC_r != 0) if !mi(diff_method_ideal_LARC_r) 
+
+*CHANGED SARC
+gen FUP_SARC_ideal = FUP_ideal_method == 4 | (FUP_ideal_method > 5 & FUP_ideal_method < 12)
+gen COUN_SARC_ideal = COUN_129 == 4 | (COUN_129 > 5 & COUN_129 < 12)
+gen diff_method_SARC_ideal_r = FUP_SARC_ideal - COUN_SARC_ideal
+gen diff_method_SARC_ideal = (diff_method_SARC_ideal_r != 0) if !mi(diff_method_SARC_ideal_r)
+
+********************************************************************************
+***METHOD USE
+*CHANGED LARC
+gen FUP_LARC_use = (FUP_curr_method < 4 | FUP_curr_method==5) & FUP_curr_method!=0
+gen COUN_LARC_use = (coun_curr_method < 4 | coun_curr_method==5) & coun_curr_method!=0
+gen diff_method_LARC_use_r = FUP_LARC_use - COUN_LARC_use
+gen diff_method_LARC_use = (diff_method_LARC_use_r != 0) if !mi(diff_method_LARC_use_r) 
+
+*CHANGED SARC
+gen FUP_SARC_use = FUP_curr_method == 4 | (FUP_curr_method > 5 & FUP_curr_method < 12)
+gen COUN_SARC_use = coun_curr_method == 4 | (coun_curr_method > 5 & coun_curr_method < 12)
+gen diff_method_SARC_use_r = FUP_SARC_use - COUN_SARC_use
+gen diff_method_SARC_use = (diff_method_SARC_use_r != 0) if !mi(diff_method_SARC_use_r)
+
+*** INTERTEMPORAL DISCORDANCE
+* CHANGED LARC
+gen POST_COUN_ideal_LARC = (COUN_3081 < 4 | COUN_3081 == 5) & COUN_3081 !=0
+gen diff_LARC_ID_r = FUP_LARC_use - POST_COUN_ideal_LARC
+gen diff_LARC_ID = (diff_LARC_ID_r > 0 | diff_LARC_ID_r < 0) if !mi(diff_LARC_ID_r)
+
+* CHANGED SARC
+gen POST_COUN_ideal_SARC = COUN_3081 == 4 | (COUN_3081 > 5 & COUN_3081 < 12)
+gen diff_SARC_ID_r = FUP_SARC_use - POST_COUN_ideal_SARC
+gen diff_SARC_ID = (diff_SARC_ID_r > 0 | diff_SARC_ID_r < 0) if !mi(diff_SARC_ID_r)
+
+*** CONTEMPORANEOUS DISCORDANCE
+* CHANGED LARC
+gen diff_LARC_CD_r = FUP_LARC_use - FUP_ideal_LARC
+gen diff_LARC_CD = (diff_LARC_CD_r > 0 | diff_LARC_CD_r < 0) if !mi(diff_LARC_CD_r)
+
+* CHANGED SARC
+gen diff_SARC_CD_r = FUP_SARC_use - FUP_SARC_ideal
+gen diff_SARC_CD = (diff_SARC_CD_r > 0 | diff_SARC_CD_r < 0) if !mi(diff_SARC_CD_r)
 	
 * FIGURE E1-E2: Counseling Times
 *******************************************************************************

@@ -1,5 +1,5 @@
 ***MALAWI Behavioral Biases Study
-***DO FILE 3: TABLE 3 (Heterogeity analyses for Tailored Counseling)
+***DO FILE 4: TABLE 4 (Heterogeity analyses for Partner Invitation)
 
 ***KEXIN ZHANG
 ***June 3, 2025
@@ -71,7 +71,7 @@ restore
 
 esttab discuss_kids_husb_Y1 discuss_kids_husb_Y2 discuss_kids_husb_Y3 discuss_kids_husb_Y4 using "$output\partner_subgroups.tex", replace fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
-prehead("\begin{table}\begin{center}\caption{Treatment Effect of Tailored Counseling}\label{tab: partnerbygroup}\tabcolsep=0.3cm\scalebox{0.8}{\begin{tabular}{lcccc}\toprule") coeflabel(HUSB_T "\makecell[l]{Discussed no. of children \\ with husband}") posthead("\midrule" ) ///
+prehead("\begin{table}\begin{center}\caption{Treatment Effect of Partner Invitation}\label{tab: partnerbygroup}\tabcolsep=0.3cm\scalebox{0.8}{\begin{tabular}{lcccc}\toprule") coeflabel(HUSB_T "\makecell[l]{Discussed no. of children \\ with husband}") posthead("\midrule" ) ///
 stats(N, fmt(0) labels("N"))  ///
 mtitles("\makecell{Change in \\ Stated Ideal Method}" "\makecell{Change in \\ Method Use}" "\makecell{Intertemporal \\ Discordance}" "\makecell{Contemporaneous \\ Discordance}") collabels(none)
 
