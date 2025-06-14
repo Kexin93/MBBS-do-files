@@ -12,7 +12,7 @@ version 13
 clear all
 
 global data "F:\5. Malawi Behavioral Biases Study"
-global output "$data\Results\2025-6-3"
+global output "$data\Results\2025-6-14"
 global dofile "$data\GitHub\MBBS-do-files"
 
 use "$data\Archive\ANALYSIS_BASE_RAND_CVF_PHO_HOM_CLI_ANALYSIS.dta"
@@ -81,7 +81,7 @@ gen access_choice = w1_w03_w325b==1 & w1_w03_w325c==1 & w1_w03_w325d==0
 gen women_satisfaction = w1_w07_w724c == 1 | w1_w07_w724c == 2
 
 *** WOMEN's DISSATISFACTION WITH THEIR BL METHOD
-gen women_dissatisfaction = w1_w07_w724c == 4 | w1_w07_w724c == 5
+gen women_dissatisfaction = w1_w07_w724c == 3 | w1_w07_w724c == 4 | w1_w07_w724c == 5
 
 * Partner Invitation
 **DISCUSSED WITH HUSBAND HOW MANY MORE CHILDREN YOU WANT
@@ -2283,7 +2283,7 @@ label var diff_method_21 "FUP method use differs from counseling method use"
 	drop diff_method_r21
 	
 * TABLE A9
-lab var SHORT_T "Targeted Counseling"
+lab var SHORT_T "Tailored Counseling"
 lab var HUSB_T "Partner Invitation"
 
 	label var COUN_207 "Partner Invitation Uptake"

@@ -71,49 +71,49 @@ restore
 
 esttab discuss_kids_husb_Y1 discuss_kids_husb_Y2 discuss_kids_husb_Y3 discuss_kids_husb_Y4 using "$output\partner_subgroups.tex", replace fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
-prehead("\begin{table}\begin{center}\caption{Treatment Effect of Partner Invitation}\label{tab: partnerbygroup}\tabcolsep=0.3cm\scalebox{0.8}{\begin{tabular}{lcccc}\toprule") coeflabel(HUSB_T "\makecell[l]{Discussed no. of children \\ with husband}") posthead("\midrule" ) ///
+prehead("\begin{table}\begin{center}\caption{Heterogeneity in the Treatment Effect of Partner Invitation}\label{tab: partnerbygroup}\tabcolsep=0.3cm\scalebox{0.8}{\begin{tabular}{lcccc}\toprule") coeflabel(HUSB_T "\makecell[l]{Discussed no. of children \\ with husband}") posthead("\midrule" ) ///
 stats(N, fmt(0) labels("N"))  ///
-mtitles("\makecell{Change in \\ Stated Ideal Method}" "\makecell{Change in \\ Method Use}" "\makecell{Intertemporal \\ Discordance}" "\makecell{Contemporaneous \\ Discordance}") collabels(none)
+mtitles("\makecell{Change in \\ Stated Ideal Method}" "\makecell{Change in \\ Method Use}" "\makecell{Intertemporal \\ Discordance}" "\makecell{Contemporaneous \\ Discordance}") collabels(none) postfoot("\cdashline{1-5}")
 
 esttab discuss_kids_husb_N1 discuss_kids_husb_N2 discuss_kids_husb_N3 discuss_kids_husb_N4 using "$output\partner_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(HUSB_T "\makecell[l]{Did not discuss \\ children with husband}") nomtitles collabels(none) nonumbers
+coeflabel(HUSB_T "\makecell[l]{Did not discuss \\ children with husband}") nomtitles collabels(none) nonumbers postfoot("\midrule")
 
 esttab husb_supports_fp_Y1 husb_supports_fp_Y2 husb_supports_fp_Y3 husb_supports_fp_Y4 using "$output\partner_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(HUSB_T "Husband supports FP") nomtitles collabels(none) nonumbers
+coeflabel(HUSB_T "Husband supports FP") nomtitles collabels(none) nonumbers postfoot("\cdashline{1-5}")
 
 esttab husb_supports_fp_N1 husb_supports_fp_N2 husb_supports_fp_N3 husb_supports_fp_N4 using "$output\partner_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(HUSB_T "Husband does not support FP") nomtitles collabels(none) nonumbers
+coeflabel(HUSB_T "Husband does not support FP") nomtitles collabels(none) nonumbers postfoot("\midrule")
 
 esttab cont_wom_decide_Y1 cont_wom_decide_Y2 cont_wom_decide_Y3 cont_wom_decide_Y4 using "$output\partner_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(HUSB_T "\makecell[l]{Woman decides \\ FP use/non-use}") nomtitles collabels(none) nonumbers
+coeflabel(HUSB_T "\makecell[l]{Woman decides \\ FP use/non-use}") nomtitles collabels(none) nonumbers postfoot("\cdashline{1-5}")
 
 esttab cont_wom_decide_N1 cont_wom_decide_N2 cont_wom_decide_N3 cont_wom_decide_N4 using "$output\partner_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(HUSB_T "\makecell[l]{Woman does not decide \\ FP use/non-use}") nomtitles collabels(none) nonumbers
+coeflabel(HUSB_T "\makecell[l]{Woman does not decide \\ FP use/non-use}") nomtitles collabels(none) nonumbers postfoot("\midrule")
 
 esttab husb_sat_Y1 husb_sat_Y2 husb_sat_Y3 husb_sat_Y4 using "$output\partner_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(HUSB_T "\makecell[l]{Husband satisfied \\ with FP method use}") nomtitles collabels(none) nonumbers
+coeflabel(HUSB_T "\makecell[l]{Husband satisfied \\ with FP method use}") nomtitles collabels(none) nonumbers postfoot("\cdashline{1-5}")
 
 esttab husb_sat_N1 husb_sat_N2 husb_sat_N3 husb_sat_N4 using "$output\partner_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(HUSB_T "\makecell[l]{Husband not satisfied \\ with FP method use}") nomtitles collabels(none) nonumbers
+coeflabel(HUSB_T "\makecell[l]{Husband not satisfied \\ with FP method use}") nomtitles collabels(none) nonumbers postfoot("\midrule")
 
 esttab women_satisfaction_Y1 women_satisfaction_Y2 women_satisfaction_Y3 women_satisfaction_Y4 using "$output\partner_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(HUSB_T "\makecell[l]{Women satisfied with \\ their BL Method}") nomtitles collabels(none) nonumbers
+coeflabel(HUSB_T "\makecell[l]{Women satisfied with \\ their BL Method}") nomtitles collabels(none) nonumbers postfoot("\cdashline{1-5}")
 
 esttab women_dissatisfaction_Y1 women_dissatisfaction_Y2 women_dissatisfaction_Y3 women_dissatisfaction_Y4 using "$output\partner_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///

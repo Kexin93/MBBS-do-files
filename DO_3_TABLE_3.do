@@ -71,64 +71,64 @@ restore
 
 esttab inj_3_months_Y1 inj_3_months_Y2 inj_3_months_Y3 inj_3_months_Y4 using "$output\tailored_subgroups.tex", replace fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
-prehead("\begin{table}\begin{center}\caption{Treatment Effect of Tailored Counseling}\label{tab: tailoredbygroup}\tabcolsep=0.3cm\scalebox{0.8}{\begin{tabular}{lcccc}\toprule") coeflabel(SHORT_T "\makecell[l]{Recently received \\injectable (<3 months)}") posthead("\midrule" ) ///
+prehead("\begin{table}\begin{center}\caption{Heterogeneity in the Treatment Effect of Tailored Counseling}\label{tab: tailoredbygroup}\tabcolsep=0.3cm\scalebox{0.8}{\begin{tabular}{lcccc}\toprule") coeflabel(SHORT_T "\makecell[l]{Recently received \\injectable (<3 months)}") posthead("\midrule" ) ///
 stats(N, fmt(0) labels("N"))  ///
-mtitles("\makecell{Change in \\ Stated Ideal Method}" "\makecell{Change in \\ Method Use}" "\makecell{Intertemporal \\ Discordance}" "\makecell{Contemporaneous \\ Discordance}") collabels(none)
+mtitles("\makecell{Change in \\ Stated Ideal Method}" "\makecell{Change in \\ Method Use}" "\makecell{Intertemporal \\ Discordance}" "\makecell{Contemporaneous \\ Discordance}") collabels(none) postfoot("\cdashline{1-5}")
 
 esttab inj_3_months_N1 inj_3_months_N2 inj_3_months_N3 inj_3_months_N4 using "$output\tailored_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(SHORT_T "\makecell[l]{Did not recently \\ receive injectable}") nomtitles collabels(none) nonumbers
+coeflabel(SHORT_T "\makecell[l]{Did not recently \\ receive injectable}") nomtitles collabels(none) nonumbers postfoot("\midrule")
 
 esttab want_switch_adopt_Y1 want_switch_adopt_Y2 want_switch_adopt_Y3 want_switch_adopt_Y4 using "$output\tailored_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(SHORT_T "Wants to switch or adopt") nomtitles collabels(none) nonumbers
+coeflabel(SHORT_T "Wants to switch or adopt") nomtitles collabels(none) nonumbers postfoot("\cdashline{1-5}")
 
 esttab want_switch_adopt_N1 want_switch_adopt_N2 want_switch_adopt_N3 want_switch_adopt_N4 using "$output\tailored_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(SHORT_T "Does not want to switch or adopt") nomtitles collabels(none) nonumbers
+coeflabel(SHORT_T "Does not want to switch or adopt") nomtitles collabels(none) nonumbers postfoot("\midrule")
 
 esttab told_side_effects_Y1 told_side_effects_Y2 told_side_effects_Y3 told_side_effects_Y4 using "$output\tailored_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(SHORT_T "Told about side effects") nomtitles collabels(none) nonumbers
+coeflabel(SHORT_T "Told about side effects") nomtitles collabels(none) nonumbers postfoot("\cdashline{1-5}")
 
 esttab told_side_effects_N1 told_side_effects_N2 told_side_effects_N3 told_side_effects_N4 using "$output\tailored_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(SHORT_T "Not told about side effects") nomtitles collabels(none) nonumbers
+coeflabel(SHORT_T "Not told about side effects") nomtitles collabels(none) nonumbers postfoot("\midrule")
 
 esttab deferral_Y1 deferral_Y2 deferral_Y3 deferral_Y4 using "$output\tailored_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(SHORT_T "Defer or delay care-seeking") nomtitles collabels(none) nonumbers
+coeflabel(SHORT_T "Defer or delay care-seeking") nomtitles collabels(none) nonumbers postfoot("\cdashline{1-5}")
 
 esttab deferral_N1 deferral_N2 deferral_N3 deferral_N4 using "$output\tailored_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(SHORT_T "\makecell[l]{Does not defer or \\ delay care-seeking}") nomtitles collabels(none) nonumbers
+coeflabel(SHORT_T "\makecell[l]{Does not defer or \\ delay care-seeking}") nomtitles collabels(none) nonumbers postfoot("\midrule")
 
 esttab access_choice_Y1 access_choice_Y2 access_choice_Y3 access_choice_Y4 using "$output\tailored_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(SHORT_T "Had access and choice") nomtitles collabels(none) nonumbers
+coeflabel(SHORT_T "Had access and choice") nomtitles collabels(none) nonumbers postfoot("\cdashline{1-5}")
 
 esttab access_choice_N1 access_choice_N2 access_choice_N3 access_choice_N4 using "$output\tailored_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(SHORT_T "Did not have access or choice") nomtitles collabels(none) nonumbers
+coeflabel(SHORT_T "Did not have access or choice") nomtitles collabels(none) nonumbers postfoot("\midrule")
 
 esttab women_satisfaction_Y1 women_satisfaction_Y2 women_satisfaction_Y3 women_satisfaction_Y4 using "$output\tailored_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 stats(N, fmt(0) labels("N"))  ///
-coeflabel(SHORT_T "\makecell[l]{Women satisfied with \\ their BL Method}") nomtitles collabels(none) nonumbers
+coeflabel(SHORT_T "\makecell[l]{Women satisfied with \\ their BL Method}") nomtitles collabels(none) nonumbers postfoot("\cdashline{1-5}")
 
 esttab women_dissatisfaction_Y1 women_dissatisfaction_Y2 women_dissatisfaction_Y3 women_dissatisfaction_Y4 using "$output\tailored_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 coeflabel(SHORT_T "\makecell[l]{Women dissatisfied with \\ their BL Method}") nomtitles collabels(none) nonumbers ///
 stats(N, fmt(0) labels("N"))  ///
-postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: We control for baseline level balancing variables that include a woman's age, her contraceptive use, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are defined in Appendix A1. Heteroskedastic-robust standard errors are presented in brackets. ***1\%, ** 5\%, * 10\%} \end{table}") nogaps
 
 

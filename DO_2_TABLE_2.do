@@ -48,16 +48,9 @@ estadd scalar ymean = r(mean)
 esttab est1 est2 est3 est4 using "$output\main_itt_results.tex", replace fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T HUSB_T) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean"))  ///
-prehead("\begin{table}\begin{center}\caption{Treatment Effect of Tailored Counseling and Partner invitations}\label{tab: allwomen}\tabcolsep=0.3cm\scalebox{0.85}{\begin{tabular}{lcccc}\toprule") ///
+prehead("\begin{table}\begin{center}\caption{Treatment Effect of Tailored Counseling and Partner Invitations}\label{tab: allwomen}\tabcolsep=0.3cm\scalebox{0.85}{\begin{tabular}{lcccc}\toprule") ///
 posthead("\midrule \multicolumn{5}{c}{\textbf{A: Change in Stated Ideal Method}} \\\\[-1ex]") nogaps ///
 nomtitles collabels(none) 
-
-// esttab est1 est2 using "$output\allwomen_husband_ITT_3col.tex", replace fragment label nolines ///
-// cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
-// stats(N ymean, fmt(0 2) labels("N" "Control mean"))  ///
-// prehead("\begin{table}\begin{center}\caption{Treatment Effect of the Partner Invitation}\label{tab: allwomenhusbandITT}\tabcolsep=0.1cm\scalebox{0.88}{\begin{tabular}{lccc}\toprule") ///
-// posthead("\midrule \multicolumn{4}{c}{\textbf{A: Change in Stated Ideal Method from Counseling to Follow-up}} \\\\[-1ex]") nogaps ///
-// collabels(none) nomtitles
 
 ******************* PANEL B. Counseling current method and FUP current method**********************************************	
 	eststo clear
@@ -81,14 +74,7 @@ estadd scalar ymean = r(mean)
 esttab est1 est2 est3 est4 using "$output\main_itt_results.tex", append fragment label nomtitles nonumbers nolines cells(b(star fmt(%9.3f)) ///
 se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T HUSB_T) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
-posthead("\midrule \multicolumn{5}{c}{\textbf{B: Change in Method Use}} \\\\[-1ex]") nogaps
-
-// *Panel B: Counseling current method and Follow-up current method
-// esttab est1 est2 using "$output\allwomen_husband_ITT_3col.tex", append fragment label nomtitles nonumbers nolines cells(b(star fmt(%9.3f)) ///
-// se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
-// stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
-// posthead("\midrule \multicolumn{4}{c}{\textbf{B: Change in Method Use from Counseling to Follow-up}} \\\\[-1ex]") nogaps
-
+posthead("\midrule \multicolumn{5}{c}{\textbf{B: Change in Method Use}} \\\\[-1ex]") nogaps collabels(none)
 
 ******************* Panel C: post-COUN ideal method and FUP current method**********************************************
 	eststo clear
@@ -112,7 +98,7 @@ estadd scalar ymean = r(mean)
 esttab est1 est2 est3 est4 using "$output\main_itt_results.tex", append fragment label nomtitles nonumbers nolines cells(b(star fmt(%9.3f)) ///
 se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T HUSB_T) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean"))  ///
-posthead("\midrule \multicolumn{5}{c}{\textbf{C: Intertemporal Discordance}} \\\\[-1ex]") nogaps
+posthead("\midrule \multicolumn{5}{c}{\textbf{C: Intertemporal Discordance}} \\\\[-1ex]") nogaps collabels(none)
 
 ******************* Panel D: FUP ideal method and FUP current method**********************************************
 	eststo clear
@@ -134,7 +120,7 @@ estadd scalar ymean = r(mean)
 
 * Panel D: 
 esttab est1 est2 est3 est4 using  "$output\main_itt_results.tex", append fragment label nomtitles nonumbers nolines cells(b(star fmt(%9.3f)) ///
-se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T HUSB_T) ///
+se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T HUSB_T) collabels(none) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 posthead("\midrule \multicolumn{5}{c}{\textbf{D: Contemporaneous Discordance}} \\\\[-1ex]") ///
-postfoot("\midrule Balancing controls & & x & & x \\\bottomrule \end{tabular}}\end{center}\footnotesize{Notes: In Panel A, the dependent variable is a binary variable that indicates whether a woman's stated ideal method at counseling differs from her stated ideal method at follow-up. In Panel B, the dependent variable is a binary variable that indicates if the woman's method use at counseling differs from her method use at follow-up. In Panel C, the dependent variable is a binary variable that indicates if the woman's stated ideal method at counseling differs from her method use at follow-up. In Panel D, the dependent variable is a binary variable that indicates if a woman's method use differs from her stated ideal method at follow-up. Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+postfoot("\midrule Balancing controls & & x & & x \\\bottomrule \end{tabular}}\end{center}\footnotesize{Notes: Each panel presents regression results for the primary outcome that is specified. Columns (1) and (2) present results for the tailored counseling intervention, and columns (3) and (4) present results for the partner invitation intervention. Columns (2) and (4) control for baseline level balancing variables that include a woman's age, her contraceptive use, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are described in Section 3 and are defined in more detail in Appendix A1. Heteroskedastic-robust standard errors are presented in brackets. ***1\%, ** 5\%, * 10\%.} \end{table}") nogaps
