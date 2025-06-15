@@ -12,9 +12,18 @@
 version 13
 clear all
 
+
+if "`c(username)'"=="Kexin Zhang" {
 global data "F:\5. Malawi Behavioral Biases Study"
-global output "$data\Results\2025-6-14"
 global dofile "$data\GitHub\MBBS-do-files"
+global output "$data\Results\2025-6-14"
+}
+
+else if "`c(username)'"=="kexin" {
+global data "C:\Users\kexin\Dropbox\MALAWI BEHAVIORAL BIASES STUDY\DATA"
+global dofile "$data\DO FILES\ANALYSIS DO FILES\MBBS FORMAL DO FILES 6-15-25\MBBS-do-files"
+global output "$data\RESULTS\6-15-25"
+}
 
 * TABLES IN THE MAIN TEXT (TABLE 1 - TABLE 7)
 run "$dofile\DO_1_TABLE_1.do"
