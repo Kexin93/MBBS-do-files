@@ -28,19 +28,19 @@ keep if COUN__FV_1 == 1
 
 	eststo clear
 ******************* PANEL A. pre-COUN ideal method and FUP ideal method**********************************************
-eststo: reg diff_method_ideal_LARC SHORT_T  , vce(robust) 
+eststo: reg diff_method_ideal_LARC SHORT_T, vce(robust) 
 summarize diff_method_ideal_LARC if SHORT_T == 0  
 estadd scalar ymean = r(mean)
 	
-eststo: reg diff_method_ideal_LARC SHORT_T $balance_covariates  , vce(robust) 
+eststo: reg diff_method_ideal_LARC SHORT_T $balance_covariates, vce(robust) 
 summarize diff_method_ideal_LARC if SHORT_T == 0  
 estadd scalar ymean = r(mean)
 	
-eststo: reg diff_method_ideal_LARC HUSB_T  , vce(robust) 
+eststo: reg diff_method_ideal_LARC HUSB_T, vce(robust) 
 summarize diff_method_ideal_LARC if HUSB_T == 0  
 estadd scalar ymean = r(mean)
 
-eststo: reg diff_method_ideal_LARC HUSB_T $balance_covariates  , vce(robust) 
+eststo: reg diff_method_ideal_LARC HUSB_T $balance_covariates, vce(robust) 
 summarize diff_method_ideal_LARC if HUSB_T == 0  
 estadd scalar ymean = r(mean)
 	
