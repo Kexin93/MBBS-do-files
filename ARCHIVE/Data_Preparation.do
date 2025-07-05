@@ -12,7 +12,7 @@ version 13
 clear all
 
 if "`c(username)'"=="Kexin Zhang" {
-global data "F:\5. Malawi Behavioral Biases Study"
+global data "E:\5. Malawi Behavioral Biases Study"
 global dofile "$data\GitHub\MBBS-do-files"
 global output "$data\Results\2025-6-14"
 
@@ -106,7 +106,7 @@ gen cont_wom_decide = w1_w07_w718b < 3 | w1_w07_w718c < 3
 ** HUSBAND SATISFIED WITH BL CONTRACEPTIVE USE
 gen husb_sat = w1_w07_w724d == 1 | w1_w07_w724d == 2
 
-gen husb_dissat = w1_w07_w724d == 4 | w1_w07_w724d == 5
+gen husb_dissat = w1_w07_w724d == 3 | w1_w07_w724d == 4 | w1_w07_w724d == 5
 
 * Registration
 drop w1_reg_number w1_reg_fmid /*w1_reg_enumid_1*/ w1_reg_hhid_1

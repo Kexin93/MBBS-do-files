@@ -27,7 +27,7 @@ keep if COUN__FV_1 == 1
 	drop if PHO_103 == 1 | HOME_103 == 1 //638
 
 	eststo clear
-foreach var of varlist discuss_kids_husb husb_supports_fp  cont_wom_decide husb_sat husb_dissat women_satisfaction women_dissatisfaction{
+foreach var of varlist discuss_kids_husb husb_supports_fp  cont_wom_decide husb_sat women_satisfaction women_dissatisfaction{
 preserve
 keep if `var' == 1
 eststo `var'_Y1: reg diff_method_8 HUSB_T $balance_covariates if COUN__FV_1 == 1, vce(robust) 
@@ -48,7 +48,7 @@ estadd scalar ymean = r(mean)
 restore
 }
 
-foreach var of varlist discuss_kids_husb husb_supports_fp  cont_wom_decide husb_sat husb_dissat{
+foreach var of varlist discuss_kids_husb husb_supports_fp  cont_wom_decide husb_sat{
 preserve
 keep if `var' == 0
 eststo `var'_N1: reg diff_method_8 HUSB_T $balance_covariates if COUN__FV_1 == 1, vce(robust) 
