@@ -129,6 +129,6 @@ esttab women_dissatisfaction_Y1 women_dissatisfaction_Y2 women_dissatisfaction_Y
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
 coeflabel(SHORT_T "\makecell[l]{Women dissatisfied with \\ their BL Method}") nomtitles collabels(none) nonumbers ///
 stats(N, fmt(0) labels("N"))  ///
-postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: We control for baseline level balancing variables that include a woman's age, her contraceptive use, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are defined in Appendix A1. Heteroskedastic-robust standard errors are presented in brackets. ***1\%, ** 5\%, * 10\%} \end{table}") nogaps
+postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: We control for baseline level balancing variables that include a woman's age, her contraceptive use, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are presented in Table \ref{tab: variable_descriptions}. Heteroskedastic-robust standard errors are presented in brackets. ***1\%, ** 5\%, * 10\%} \end{table}") nogaps
 
 

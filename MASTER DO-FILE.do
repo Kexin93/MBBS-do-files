@@ -14,7 +14,7 @@ clear all
 
 
 if "`c(username)'"=="Kexin Zhang" {
-global data "F:\5. Malawi Behavioral Biases Study"
+global data "E:\5. Malawi Behavioral Biases Study"
 global dofile "$data\GitHub\MBBS-do-files"
 global output "$data\Results\2025-6-14"
 }

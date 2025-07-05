@@ -1613,13 +1613,13 @@ label variable educ_second "Education: Secondary"
 label variable educ_higher "Education: Higher"
 label variable wom_work "Currently working (1 = yes)"
 label variable w1_w06_w609 "lived with men once or more"
-label variable tot_child "Total no. of children at baseline (BL)"
-label variable wom_des_fam_size "Desired no. of children at BL"
+label variable tot_child "Total no. of children"
+label variable wom_des_fam_size "Desired no. of children"
 label variable cohab_age "Age at first cohabitation (years)"
-label variable top_attribute "Top attribute: Effectiveness"
+label variable top_attribute "Top attribute: Effectiveness (1 = yes)"
 label variable top_attribute_wgt "Weight given to top attribute"
 label variable want_to_switch "Wants to switch methods (1 = yes)"
-label variable HUSB_supp "husband supports FP"
+label variable HUSB_supp "husband supports FP (1 = yes)"
 
 label variable counselor "counselor"
 label variable BASE_husb_FP "husband support at BL"
@@ -1630,10 +1630,10 @@ replace curr_use = 0 if w1_w03_w308b > 5 & w1_w03_w3044 == 1
 	
 	* baseline using injectables
 	gen baseline_inj = (w1_w03_w3044 == 1) if w1_w03_w303 == 1
-	label var baseline_inj "Current FP method: Injectables"
+	label var baseline_inj "Current FP method: Injectables (1 = yes)"
 	
 	gen baseline_implants = (w1_w03_w3045 == 1) if w1_w03_w303 == 1
-	label var baseline_implants "Current FP method: Implants"
+	label var baseline_implants "Current FP method: Implants (1 = yes)"
 	
 global DESCVARS age tot_child wom_des_fam_size preprimary educ_primary educ_second educ_higher wom_work cohab_age curr_use baseline_inj baseline_implants top_attribute top_attribute_wgt want_to_switch husband_support
 
@@ -2599,7 +2599,7 @@ gen attribute_1 = w1_w03_w338_1_1extra
 replace attribute_1 = w1_w03_w3361 if !missing(w1_w03_w3361) & missing(attribute_1)
 	recode attribute_1 (88=.)
 	label val attribute_1 attributes
-	label var attribute_1 "Top method attribute at Baseline"
+	label var attribute_1 "Top method attribute"
 	
 	*CHECK
 	count if attribute_1 != w1_w03_attribute_1 
