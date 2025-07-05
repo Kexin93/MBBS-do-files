@@ -64,7 +64,7 @@ label cells("mean(pattern(1 1 1 0 0) fmt(2)) b(star pattern(0 0 0 1 0) fmt(2)) p
 mtitles("All" "Compliers" "Non-Compliers" "Difference" "p-value") ///
 nonumbers replace collabels(none) compress style(tab) ///
 stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
-prehead("\begin{table}\begin{center} \caption{Partner Invitation Compliers}\label{tab: husbandcompliers}\tabcolsep=0.02cm\begin{tabular}{lccccc}\toprule") ///
+prehead("\begin{table}\begin{center} \caption{Partner Invitation Compliers}\label{tab: husbandcompliers}\tabcolsep=0.07cm\begin{tabular}{lccccc}\toprule") ///
 postfoot("\bottomrule\end{tabular}\end{center}\footnotesize{Notes: Among 701 women who received a counseling session, 401 women were assigned to the partner invitation group, among which 112 male partners participated. Variable definitions are presented in Table \ref{tab: variable_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}")
 
 * TABLE D3 -Selection between clinic visitors and non-clinic-visitors
@@ -87,7 +87,7 @@ label cells("mean(pattern(1 1 1 0 0) fmt(2)) b(star pattern(0 0 0 1 0) fmt(2)) p
 mtitles("All" "Yes" "No" "Difference" "p-value") ///
 nonumbers replace collabels(none) compress style(tab) ///
 stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
-prehead("\begin{table}\begin{center}\caption{Who Visited the Clinic?}\label{tab: visitclinic}\tabcolsep=0.2cm\scalebox{0.62}{\begin{tabular}{lccccc}\toprule") ///
+prehead("\begin{table}\begin{center}\caption{Who Visited the Clinic?}\label{tab: visitclinic}\tabcolsep=0.2cm\scalebox{0.75}{\begin{tabular}{lccccc}\toprule") ///
 posthead("\midrule\textbf{Visited the Good Health Kauma Clinic?} \\\\[-1ex]") nogaps postfoot("\midrule")
 
 	*========================= Any Clinc ==========================================
