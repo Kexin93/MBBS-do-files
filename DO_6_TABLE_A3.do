@@ -50,7 +50,7 @@ esttab est1 est2 using "$output\allwomen_partnerIV.tex", replace fragment label 
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(COUN_207) ///
 stats(N ymean fs, fmt(0 2) labels("N" "Control mean" "First Stage F"))  ///
 prehead("\begin{table}\begin{center}\caption{Instrumental Variable (IV-2SLS) Results of Partner Invitation}\label{tab: allwomenhusbandIV}\tabcolsep=0.3cm\scalebox{0.88}{\begin{tabular}{lcc}\toprule") ///
-posthead("\midrule \multicolumn{3}{c}{\textbf{A: Change in Stated Ideal Method}} \\\\[-1ex]") nogaps ///
+posthead("\midrule \multicolumn{3}{c}{\textbf{A: Change in Stated Preferred Method}} \\\\[-1ex]") nogaps ///
 collabels(none) nomtitles
 
 ******************* Panel B: Counseling Current Method and FUP Current Method**********************************************

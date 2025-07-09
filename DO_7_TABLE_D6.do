@@ -62,7 +62,7 @@ esttab PI0_clinic PI0_home PI0_phone PI1_clinic PI1_home PI1_phone PI_clinic_dif
 label cells("mean(pattern(1 1 1 1 1 1 0 0 0) fmt(2)) b(star pattern(0 0 0 0 0 0 1 1 1) fmt(2))") ///
 nonumbers replace collabels(none) compress style(tab) ///
 stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
-mgroups("Partner Invitation = 0" "Partner Invitation = 1" "Difference", pattern(1 0 0 1 0 0 1 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
+mgroups("Partner Invitation = 0" "Partner Invitation = 1" "Difference", pattern(1 0 0 1 0 0 1 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) starlevels(* 0.1 ** 0.05 *** 0.01) ///
 mtitles("Clinic" "Home" "Phone" "Clinic" "Home" "Phone" "(1)-(4)" "(2)-(5)" "(3)-(6)")  ///
 prehead("\begin{table}\begin{center}\caption{Summary Statistics across Survey Modes by Treatment Arms}\label{tab: surveymodesummstatsarms}\tabcolsep=0.2cm\scalebox{0.67}{\begin{tabular}{lccccccccc}\toprule") ///
 posthead("\midrule &\multicolumn{9}{c}{\textbf{Partner Invitations}}\\") nogaps postfoot("\midrule")
@@ -97,7 +97,7 @@ esttab TC0_clinic TC0_home TC0_phone TC1_clinic TC1_home TC1_phone TC_clinic_dif
 label cells("mean(pattern(1 1 1 1 1 1 0 0 0) fmt(2)) b(star pattern(0 0 0 0 0 0 1 1 1) fmt(2))") ///
 nonumbers append collabels(none) compress style(tab) ///
 stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
-mgroups("Tailored Counseling = 0" "Tailored Counseling = 1" "Difference", pattern(1 0 0 1 0 0 1 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) ///
+mgroups("Tailored Counseling = 0" "Tailored Counseling = 1" "Difference", pattern(1 0 0 1 0 0 1 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) starlevels(* 0.1 ** 0.05 *** 0.01) ///
 mtitles("Clinic" "Home" "Phone" "Clinic" "Home" "Phone" "(1)-(4)" "(2)-(5)" "(3)-(6)")  ///
 posthead("\midrule &\multicolumn{9}{c}{\textbf{Tailored Counseling}}\\") nogaps ///
 postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Notes: Panel A displays the summary statistics of variables across the three survey modes by the intervention of partner invitations. Panel B displays the summary statistics of the same variables across survey modes by the intervention of tailored counseling. Variable definitions are presented in Table \ref{tab: variable_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}") nogaps

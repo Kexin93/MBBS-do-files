@@ -73,7 +73,7 @@ esttab discuss_kids_husb_Y1 discuss_kids_husb_Y2 discuss_kids_husb_Y3 discuss_ki
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///
 prehead("\begin{table}\begin{center}\caption{Heterogeneity in the Treatment Effect of Partner Invitation}\label{tab: partnerbygroup}\tabcolsep=0.3cm\scalebox{0.8}{\begin{tabular}{lcccc}\toprule") coeflabel(HUSB_T "\makecell[l]{Discussed no. of children \\ with husband}") posthead("\midrule" ) ///
 stats(N, fmt(0) labels("N"))  ///
-mtitles("\makecell{Change in \\ Stated Ideal Method}" "\makecell{Change in \\ Method Use}" "\makecell{Intertemporal \\ Discordance}" "\makecell{Contemporaneous \\ Discordance}") collabels(none) postfoot("\cdashline{1-5}")
+mtitles("\makecell{Change in \\ Stated Preferred Method}" "\makecell{Change in \\ Method Use}" "\makecell{Intertemporal \\ Discordance}" "\makecell{Contemporaneous \\ Discordance}") collabels(none) postfoot("\cdashline{1-5}")
 
 esttab discuss_kids_husb_N1 discuss_kids_husb_N2 discuss_kids_husb_N3 discuss_kids_husb_N4 using "$output\partner_subgroups.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T) ///

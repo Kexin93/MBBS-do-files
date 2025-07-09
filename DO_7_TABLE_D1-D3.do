@@ -36,7 +36,7 @@ estadd scalar F_pvalue = r(p): coun_diff_p
 esttab all counselled not_counselled counselled_diff coun_diff_p using "$output\counseling_reached.tex", booktabs fragment ///
 label cells("mean(pattern(1 1 1 0 0) fmt(2)) b(star pattern(0 0 0 1 0) fmt(2)) p(pattern(0 0 0 0 1) fmt(2))") ///
 mtitles("All" "Counselled" "Not Counselled" "Difference" "p-value") ///
-nonumbers replace collabels(none) compress style(tab) ///
+nonumbers replace collabels(none) compress style(tab) starlevels(* 0.1 ** 0.05 *** 0.01) ///
 stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
 prehead("\begin{table}\begin{center}\caption{Who were Available for the Counseling Session?}\label{tab: counselingreached}\tabcolsep=0.2cm\scalebox{0.85}{\begin{tabular}{lccccc}\toprule") ///
 postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Notes: During the counseling session, 770 women who were interviewed at the baseline were asked if they were available for counseling, among whom 701 women were available for counseling and 69 women did not receive the counseling session. Variable definitions are presented in Table \ref{tab: variable_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}")
@@ -62,7 +62,7 @@ estadd scalar F_pvalue = r(p): coun207_diff_p
 esttab husb_t husb_t_take husb_t_ntake husb_itt coun207_diff_p using "$output\husband_compliers639.tex", booktabs fragment ///
 label cells("mean(pattern(1 1 1 0 0) fmt(2)) b(star pattern(0 0 0 1 0) fmt(2)) p(pattern(0 0 0 0 1) fmt(2))") ///
 mtitles("All" "Compliers" "Non-Compliers" "Difference" "p-value") ///
-nonumbers replace collabels(none) compress style(tab) ///
+nonumbers replace collabels(none) compress style(tab) starlevels(* 0.1 ** 0.05 *** 0.01) ///
 stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
 prehead("\begin{table}\begin{center} \caption{Partner Invitation Compliers}\label{tab: husbandcompliers}\tabcolsep=0.07cm\begin{tabular}{lccccc}\toprule") ///
 postfoot("\bottomrule\end{tabular}\end{center}\footnotesize{Notes: Among 701 women who received a counseling session, 401 women were assigned to the partner invitation group, among which 112 male partners participated. Variable definitions are presented in Table \ref{tab: variable_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}")
@@ -84,7 +84,7 @@ estadd scalar F_pvalue = r(p): coun207_diff_p
 
 esttab all clinic_yes clinic_no clinic_diff coun207_diff_p using "$output\visit_clinic639.tex", booktabs fragment ///
 label cells("mean(pattern(1 1 1 0 0) fmt(2)) b(star pattern(0 0 0 1 0) fmt(2)) p(pattern(0 0 0 0 1) fmt(2))") ///
-mtitles("All" "Yes" "No" "Difference" "p-value") ///
+mtitles("All" "Visited" "Did not visit" "Difference" "p-value") starlevels(* 0.1 ** 0.05 *** 0.01) ///
 nonumbers replace collabels(none) compress style(tab) ///
 stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
 prehead("\begin{table}\begin{center}\caption{Who Visited the Clinic?}\label{tab: visitclinic}\tabcolsep=0.2cm\scalebox{0.75}{\begin{tabular}{lccccc}\toprule") ///
@@ -106,7 +106,7 @@ posthead("\midrule\textbf{Visited the Good Health Kauma Clinic?} \\\\[-1ex]") no
 
 	esttab all any_clinic no_clinic any_clinic_diff anyClinic_diff_p using "$output\visit_clinic639.tex", booktabs fragment ///
 	label cells("mean(pattern(1 1 1 0 0) fmt(2)) b(star pattern(0 0 0 1 0) fmt(2)) p(pattern(0 0 0 0 1) fmt(2))") nomtitles ///
-	nonumbers append collabels(none) compress style(tab) ///
+	nonumbers append collabels(none) compress style(tab) starlevels(* 0.1 ** 0.05 *** 0.01) ///
 	stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
 	posthead("\textbf{Visited Any Clinic?} \\\\[-1ex]") nogaps ///
 	postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Notes: Among the 782 women who were interviewed at the baseline, 701 women attended a counseling session, among whom 682 women received a follow-up interview either through phone surveys, home visit surveys, or clinic visit surveys. Variable definitions are presented in Table \ref{tab: variable_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}") nogaps

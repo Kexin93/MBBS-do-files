@@ -49,7 +49,7 @@ esttab est1 est2 est3 est4 using "$output\main_itt_results.tex", replace fragmen
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T HUSB_T) ///
 stats(N ymean, fmt(0 2) labels("N" "Control mean"))  ///
 prehead("\begin{table}\begin{center}\caption{Treatment Effect of Tailored Counseling and Partner Invitations}\label{tab: allwomen}\tabcolsep=0.3cm\scalebox{0.85}{\begin{tabular}{lcccc}\toprule") ///
-posthead("\midrule \multicolumn{5}{c}{\textbf{A: Change in Stated Ideal Method}} \\\\[-1ex]") nogaps ///
+posthead("\midrule \multicolumn{5}{c}{\textbf{A: Change in Stated Preferred Method}} \\\\[-1ex]") nogaps ///
 nomtitles collabels(none) 
 
 ******************* PANEL B. Counseling current method and FUP current method**********************************************	
