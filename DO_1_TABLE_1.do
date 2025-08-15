@@ -41,7 +41,7 @@ esttab allsample w_husb wo_husb husb_diff husb_diff_p using "$output\summary_sta
 label cells("mean(pattern(1 1 1 0 0) fmt(2)) b(star pattern(0 0 0 1 0) fmt(2)) p(pattern(0 0 0 0 1) fmt(2))") ///
 stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
 nonumbers replace collabels(none) compress style(tab) mtitles("All" "Yes" "No" "Difference" "p-value")  ///
-prehead("\begin{table}\begin{center}\caption{Summary Statistics}\label{tab: husbandsummstats}\tabcolsep=0.2cm\scalebox{0.67}{\begin{tabular}{lccccc}\toprule") ///
+prehead("\begin{table}[h!]\begin{center}\caption{Summary Statistics}\label{tab: husbandsummstats}\tabcolsep=0.2cm\scalebox{0.67}{\begin{tabular}{lccccc}\toprule") ///
 posthead("\midrule\textbf{A. Partner Invitation Group} \\\\[-1ex]") nogaps postfoot("\midrule")
 
 
