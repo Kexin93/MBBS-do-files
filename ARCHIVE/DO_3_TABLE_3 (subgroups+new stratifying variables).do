@@ -26,48 +26,43 @@ keep if COUN__FV_1 == 1
 * Drop pregnant women at FUP
 	drop if PHO_103 == 1 | HOME_103 == 1 //638
 
+/*inj_3_months want_switch_adopt told_side_effects deferral access_choice women_satisfaction women_dissatisfaction*/
+
 	eststo clear
-foreach var of varlist inj_3_months want_switch_adopt told_side_effects deferral access_choice women_satisfaction women_dissatisfaction{
-preserve
-keep if `var' == 1
-eststo `var'_Y1: reg diff_method_8 SHORT_T $balance_covariates if COUN__FV_1 == 1, vce(robust) 
+foreach var of varlist prior_knowledge_bi number_attributes_bi attribute_wgt_variation_bi method_attribute_concordance2 method_attribute_concordance1 women_satisfaction method_attribute_concordance3 method_attribute_concordance5{
+reg diff_method_8 SHORT_T `var' c.SHORT#c.`var' $balance_covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_8 if SHORT_T == 0 & COUN__FV_1 == 1 
 estadd scalar ymean = r(mean)
 	
-eststo `var'_Y2: reg diff_method_3 SHORT_T $balance_covariates, vce(robust) 
+reg diff_method_3 SHORT_T `var' c.SHORT#c.`var' $balance_covariates, vce(robust) 
 summarize diff_method_3 if SHORT_T == 0 
 estadd scalar ymean = r(mean)
 
-eststo `var'_Y3: reg diff_method_9 SHORT_T $balance_covariates, vce(robust) 
+reg diff_method_9 SHORT_T `var' c.SHORT#c.`var' $balance_covariates, vce(robust) 
 summarize diff_method_9 if SHORT_T == 0
 estadd scalar ymean = r(mean)
 
-eststo `var'_Y4: reg diff_method_5 SHORT_T $balance_covariates if COUN__FV_1 == 1, vce(robust) 
+reg diff_method_5 SHORT_T `var' c.SHORT#c.`var' $balance_covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_5 if SHORT_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
-restore
 }
 
-foreach var of varlist inj_3_months want_switch_adopt told_side_effects deferral access_choice {
-preserve
-keep if `var' == 0
-eststo `var'_N1: reg diff_method_8 SHORT_T $balance_covariates if COUN__FV_1 == 1, vce(robust) 
+reg diff_method_8 SHORT_T method_attribute_concordance1 method_attribute_concordance2 c.SHORT#c.method_attribute_concordance1 c.SHORT#c.method_attribute_concordance2 c.method_attribute_concordance1#c.method_attribute_concordance2 c.SHORT_T#c.method_attribute_concordance1#c.method_attribute_concordance2 $balance_covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_8 if SHORT_T == 0 & COUN__FV_1 == 1 
 estadd scalar ymean = r(mean)
 	
-eststo `var'_N2: reg diff_method_3 SHORT_T $balance_covariates, vce(robust) 
+reg diff_method_3 SHORT_T method_attribute_concordance1 method_attribute_concordance2 c.SHORT#c.method_attribute_concordance1 c.SHORT#c.method_attribute_concordance2 c.method_attribute_concordance1#c.method_attribute_concordance2 c.SHORT_T#c.method_attribute_concordance1#c.method_attribute_concordance2 $balance_covariates, vce(robust) 
 summarize diff_method_3 if SHORT_T == 0 
 estadd scalar ymean = r(mean)
 
-eststo `var'_N3: reg diff_method_9 SHORT_T $balance_covariates, vce(robust) 
+reg diff_method_9 SHORT_T method_attribute_concordance1 method_attribute_concordance2 c.SHORT#c.method_attribute_concordance1 c.SHORT#c.method_attribute_concordance2 c.method_attribute_concordance1#c.method_attribute_concordance2 c.SHORT_T#c.method_attribute_concordance1#c.method_attribute_concordance2 $balance_covariates, vce(robust) 
 summarize diff_method_9 if SHORT_T == 0
 estadd scalar ymean = r(mean)
 
-eststo `var'_N4: reg diff_method_5 SHORT_T $balance_covariates if COUN__FV_1 == 1, vce(robust) 
+reg diff_method_5 SHORT_T method_attribute_concordance1 method_attribute_concordance2 c.SHORT#c.method_attribute_concordance1 c.SHORT#c.method_attribute_concordance2 c.method_attribute_concordance1#c.method_attribute_concordance2 c.SHORT_T#c.method_attribute_concordance1#c.method_attribute_concordance2 $balance_covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_5 if SHORT_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
-restore
-}
+
 
 esttab inj_3_months_Y1 inj_3_months_Y2 inj_3_months_Y3 inj_3_months_Y4 using "$output\tailored_subgroups.tex", replace fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T) ///
