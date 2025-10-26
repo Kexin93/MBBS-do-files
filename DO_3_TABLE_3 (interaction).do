@@ -28,7 +28,7 @@ keep if COUN__FV_1 == 1
 
 **# Revised version
 	eststo clear
-foreach var of varlist /*prior_knowledge_bi number_attributes_bi attribute_wgt_var_bi*/ method_attribute_con2 method_attribute_con1 method_attribute_con3 method_attribute_con5 women_satisfaction{
+foreach var of varlist /*prior_knowledge_bi number_attributes_bi attribute_wgt_var_bi*/ method_attribute_con2 method_attribute_con1 method_attribute_con3 method_attribute_con5 deferral inj_3_months /*women_satisfaction*/{
 preserve
 eststo `var'_Y1: reg diff_method_8 SHORT_T `var' c.SHORT_T#c.`var' $balance_covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_8 if SHORT_T == 0 & COUN__FV_1 == 1 
@@ -77,7 +77,17 @@ coeflabel(method_attribute_con3 "\makecell[l]{Stated preferred method \\ = metho
 esttab method_attribute_con5_Y1 method_attribute_con5_Y2 method_attribute_con5_Y3 method_attribute_con5_Y4 using "$output\tailored_counseling_interaction.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T c.SHORT_T#c.method_attribute_con5) ///
 stats(N pvalue1, labels("N" "\makecell[l]{TC + TC $\times$ Stated preferred method $\ne$ method use \\ in taiored list = 0}") fmt(%9.0f %9.3f))  ///
-coeflabel(method_attribute_con5 "\makecell[l]{Stated preferred method $\ne$ method use \\ in tailored list}" c.SHORT_T#c.method_attribute_con5 "TC $\times$ Stated preferred method $\ne$ method use in tailored list") nomtitles collabels(none) nonumbers postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are presented in Table \ref{tab: variable_descriptions}. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+coeflabel(c.SHORT_T#c.method_attribute_con5 "TC $\times$ Stated preferred method $\ne$ method use in tailored list") nomtitles collabels(none) nonumbers postfoot("\cdashline{1-5}")
+
+esttab deferral_Y1 deferral_Y2 deferral_Y3 deferral_Y4 using "$output\tailored_counseling_interaction.tex", append fragment label nolines ///
+cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T c.SHORT_T#c.deferral) ///
+stats(N pvalue1, labels("N" "\makecell[l]{TC + TC $\times$ Decision deferral = 0}") fmt(%9.0f %9.3f))  ///
+coeflabel(c.SHORT_T#c.deferral "TC $\times$ Decision deferral") nomtitles collabels(none) nonumbers postfoot("\cdashline{1-5}")
+
+esttab inj_3_months_Y1 inj_3_months_Y2 inj_3_months_Y3 inj_3_months_Y4 using "$output\tailored_counseling_interaction.tex", append fragment label nolines ///
+cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T c.SHORT_T#c.inj_3_months) ///
+stats(N pvalue1, labels("N" "\makecell[l]{TC + TC $\times$ Received injectables within the \\ last 3 months = 0}") fmt(%9.0f %9.3f))  ///
+coeflabel(inj_3_months "\makecell[l]{Received injectables within the \\ last 3 months = 0}" c.SHORT_T#c.inj_3_months "TC $\times$ Received injectables within the \\ last 3 months = 0") nomtitles collabels(none) nonumbers postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are presented in Table \ref{tab: variable_descriptions}. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
 
 /*esttab women_satisfaction_Y1 women_satisfaction_Y2 women_satisfaction_Y3 women_satisfaction_Y4 using "$output\tailored_counseling_interaction.tex", append fragment label nolines ///
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T c.SHORT_T#c.women_satisfaction) ///
