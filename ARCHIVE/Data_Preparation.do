@@ -82,7 +82,8 @@ gen want_switch_adopt = w1_w03_w331==1 | w1_w03_w338a==1
 gen told_side_effects = w1_w03_w317==1 | w1_w03_w318==1
 
 ***DEFERRAL: DO NOT FOLLOW THROUGH WITH ADVICE
-gen deferral = w1_w10_w1012_1==1 | w1_w10_w1012_2==1 | w1_w10_w1012_3==1
+*gen deferral = w1_w10_w1012_1==1 | w1_w10_w1012_2==1 | w1_w10_w1012_3==1
+gen deferral = w1_w10_w1012_3==1
 
 ***BASELINE ACCESS AND CHOICE: 325b-325d - MAJOR HETEROGENEITY HERE!!
 gen access_choice = w1_w03_w325b==1 & w1_w03_w325c==1 & w1_w03_w325d==0
@@ -107,6 +108,42 @@ gen cont_wom_decide = w1_w07_w718b < 3 | w1_w07_w718c < 3
 gen husb_sat = w1_w07_w724d == 1 | w1_w07_w724d == 2
 
 gen husb_dissat = w1_w07_w724d == 3 | w1_w07_w724d == 4 | w1_w07_w724d == 5
+
+** Bargaining power
+gen women_big_purchase = w1_w09_w901  == 1 | w1_w09_w901  == 2 if !mi(w1_w09_w901 )
+
+gen women_child_edu = w1_w09_w902 == 1 | w1_w09_w902 ==2 if !mi(w1_w09_w902)
+
+ta w1_w09_wom_work if mi(w1_w09_w903)
+gen women_decide_her_m = w1_w09_w903 == 1 | w1_w09_w903 == 2 if !mi(w1_w09_w903)
+replace women_decide_her_m = 0 if w1_w09_wom_work == 0
+ta women_decide_her_m
+
+ta w1_w09_wom_work if mi(w1_w09_w904)
+gen women_earn_more = w1_w09_w904 == 1 | w1_w09_w904 == 3 if !mi(w1_w09_w904)
+replace women_earn_more = 0 if w1_w09_wom_work == 0
+ta women_earn_more
+
+gen women_decide_husb_m = w1_w09_w905 == 1 | w1_w09_w905 == 2 if !mi(w1_w09_w905)
+
+gen women_decide_health = w1_w09_w906 == 1 | w1_w09_w906 == 2 if !mi(w1_w09_w906)
+
+gen women_decide_daily = w1_w09_w908 == 1 | w1_w09_w908 == 2 if !mi(w1_w09_w908)
+
+gen women_decide_visits = w1_w09_w909 == 1 | w1_w09_w909 == 2 if !mi(w1_w09_w909)
+
+gen women_own_money = w1_w09_w910a == 1 if !mi(w1_w09_w910a)
+
+gen women_own_house_a =  w1_w09_w910b == 1 |  w1_w09_w910b == 3 if !mi(w1_w09_w910b)
+
+gen women_own_land_a = w1_w09_w911 == 1 | w1_w09_w911 == 3 if !mi(w1_w09_w911)
+
+* Disagreement with husband
+* Husband wants more children
+gen husb_want_more = w1_w07_w720  == 2 if !mi(w1_w07_w720)
+
+* Discussed family planning
+gen discussed_FP = w1_w09_w925 == 1 if !mi(w1_w09_w925)
 
 * Registration
 drop w1_reg_number w1_reg_fmid /*w1_reg_enumid_1*/ w1_reg_hhid_1
@@ -269,7 +306,7 @@ drop  w1_hh1_number w1_hh1_survey_id_1 w1_hhsize num_guests w1_hh1_hr_3 w1_hh1_r
   w1_w03_w33411 w1_w03_w33413 w1_w03_w33414 w1_w03_w33415 w1_w03_w33416 w1_w03_w33417 ///
   w1_w03_w33418 w1_w03_w33419 w1_w03_w33420 w1_w03_w33421 w1_w03_w33422 w1_w03_w33423 ///
   w1_w03_w33424 w1_w03_w33426 w1_w03_w33427 w1_w03_w33496 w1_w03_w334_o ///
-  w1_w03_w338_2_2 w1_w03_w338_3_2 w1_w03_w339 ///
+  w1_w03_w339 ///
   w1_w03_w340 w1_w03_w341 w1_w03_w342 w1_w03_w344 w1_w03_w345 w1_w03_w346 w1_w03_w347 ///
   w1_w03_w348 w1_w03_w349 w1_w03_w350 w1_w03_w3511 w1_w03_w3512 w1_w03_w3513 w1_w03_w3514 ///
   w1_w03_w3515 w1_w03_w3516 w1_w03_w3517 w1_w03_w35196 w1_w03_w35188 w1_w03_w351_o ///
@@ -424,14 +461,14 @@ drop  w1_hh1_number w1_hh1_survey_id_1 w1_hhsize num_guests w1_hh1_hr_3 w1_hh1_r
   w1_w09_w912d w1_w09_w912c w1_w09_w912b w1_w09_w912a w1_w09_w913a ///
   w1_w09_w913b w1_w09_w913c w1_w09_w913d w1_w09_w913e w1_w09_w914 ///
   w1_w09_w915 w1_w09_w916 w1_w09_w917 w1_w09_w918 w1_w09_husb_ideal_size_conf ///
-  w1_w09_w925 w1_w09_w9261 w1_w09_w9262 w1_w09_w9263 w1_w09_w9265 ///
+  w1_w09_w9261 w1_w09_w9262 w1_w09_w9263 w1_w09_w9265 ///
   w1_w09_w9268 w1_w09_w9269 w1_w09_w92610 w1_w09_w92696 w1_w09_w926_o ///
   w1_w09_w9271 w1_w09_w9272 w1_w09_w9273 w1_w09_w9274 w1_w09_w9275 ///
   w1_w09_w92796 w1_w09_w927_o w1_w09_w930_1 w1_w09_w930_2 ///
   w1_w09_w930_3 w1_w09_w930_4 w1_w09_w930_5 w1_w09_w930_6 w1_w09_w930_7 ///
   w1_w09_w930_8 w1_w09_w930_9 w1_w09_w930_10 w1_w09_w930_11 w1_w09_w930_12 ///
   w1_w09_new_husband_name w1_w09_wom_earn w1_w09_total_children_alive ///
-  w1_w09_husb_earn w1_w09_wom_work w1_w09_husb_ideal_size w1_w09_husb_work ///
+  w1_w09_husb_earn w1_w09_husb_ideal_size w1_w09_husb_work ///
   w1_w09_wom_husb_name w1_w09_woman_name w1_w09_woman_marital w1_w09_wom_husb_id ///
   w1_w09_completed_time w1_w09_started_time w1_w09_username w1_w09_received_on ///
   w1_w09_form_link w1_w09_userid w1_w09_deviceid w1_w09_locationlatitudedegrees ///
@@ -1519,9 +1556,12 @@ todate w1_w01_wid_3, generate(dateofinterview) p(yyyymmdd)
 *drop cohab_age
 	capture drop cohab_age
 personage woman_birthdate first_cohab_date, gen(cohab_age)
-	drop first_cohab_date
 	label var woman_birthdate "Woman's birth date"
 	label var dateofinterview "Date of interview"
+	
+personage first_cohab_date dateofinterview, gen(cohab_time)
+	gen cohab_longer8 = (cohab_time > 8) if !mi(cohab_time)
+	drop first_cohab_date
 	drop dateofinterview woman_birthdate
 * 14) want to switch methods? - for 679 women currently using methods
 tab w1_w03_w331
@@ -1843,7 +1883,7 @@ replace coun_curr_method = 0 if COUN_123 == 0
 	}
 	
 	tab baseline_ideal_method
-	
+
 	* FIGURES
 	*FIGURE A2
 			capture drop w1_w03_w336extra?
@@ -1856,16 +1896,44 @@ replace coun_curr_method = 0 if COUN_123 == 0
 	
 	destring w1_w03_w336?, replace
 		des w1_w03_w336?
-	
-	lab val w1_w03_w336? attributes
+
+		lab val w1_w03_w336? attributes
 
 		capture drop attribute_1_wgt
 	gen attribute_1_wgt = w1_w03_w338_1_2 //329
 	replace attribute_1_wgt = 20 if w1_w03_w3361 !=. & missing(w1_w03_w3362) //448
 		tab attribute_1_wgt // 329 multiple choice top weight + 448 single choice top weight of 20 = 777
-		drop w1_w03_w336 w1_w03_w338_1_2
+		drop w1_w03_w336
 		label var attribute_1_wgt "Number of beans assigned to the top method attribute"
 	
+	gen attribute_2_wgt = w1_w03_w338_2_2
+		ta attribute_1_wgt if mi(w1_w03_w338_2_2) //check: all 20
+		ta w1_w03_w338_1_2 if mi(w1_w03_w338_2_2) //check: all missing
+	
+	replace attribute_2_wgt = 0 if mi(attribute_2_wgt)
+		label var attribute_2_wgt "Number of beans assigned to the second method attribute"
+	
+	gen attribute_3_wgt = w1_w03_w338_3_2
+		ta attribute_2_wgt if mi(w1_w03_w338_3_2)
+	
+	replace attribute_3_wgt = 0 if mi(attribute_3_wgt)
+		label var attribute_3_wgt "Number of beans assigned to the third method attribute"
+		
+	gen x = attribute_1_wgt + attribute_2_wgt +attribute_3_wgt
+		drop x
+	
+	gen attribute_wgt_variation = 0 if attribute_1_wgt == 20 & attribute_2_wgt == 0 & attribute_3_wgt == 0
+	
+	egen attribute_wgt_mean2 = rowmean(attribute_1_wgt attribute_2_wgt)
+	replace attribute_wgt_variation = sqrt((attribute_1_wgt - attribute_wgt_mean2)^2 + (attribute_2_wgt - attribute_wgt_mean2)^2) if mi(attribute_wgt_variation) & attribute_1_wgt > 0 & attribute_2_wgt >0 & attribute_3_wgt == 0
+	
+	egen attribute_wgt_mean3 = rowmean(attribute_1_wgt attribute_2_wgt attribute_3_wgt)
+	replace attribute_wgt_variation = sqrt((attribute_1_wgt - attribute_wgt_mean3)^2 + (attribute_2_wgt - attribute_wgt_mean3)^2 + (attribute_3_wgt - attribute_wgt_mean3)^2) if mi(attribute_wgt_variation) & attribute_1_wgt > 0 & attribute_2_wgt >0 & attribute_3_wgt > 0
+	
+	drop attribute_wgt_mean2 attribute_wgt_mean3
+	
+	gen attribute_wgt_var_bi = attribute_wgt_variation > 0 if !mi(attribute_wgt_variation)
+
 	* Counselor FE into the number of reported attributes
 	gen number_attributes = 1 if !mi(w1_w03_w3361) & mi(w1_w03_w3362)
 	replace number_attributes = 2 if !mi(w1_w03_w3362) & mi(w1_w03_w3363)
@@ -1874,10 +1942,11 @@ replace coun_curr_method = 0 if COUN_123 == 0
 	replace number_attributes = 5 if !mi(w1_w03_w3365) & mi(w1_w03_w3366)
 	replace number_attributes = 6 if !mi(w1_w03_w3366) & mi(w1_w03_w3367)
 	replace number_attributes = 7 if !mi(w1_w03_w3367) 
-	
-	replace number_attributes = 3 if number_attributes > 3 & !mi(number_attributes)
-	
 	label var number_attributes "Number of attributes"
+	
+	gen number_attributes_bi = number_attributes >1 
+	label var number_attributes_bi "Number of attributes > 1"
+	
 	fvset base 1 w1_reg_enumid_1
 	eststo number_coun_fe: reg number_attributes i.w1_reg_enumid_1, vce(robust)
 	esttab number_coun_fe using "$output\regression.rtf", se ar2 note("Notes: Five enumerators were hired.") replace
@@ -2198,7 +2267,7 @@ gen diff_method_8 = (diff_method_r8 != 0) if !mi(diff_method_r8)
 label var diff_method_8 "Pre-counseling ideal method differs from FUP ideal method"
 	label val diff_method_8 yesno
 	drop diff_method_r8
-	
+		
 	capture drop diff_method_r20
 	capture drop diff_method_20
 gen diff_method_r20 = FUP_curr_method - coun_curr_method
@@ -2243,6 +2312,9 @@ gen diff_method_9 = (diff_method_9_r > 0 | diff_method_9_r < 0) if !mi(diff_meth
 	tab diff_method_9 //576 = 248 different + 328 same
 	drop diff_method_9_r
 	
+	gen intertemperal_concordance = (FUP_curr_method == COUN_3081) if !mi(FUP_curr_method) & !mi(COUN_3081)
+	label var intertemperal_concordance "Intertemporal Concordance"
+
 ******************* FUP Ideal Method and FUP Current Method**********************************************
 	capture drop diff_method_r5
 	capture drop diff_method_5
@@ -2253,6 +2325,9 @@ gen diff_method_5 = (diff_method_r5 != 0) if !mi(diff_method_r5)
 	label val diff_method_5 yesno
 	drop diff_method_r5
 	
+	gen contemp_concordance = (FUP_ideal_method == FUP_curr_method) if !mi(FUP_ideal_method) & !mi(FUP_curr_method)
+	label var contemp_concordance "Contemporaneous Concordance"
+
 * TABLE A5-A6
 * Panel A
 * Column 1
@@ -2653,7 +2728,7 @@ replace method6 = 3 if COUN_attribute == 12
 replace method1 = 7 if COUN_attribute == 3
 replace method2 = 8 if COUN_attribute == 3
 
-* COUN_attribute == 16 17 18 19 20
+* COUN_attribute == 10 16 17 18 19 20
 replace method1 = 3 if inlist(COUN_attribute, 10, 16, 17, 18, 19, 20) 
 replace method2 = 5 if inlist(COUN_attribute, 10, 16, 17, 18, 19, 20) 
 replace method3 = 1 if inlist(COUN_attribute, 10, 16, 17, 18, 19, 20) 
@@ -2693,6 +2768,14 @@ replace method5 = 5 if COUN_attribute == 21
 replace method6 = 4 if COUN_attribute == 21
 replace method7 = 6 if COUN_attribute == 21
 
+clonevar tailored_method1 = method1
+clonevar tailored_method2 = method2
+clonevar tailored_method3 = method3
+clonevar tailored_method4 = method4
+clonevar tailored_method5 = method5
+clonevar tailored_method6 = method6
+clonevar tailored_method7 = method7
+
 forvalues i = 8/12{
 	gen method`i' = .
 }
@@ -2712,6 +2795,7 @@ replace method12 = 11 if SHORT_T == 0
 forvalues x = 1/12{
 	label var method`x' "Method `x' corresponding to woman's top method attribute during counseling"
 }
+
 * CHECK
 	capture label drop methods
 label define methods 0 "NONE" /// 
@@ -2743,21 +2827,81 @@ label val PHO_method HOM_method CLIN_method FUP_curr_method CLIN_ideal_method //
 	FUP_ideal_method PHO_switchto_method HOM_switchto_method FUP_switchto_method ///
 	COUN_switchto_method methods
 * Method-attribute Concordance
-// gen method_attribute_concordance = (inlist(baseline_curr_method, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12))
+// gen method_attribute_con = (inlist(baseline_curr_method, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12))
 //
-// label var method_attribute_concordance "Baseline method use and method attribute are concordant"
-// 	label val method_attribute_concordance yesno
+// label var method_attribute_con "Baseline method use and method attribute are concordant"
+// 	label val method_attribute_con yesno
+
+* Counseling method use-attribute Concordance
+gen method_attribute_con2 = (inlist(coun_curr_method, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12))
+
+label var method_attribute_con2 "Method use in list, pre-counseling stated preferred method not in list"
 
 * Ideal-method-attribute Concordance
-gen method_attribute_concordance1 = (inlist(COUN_129, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12))
+gen method_attribute_con1 = (inlist(COUN_129, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12))
 
-label var method_attribute_concordance1 "Counseling stated ideal method falls in the attribute-based method list"
+label var method_attribute_con1 "Pre-counseling stated preferred method in list, method use not in list"
 
-// gen method_attribute_concordance2 = (inlist(baseline_ideal_method, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12))
+* Concordance 3
+gen method_attribute_con3 = (COUN_129 == coun_curr_method & inlist(COUN_129, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12))  if !mi(COUN_129) & !mi(coun_curr_method)
+
+label var method_attribute_con3 "Pre-counseling stated preferred method = method use, in list"
+
+* Concordance 4
+gen method_attribute_con4 = (COUN_129 == coun_curr_method)  if !mi(COUN_129) & !mi(coun_curr_method)
+
+label var method_attribute_con4 "Pre-counseling stated preferred method = method use"
+
+* Concordance 5
+gen method_attribute_con5 = (inlist(COUN_129, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12) & inlist(coun_curr_method, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12) & COUN_129 != coun_curr_method)  if !mi(COUN_129) & !mi(coun_curr_method)
+
+label var method_attribute_con5 "Pre-counseling stated preferred method != method use in list"
+
+// gen method_attribute_con2 = (inlist(baseline_ideal_method, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12))
 //
-// label var method_attribute_concordance2 "Baseline stated ideal method falls in the attribute-based method list"
+// label var method_attribute_con2 "Baseline stated ideal method falls in the attribute-based method list"
 
-	label val /*method_attribute_concordance*/ method_attribute_concordance1 /*method_attribute_concordance2*/ yesno
+	label val /*method_attribute_con*/ method_attribute_con1 /*method_attribute_con2*/ yesno
+
+* New outcomes
+gen method_inlist_95 = inlist(COUN_3081, tailored_method1, tailored_method2, tailored_method3, tailored_method4, tailored_method5, tailored_method6, tailored_method7) if !mi(COUN_3081)
+
+label var method_inlist_95 "Post-counseling method in tailored list"
+
+gen method_inlist_96 = inlist(FUP_curr_method, tailored_method1, tailored_method2, tailored_method3, tailored_method4, tailored_method5, tailored_method6, tailored_method7) if !mi(FUP_curr_method)
+
+label var method_inlist_96 "Follow-up method use in tailored list"
+
+gen method_inlist_97 = inlist(FUP_ideal_method, tailored_method1, tailored_method2, tailored_method3, tailored_method4, tailored_method5, tailored_method6, tailored_method7) if !mi(FUP_ideal_method)
+
+label var method_inlist_97 "Follow-up ideal method in tailored list"
+	
+gen method_inlist_98 = inlist(COUN_3081, tailored_method1, tailored_method2, tailored_method3, tailored_method4, tailored_method5, tailored_method6, tailored_method7) & inlist(FUP_curr_method, tailored_method1, tailored_method2, tailored_method3, tailored_method4, tailored_method5, tailored_method6, tailored_method7) if !mi(COUN_3081) & !mi(FUP_curr_method)
+
+label var method_inlist_98 "Both post-counseling preferred method and FUP method use in tailored list"
+
+gen method_inlist_99 = inlist(FUP_ideal_method, tailored_method1, tailored_method2, tailored_method3, tailored_method4, tailored_method5, tailored_method6, tailored_method7) & inlist(FUP_curr_method, tailored_method1, tailored_method2, tailored_method3, tailored_method4, tailored_method5, tailored_method6, tailored_method7) if !mi(FUP_ideal_method) & !mi(FUP_curr_method)
+
+label var method_inlist_99 "Both FUP stated preferred method and FUP method use in tailored list"
+
+gen method_inlist_100 = inlist(COUN_3081, tailored_method1, tailored_method2, tailored_method3, tailored_method4, tailored_method5, tailored_method6, tailored_method7) & COUN_3081 == FUP_curr_method if !mi(COUN_3081) & !mi(FUP_curr_method)
+
+label var method_inlist_100 "Post-counseling ideal method = FUP method use in tailored list"
+
+gen method_inlist_101 = inlist(FUP_ideal_method, tailored_method1, tailored_method2, tailored_method3, tailored_method4, tailored_method5, tailored_method6, tailored_method7) & FUP_ideal_method == FUP_curr_method if !mi(COUN_3081) & !mi(FUP_curr_method)
+
+label var method_inlist_101 "Follow-up stated preferred method = FUP method use in tailored list"
+
+	capture drop same_method_9
+gen same_method_9 = (FUP_curr_method == COUN_3081 & inlist(COUN_3081, tailored_method1, tailored_method2, tailored_method3, tailored_method4, tailored_method5, tailored_method6, tailored_method7)) if !mi(FUP_curr_method) & !mi(COUN_3081)
+	label var same_method_9 "Post-counseling ideal method is the same as FUP current method in tailored list"
+	label val same_method_9 yesno
+	tab same_method_9 //576 = 248 different + 328 same
+	
+	capture drop same_method_5
+gen same_method_5 = (FUP_ideal_method == FUP_curr_method & inlist(FUP_curr_method, tailored_method1, tailored_method2, tailored_method3, tailored_method4, tailored_method5, tailored_method6, tailored_method7)) if !mi(FUP_curr_method) & !mi(FUP_ideal_method)
+	label var same_method_5 "FUP ideal method is the same as FUP current method use in tailored list"
+	label val same_method_5 yesno
 
 label val  ethnicity_Chewa preprimary educ_primary educ_second educ_higher husband_support ///
 baseline_inj baseline_implants BL_long_acting_method husb_satisfied yesno
@@ -2846,5 +2990,16 @@ drop _est_number_coun_fe all20 attribute_total ratio n
 
 * Baseline hormonal methods
 	gen baseline_hormonal = (baseline_inj == 1 | baseline_implants == 1) if !mi(w1_w03_w303)
+	
+* Treatment group indicators
+
+forvalues i = 0/3{
+    gen treatment`i' = w1_treatment == `i'
+}
+
+label var treatment0 "Control Group"
+label var treatment1 "Standard Counseling, Partner Invitations"
+label var treatment2 "Tailored Counseling, Individual Counseling"
+label var treatment3 "Tailored Counseling, Partner Invitations"
 
 save "$data\MBBS_Analysis_data.dta", replace
