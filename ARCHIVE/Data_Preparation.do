@@ -2056,6 +2056,11 @@ gen w1_w03_w3040 = (w1_w03_w303 == 0) if !mi(w1_w03_w303)
 		
 		label val w1_w03_w304* yes 
 
+gen modern_methods304 = (w1_w03_w3043 == 1 | w1_w03_w3046 == 1 | w1_w03_w3047 == 1) if !mi(w1_w03_w3047)
+	label var modern_methods304 "Other Modern Methods"
+gen traditional_methods304 = (w1_w03_w30411 == 1 | w1_w03_w30414 == 1 | w1_w03_w30416 == 1) if !mi(w1_w03_w30416)
+	label var traditional_methods304 "Traditional methods"
+
 * TABLE A2, COLUMN 2: BASELINE IDEAL METHOD
 ********************Baseline Switch to Methods *******************************************
 tab w1_w03_w331
@@ -2158,15 +2163,19 @@ label val  BL_Ideal_Method0 BL_Ideal_Method1 BL_Ideal_Method3 BL_Ideal_Method4 /
 BL_Ideal_Method5 BL_Ideal_Method6 BL_Ideal_Method7 BL_Ideal_Method11 ///
 BL_Ideal_Method14 BL_Ideal_Method15 BL_Ideal_Method16 yesno
 
+
+gen modern_methods_BLideal = (BL_Ideal_Method1 ==1 | BL_Ideal_Method3 == 1 | BL_Ideal_Method6 == 1 | BL_Ideal_Method7 == 1) if !mi(BL_Ideal_Method3)
+	label var modern_methods_BLideal "Other Modern Methods"
+
+gen traditional_methods_BLideal = (BL_Ideal_Method11 ==1 | BL_Ideal_Method14 == 1 | BL_Ideal_Method15 ==1 | BL_Ideal_Method16 == 1) if !mi(BL_Ideal_Method11)
+	label var traditional_methods_BLideal "Traditional methods"
+
 * TABLE A2, COLUMN 3: HUSBAND IDEAL METHOD
 	sum COUN__HUSB_1210 COUN__HUSB_1211 COUN__HUSB_1212 COUN__HUSB_1213 ///
 		COUN__HUSB_1214 COUN__HUSB_1215 COUN__HUSB_1216 COUN__HUSB_1217 ///
 		COUN__HUSB_12113 COUN__HUSB_12114 COUN__HUSB_12115 ///
 		COUN__HUSB_12116
 		
-	tab coun_curr_method if COUN__HUSB_1215 == 1
-	tab coun_curr_method if COUN__HUSB_1214 == 1
-
 	gen husb_ideal_method  = .
 	foreach x of numlist 0 1 2 3 4 5 6 7 13 14 15 16{
 		replace husb_ideal_method = `x' if COUN__HUSB_121`x' == 1 & mi(husb_ideal_method)
@@ -2203,6 +2212,62 @@ BL_Ideal_Method14 BL_Ideal_Method15 BL_Ideal_Method16 yesno
 
 		label var COUN__HUSB_12116 "Other Traditional Method"
 
+		
+gen husb_ideal_other_modern = (COUN__HUSB_1211 == 1 | COUN__HUSB_1212 == 1 | COUN__HUSB_1213 == 1 | COUN__HUSB_1216 == 1 | COUN__HUSB_1217 == 1 | COUN__HUSB_12115 == 1) if !mi(COUN__HUSB_1213)
+	label var husb_ideal_other_modern "Other Modern Methods"
+	
+gen husb_ideal_traditional = (COUN__HUSB_12113 == 1 | COUN__HUSB_12114 == 1 | COUN__HUSB_12116 == 1) if !mi(COUN__HUSB_12116)
+	label var husb_ideal_traditional "Traditional Methods"
+
+*====================== Table A2 (for counseling) ====================
+* Pre-counseling method
+gen COUN_129_modern = (COUN_129 ==1 | COUN_129 == 2 | COUN_129 == 3 | COUN_129 == 6 | COUN_129 == 7 | COUN_129 == 8 | COUN_129 == 9 | COUN_129 == 15) if !mi(COUN_129)
+label var COUN_129_modern "Other Modern Methods"
+
+gen COUN_129_traditional = inrange(COUN_129, 10, 14) | COUN_129 == 16 if !mi(COUN_129)
+label var COUN_129_traditional "Traditional Methods"
+
+gen COUN_129_None = COUN_129 == 0 if !mi(COUN_129)
+label var COUN_129_None "None"
+
+gen COUN_129_inj = COUN_129 == 4 if !mi(COUN_129)
+label var COUN_129_inj "Injectables"
+
+gen COUN_129_implants = COUN_129 == 5 if !mi(COUN_129)
+label var COUN_129_implants "Implants"
+
+* Post-counseling method
+gen COUN_303_modern = (COUN_303 ==1 | COUN_303 == 2 | COUN_303 == 3 | COUN_303 == 6 | COUN_303 == 7 | COUN_303 == 8 | COUN_303 == 9 | COUN_303 == 15) if !mi(COUN_303)
+label var COUN_303_modern "Other Modern Methods"
+
+gen COUN_303_traditional = inrange(COUN_303, 10, 14) | COUN_303 == 16 if !mi(COUN_303)
+label var COUN_303_traditional "Traditional Methods"
+
+gen COUN_303_None = COUN_303 == 0 if !mi(COUN_303)
+label var COUN_303_None "None"
+
+gen COUN_303_inj = COUN_303 == 4 if !mi(COUN_303)
+label var COUN_303_inj "Injectables"
+
+gen COUN_303_implants = COUN_303 == 5 if !mi(COUN_303)
+label var COUN_303_implants "Implants"
+
+* Counseling current method use
+gen coun_curr_method_modern = (coun_curr_method ==1 | coun_curr_method == 2 | coun_curr_method == 3 | coun_curr_method == 6 | coun_curr_method == 7 | coun_curr_method == 8 | coun_curr_method == 9 | coun_curr_method == 15) if !mi(coun_curr_method)
+label var coun_curr_method_modern "Other Modern Methods"
+
+gen coun_curr_method_traditional = inrange(coun_curr_method, 10, 14) | coun_curr_method == 16 if !mi(coun_curr_method)
+label var coun_curr_method_traditional "Traditional Methods"
+
+gen coun_curr_method_None = coun_curr_method == 0 if !mi(coun_curr_method)
+label var coun_curr_method_None "None"
+
+gen coun_curr_method_inj = coun_curr_method == 4 if !mi(coun_curr_method)
+label var coun_curr_method_inj "Injectables"
+
+gen coun_curr_method_implants = coun_curr_method == 5 if !mi(coun_curr_method)
+label var coun_curr_method_implants "Implants"
+	
 * TABLE A3: TOP METHOD ATTRIBUTE DISTRIBUTION
 	label val w1_w03_attribute_1 attributes
 	label var w1_w03_attribute_1 "Top attribute"
