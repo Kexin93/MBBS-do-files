@@ -33,13 +33,13 @@ eststo husb_diff_p: quietly estpost ttest $DESCVARS, by(HUSB_T)
 
 * Adding scalars of F-Test of join significance. 
 eststo F_husb: reg HUSB_T $DESCVARS
-estadd scalar F_Obs = `e(N)': husb_diff_p
+estadd scalar F_Obs = r(N): allsample
 testparm $DESCVARS
 estadd scalar F_pvalue = r(p): husb_diff_p
 
 esttab allsample w_husb wo_husb husb_diff husb_diff_p using "$output\summary_stats.tex",  booktabs fragment ///
 label cells("mean(pattern(1 1 1 0 0) fmt(2)) b(star pattern(0 0 0 1 0) fmt(2)) p(pattern(0 0 0 0 1) fmt(2))") ///
-stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
+stats(F_pvalue N, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
 nonumbers replace collabels(none) compress style(tab) mtitles("All" "Yes" "No" "Difference" "p-value")  ///
 prehead("\begin{table}[h!]\begin{center}\caption{Summary Statistics}\label{tab: husbandsummstats}\tabcolsep=0.2cm\scalebox{0.67}{\begin{tabular}{lccccc}\toprule") ///
 posthead("\midrule\textbf{A. Partner Invitation Group} \\\\[-1ex]") nogaps postfoot("\midrule")
@@ -54,13 +54,13 @@ eststo short_diff: quietly estpost ttest $DESCVARS, by(SHORT_T)
 eststo short_diff_p: quietly estpost ttest $DESCVARS, by(SHORT_T)
 
 eststo F_short: reg SHORT_T $DESCVARS
-estadd scalar F_Obs = `e(N)': short_diff_p
+estadd scalar F_Obs = r(N): allsample
 testparm $DESCVARS
 estadd scalar F_pvalue = r(p): short_diff_p
 
 esttab allsample short_gp long_gp short_diff short_diff_p using "$output\summary_stats.tex",  booktabs fragment ///
 label cells("mean(pattern(1 1 1 0 0) fmt(2)) b(star pattern(0 0 0 1 0) fmt(2)) p(pattern(0 0 0 0 1) fmt(2))") ///") nomtitles ///
-stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
+stats(F_pvalue N, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
 nonumbers append collabels(none) compress style(tab) ///
 posthead("\textbf{B. Short, Tailored Counseling Group} \\\\[-1ex]") nogaps ///
 postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Notes: Variable definitions are presented in Table \ref{variable\_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}") nogaps

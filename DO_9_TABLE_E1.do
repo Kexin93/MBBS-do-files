@@ -67,33 +67,33 @@ posthead("\midrule \multicolumn{3}{c}{\textbf{B: Change in Method Use}} \\\\[-1e
 
 ******************* Panel C: post-COUN ideal method and FUP current method**********************************************
 	eststo clear
-eststo: reg diff_method_9 SHORT_T HUSB_T c.SHORT_T#c.HUSB_T, vce(robust) 
-summarize diff_method_9
+eststo: reg intertemperal_concordance SHORT_T HUSB_T c.SHORT_T#c.HUSB_T, vce(robust) 
+summarize intertemperal_concordance
 estadd scalar ymean = r(mean)
 
-eststo: reg diff_method_9 SHORT_T HUSB_T c.SHORT_T#c.HUSB_T $balance_covariates, vce(robust) 
-summarize diff_method_9 
+eststo: reg intertemperal_concordance SHORT_T HUSB_T c.SHORT_T#c.HUSB_T $balance_covariates, vce(robust) 
+summarize intertemperal_concordance 
 estadd scalar ymean = r(mean)
 
 *Panel C: Counseling current method and Follow-up current method
 esttab est1 est2 using "$output\interaction_short_husband_4col.tex", append fragment label nomtitles nonumbers nolines cells(b(star fmt(%9.3f)) ///
 se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T HUSB_T c.SHORT_T#c.HUSB_T) ///
 stats(N ymean, fmt(0 2) labels("N" "Dep. mean"))  ///
-posthead("\midrule \multicolumn{3}{c}{\textbf{C: Intertemporal Discordance}} \\\\[-1ex]") nogaps collabels(none) 
+posthead("\midrule \multicolumn{3}{c}{\textbf{C: Intertemporal Concordance}} \\\\[-1ex]") nogaps collabels(none) 
 	
 ******************* Panel D: FUP ideal method and FUP current method**********************************************
 	eststo clear
-eststo: reg diff_method_5 SHORT_T HUSB_T c.SHORT_T#c.HUSB_T if COUN__FV_1 == 1, vce(robust) 
-summarize diff_method_5 
+eststo: reg contemp_concordance SHORT_T HUSB_T c.SHORT_T#c.HUSB_T if COUN__FV_1 == 1, vce(robust) 
+summarize contemp_concordance 
 estadd scalar ymean = r(mean)
 
-eststo: reg diff_method_5 SHORT_T HUSB_T c.SHORT_T#c.HUSB_T $balance_covariates if COUN__FV_1 == 1, vce(robust) 
-summarize diff_method_5 
+eststo: reg contemp_concordance SHORT_T HUSB_T c.SHORT_T#c.HUSB_T $balance_covariates if COUN__FV_1 == 1, vce(robust) 
+summarize contemp_concordance 
 estadd scalar ymean = r(mean)
 
 * Panel D: 
 esttab est1 est2 using  "$output\interaction_short_husband_4col.tex", append fragment label nomtitles nonumbers nolines cells(b(star fmt(%9.3f)) ///
 se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T HUSB_T c.SHORT_T#c.HUSB_T) ///
 stats(N ymean, fmt(0 2) labels("N" "Dep. mean")) ///
-posthead("\midrule \multicolumn{3}{c}{\textbf{D: Contemporaneous Discordance}} \\\\[-1ex]") ///
+posthead("\midrule \multicolumn{3}{c}{\textbf{D: Contemporaneous Concordance}} \\\\[-1ex]") ///
 postfoot("\midrule Balancing controls & & x \\\bottomrule \end{tabular}}\end{center}\footnotesize{Notes: Each panel presents regression results for the primary outcome that is specified. Columns (1) presents the baseline estimation results for the interaction effects between tailored counseling and partner invitations. Column (2) controls for baseline level balancing variables that include a woman's age, her contraceptive use, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are described in Section 3 and are defined in more detail in Table \ref{tab: variable_descriptions}. Heteroskedastic-robust standard errors are presented in brackets. ***1\%, ** 5\%, * 10\%.} \end{table}") nogaps collabels(none) 

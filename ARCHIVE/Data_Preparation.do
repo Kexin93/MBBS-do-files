@@ -2998,8 +2998,8 @@ forvalues i = 0/3{
 }
 
 label var treatment0 "Control Group"
-label var treatment1 "Standard Counseling, Partner Invitations"
-label var treatment2 "Tailored Counseling, Individual Counseling"
-label var treatment3 "Tailored Counseling, Partner Invitations"
+label var treatment1 "T1: Standard Counseling, Partner Invitations"
+label var treatment2 "T2: Tailored Counseling, No Partner Invitations"
+label var treatment3 "T3: Tailored Counseling, Partner Invitations"
 
 save "$data\MBBS_Analysis_data.dta", replace
