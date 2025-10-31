@@ -3067,4 +3067,7 @@ label var treatment1 "T1: Standard Counseling, Partner Invitations"
 label var treatment2 "T2: Tailored Counseling, No Partner Invitations"
 label var treatment3 "T3: Tailored Counseling, Partner Invitations"
 
+clonevar HUSB_T_comp = COUN__husb_cons
+replace HUSB_T_comp = 0 if COUN__husb_cons == 0 | mi(COUN__husb_cons)
+
 save "$data\MBBS_Analysis_data.dta", replace
