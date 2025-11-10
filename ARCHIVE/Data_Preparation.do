@@ -2900,12 +2900,12 @@ label val PHO_method HOM_method CLIN_method FUP_curr_method CLIN_ideal_method //
 * Counseling method use-attribute Concordance
 gen method_attribute_con2 = (inlist(coun_curr_method, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12))
 
-label var method_attribute_con2 "Method use in list, pre-counseling stated preferred method not in list"
+label var method_attribute_con2 "Method use in list"
 
 * Ideal-method-attribute Concordance
 gen method_attribute_con1 = (inlist(COUN_129, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12))
 
-label var method_attribute_con1 "Pre-counseling stated preferred method in list, method use not in list"
+label var method_attribute_con1 "Pre-counseling stated preferred method in list"
 
 * Concordance 3
 gen method_attribute_con3 = (COUN_129 == coun_curr_method & inlist(COUN_129, method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12))  if !mi(COUN_129) & !mi(coun_curr_method)
