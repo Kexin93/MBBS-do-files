@@ -2439,6 +2439,24 @@ lab var HUSB_T "Partner Invitation"
 	label var COUN_207 "Partner Invitation Uptake"
 	replace COUN_207 = 0 if mi(COUN_207)
 
+* Stated Ideal method change between pre- and post-counseling stages
+	capture drop diff_method_r22
+	capture drop diff_method_22
+gen diff_method_r22 = FUP_ideal_method - COUN_3081
+gen diff_method_22 = (diff_method_r22 != 0) if !mi(diff_method_r22)
+label var diff_method_22 "FUP stated preferred method differs between counseling and follow-up"
+	label val diff_method_22 yesno
+	drop diff_method_r22
+
+* Stated Ideal method change between pre- and post-counseling stages
+	capture drop diff_method_r23
+	capture drop diff_method_23
+gen diff_method_r23 = COUN_3081 - COUN_303
+gen diff_method_23 = (diff_method_r23 != 0) if !mi(diff_method_r23)
+label var diff_method_23 "Stated preferred method between post-counseling and end-of-counseling"
+	label val diff_method_23 yesno
+	drop diff_method_r23
+	
 * LARCs & SARCs
 ***IDEAL METHOD
 *CHANGED LARC
@@ -2568,14 +2586,16 @@ label var diff_method112 "Changes to ideal method from baseline to post-counseli
 gen diff_method113 = (FUP_ideal_method != baseline_ideal_method) if !mi(baseline_ideal_method) & !mi(FUP_ideal_method)
 label var diff_method113 "Changes to ideal method from baseline to Follow-up"	
 
-gen diff_method114 = (COUN_303 != COUN_129) if !mi(COUN_303) & !mi(COUN_129)
-label var diff_method114 "Changes to ideal method from pre-counseling to post-counseling"	
+gen diff_method_r14 = COUN_303 - COUN_129
+gen diff_method_14 = (diff_method_r14 != 0) if !mi(diff_method_r14)
+label var diff_method_14 "Changes to ideal method from pre-counseling to post-counseling"	
 
 gen diff_method115 = (FUP_ideal_method != COUN_129) if !mi(COUN_129) & !mi(FUP_ideal_method)
 label var diff_method115 "Changes to ideal method from pre-counseling to FUP"
 
-gen diff_method116 = (FUP_ideal_method != COUN_303) if !mi(COUN_303) & !mi(FUP_ideal_method)
-label var diff_method116 "Changes to ideal method from post-counseling to FUP" 
+gen diff_method_r116 = FUP_ideal_method - COUN_303
+gen diff_method_116 = (diff_method_r116) if !mi(diff_method_r116)
+label var diff_method_116 "Changes to ideal method from post-counseling to FUP" 
 
 gen diff_method117 = (coun_curr_method != baseline_curr_method) if !mi(coun_curr_method) & !mi(baseline_curr_method)
 label var diff_method117 "Changes to method use from baseline to counseling" 
