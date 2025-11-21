@@ -1,9 +1,8 @@
 ***MALAWI Behavioral Biases Study
-***DO FILE 6: TABLE E1-E3
+***TABLE E3-E5
 ***SELECTION OF WOMEN
-
 ***KEXIN ZHANG
-***NOVEMBER 15, 2023
+***NOVEMBER 21, 2025
 
 version 13
 
@@ -16,8 +15,6 @@ keep if w1_mergeRand == 3
 global DESCVARS age tot_child wom_des_fam_size preprimary educ_primary educ_second educ_higher wom_work cohab_age curr_use baseline_inj baseline_implants top_attribute top_attribute_wgt want_to_switch husband_support
 
 ****** Selection between those who used long-lasting methods (IUD, Implants, Injectables) and those who were not
-*global DESCVARS1 $DESCVARS BL_long_acting_method husb_satisfied
-
 * TABLE E1 - Selection between women who were reached for Counseling and those who were lost for counseling
 ************************************************************************************
 eststo clear 

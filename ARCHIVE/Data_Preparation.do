@@ -1961,7 +1961,7 @@ replace coun_curr_method = 0 if COUN_123 == 0
 							7 "NO UNPLEASANT SIDE EFFECTS"   ///
 							8 "SHOULD NOT BE HORMONAL"  ///
 							9 "LOW COST"  ///
-							10 "EASILY AVAILABLE AT THE CLNIC"  ///
+							10 "EASILY AVAILABLE AT THE CLINIC"  ///
 							11 "CAN BE USED FOR A LONG TIME WITHOUT NEED TO VISIT CLINIC OR RE-SUPPLY"   ///
 							12 "WILL BE ABLE TO GET PREGNANT WHEN I WANT"  ///
 							13 "NO NEED TO GO TO A CLINIC TO OBTAIN THE METHOD"  ///
@@ -2267,7 +2267,7 @@ label var w1_w03_attribute_16 "No effect on regular monthly bleeding"
 label var w1_w03_attribute_17 "No unpleasant side effects"
 label var w1_w03_attribute_18 "Should not be hormonal"
 label var w1_w03_attribute_19 "Low cost"
-label var w1_w03_attribute_110 "Easily available at the clnic"
+label var w1_w03_attribute_110 "Easily available at the clinic"
 label var w1_w03_attribute_111 "Can be used for a long time without need to visit clinic or re-supply"
 label var w1_w03_attribute_112 "Will be able to get pregnant when I want"
 label var w1_w03_attribute_113 "No need to go to a clinic to obtain the method"
@@ -2712,7 +2712,7 @@ lab define attributes   1 "EFFECTIVE AT PREVENTING PREGNANCY"  ///
 						7 "NO UNPLEASANT SIDE EFFECTS"   ///
 						8 "SHOULD NOT BE HORMONAL"  ///
 						9 "LOW COST"  ///
-						10 "EASILY AVAILABLE AT THE CLNIC"  ///
+						10 "EASILY AVAILABLE AT THE CLINIC"  ///
 						11 "CAN BE USED FOR A LONG TIME WITHOUT NEED TO VISIT CLINIC OR RE-SUPPLY"   ///
 						12 "WILL BE ABLE TO GET PREGNANT WHEN I WANT"  ///
 						13 "NO NEED TO GO TO A CLINIC TO OBTAIN THE METHOD"  ///

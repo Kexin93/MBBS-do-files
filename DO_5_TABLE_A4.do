@@ -1,9 +1,9 @@
 ***MALAWI Behavioral Biases Study
-***DO FILE 2: TABLE A3
+***TABLE A4
 ***IV REGRESSION RESULTS OF PARTNER INVITATION INTERVENTION
 
 ***KEXIN ZHANG
-***JUNE 21, 2025
+***November 21, 2025
 
 version 13
 
@@ -31,15 +31,15 @@ global covariates "age_binary cont_use1 eff_attribute i.w1_area"
 
 ******************* PANEL A. pre-COUN ideal method and FUP ideal method**********************************************
 	eststo clear
-eststo: ivregress 2sls diff_method_8 (COUN_207 = HUSB_T) if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust)
-summarize diff_method_8 if HUSB_T == 0 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
+eststo: ivregress 2sls diff_method_8 (COUN_207 = HUSB_T) if COUN__FV_1 == 1, vce(robust)
+summarize diff_method_8 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 		estat firststage
 	matrix FS = r(singleresults)
 	estadd scalar fs = FS[1, 4]
 
-eststo: ivregress 2sls diff_method_8 (COUN_207 = HUSB_T) $balance_covariates if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust)
-summarize diff_method_8 if HUSB_T == 0 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
+eststo: ivregress 2sls diff_method_8 (COUN_207 = HUSB_T) $balance_covariates if COUN__FV_1 == 1, vce(robust)
+summarize diff_method_8 if HUSB_T == 0 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	estat firststage
 	matrix FS = r(singleresults)

@@ -1,8 +1,8 @@
 ***MALAWI Behavioral Biases Study
-***DO FILE 1-2: TABLE 2
+***DO FILE: TABLE A3
 
 ***KEXIN ZHANG
-***MAY 10, 2025
+***November 21, 2025
 
 version 13
 clear all
@@ -28,12 +28,12 @@ keep if COUN__FV_1 == 1
 	
 ******************* PANEL A. pre-COUN ideal method and FUP ideal method**********************************************
 	eststo clear
-eststo: reg diff_method_8 /*treatment0*/ treatment1 treatment2 treatment3 if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
-summarize diff_method_8 if treatment0 == 1 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
+eststo: reg diff_method_8 /*treatment0*/ treatment1 treatment2 treatment3 if COUN__FV_1 == 1, vce(robust) 
+summarize diff_method_8 if treatment0 == 1 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 	
-eststo: reg diff_method_8 /*treatment0*/ treatment1 treatment2 treatment3 $balance_covariates if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
-summarize diff_method_8 if treatment0 == 1 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
+eststo: reg diff_method_8 /*treatment0*/ treatment1 treatment2 treatment3 $balance_covariates if COUN__FV_1 == 1, vce(robust) 
+summarize diff_method_8 if treatment0 == 1 & COUN__FV_1 == 1
 estadd scalar ymean = r(mean)
 		
 * Panel A: pre-counseling to Follow-up ideal methods

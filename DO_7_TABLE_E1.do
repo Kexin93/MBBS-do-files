@@ -1,9 +1,9 @@
 ***MALAWI Behavioral Biases Study
-***DO FILE 6: TABLE G4
+***TABLE E1
 ***ATTRITORS BY TRATMENT STATUS
 
 ***KEXIN ZHANG
-***NOVEMBER 15, 2023
+***NOVEMBER 21, 2025
 
 version 13
 
