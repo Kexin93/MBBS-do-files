@@ -7,7 +7,9 @@ clear all
 
 use "$data\MBBS_Analysis_data.dta"
 
-* Analytical sample of 638 observations
+*==============================================================================
+*================== Keep the final analytical sample of 638 women ==============
+*==============================================================================
 keep if w1_mergeRand == 3
 keep if COUN__FV_1 == 1
 

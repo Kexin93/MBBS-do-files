@@ -15,8 +15,9 @@ global balance_covariates "age_binary cont_use1 eff_attribute"
 
 global covariates "age_binary cont_use1 eff_attribute i.w1_area"
 
-********************************************************************************************************************
-******************** Changing Ideal Methods from Counseling to Fup: which group is more likely afterwards? ***********************************
+*==============================================================================
+*================== Keep the final analytical sample of 638 women ==============
+*==============================================================================
 	keep if w1_mergeRand == 3
 	
 	keep if COUN__FV_1 == 1

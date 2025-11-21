@@ -8,6 +8,9 @@ clear all
 
 use "$data\MBBS_Analysis_data.dta"
 
+*==============================================================================
+*================== Keep the final analytical sample of 638 women ==============
+*==============================================================================
 keep if w1_mergeRand == 3
 
 global DESCVARS age tot_child wom_des_fam_size preprimary educ_primary educ_second educ_higher wom_work cohab_age curr_use baseline_inj baseline_implants top_attribute top_attribute_wgt want_to_switch husband_support prior_knowledge base_fup_span2

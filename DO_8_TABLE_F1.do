@@ -14,6 +14,9 @@ global balance_covariates "age_binary cont_use1 eff_attribute"
 
 global covariates "age_binary cont_use1 eff_attribute i.w1_area"
 
+*==============================================================================
+*================== Keep the final analytical sample of 638 women ==============
+*==============================================================================
 keep if w1_mergeRand == 3
 
 tab COUN__FV_1
