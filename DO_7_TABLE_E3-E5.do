@@ -1,5 +1,5 @@
 ***MALAWI Behavioral Biases Study
-***DO FILE 6: TABLE G1-G3
+***DO FILE 6: TABLE E1-E3
 ***SELECTION OF WOMEN
 
 ***KEXIN ZHANG
@@ -18,7 +18,7 @@ global DESCVARS age tot_child wom_des_fam_size preprimary educ_primary educ_seco
 ****** Selection between those who used long-lasting methods (IUD, Implants, Injectables) and those who were not
 *global DESCVARS1 $DESCVARS BL_long_acting_method husb_satisfied
 
-* TABLE D1 - Selection between women who were reached for Counseling and those who were lost for counseling
+* TABLE E1 - Selection between women who were reached for Counseling and those who were lost for counseling
 ************************************************************************************
 eststo clear 
 eststo all: quietly estpost summarize $DESCVARS if !mi(COUN_available)
@@ -41,7 +41,7 @@ stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Num
 prehead("\begin{table}\begin{center}\caption{Who were Available for the Counseling Session?}\label{tab: counselingreached}\tabcolsep=0.2cm\scalebox{0.85}{\begin{tabular}{lccccc}\toprule") ///
 postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Notes: During the counseling session, 770 women who were interviewed at the baseline were asked if they were available for counseling, among whom 701 women were available for counseling and 69 women did not receive the counseling session. Variable definitions are presented in Table \ref{tab: variable_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}")
 
-* TABLE D2 -Selection between women who invited husband and those who did not
+* TABLE E2 -Selection between women who invited husband and those who did not
 ************************************************************************************
 // COMPARE between Compliers and non-compliers in the HUSB_T intervention group
 ************************************************************************************
@@ -67,7 +67,7 @@ stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Num
 prehead("\begin{table}\begin{center} \caption{Partner Invitation Compliers}\label{tab: husbandcompliers}\tabcolsep=0.07cm\begin{tabular}{lccccc}\toprule") ///
 postfoot("\bottomrule\end{tabular}\end{center}\footnotesize{Notes: Among 701 women who received a counseling session, 401 women were assigned to the partner invitation group, among which 112 male partners participated. Variable definitions are presented in Table \ref{tab: variable_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}")
 
-* TABLE D3 -Selection between clinic visitors and non-clinic-visitors
+* TABLE E3 -Selection between clinic visitors and non-clinic-visitors
 ************************************************************************************
 eststo clear 
 eststo all: quietly estpost summarize $DESCVARS if COUN__FV_1 == 1

@@ -62,20 +62,20 @@ postfoot("\midrule Balancing controls & & x & & x & &x\\\bottomrule \end{tabular
 
 **# COUN_303
 	eststo clear	
-eststo: reg diff_method_14 SHORT_T if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
-summarize diff_method_14 if SHORT_T == 0 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
+eststo: reg diff_method114 SHORT_T if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
+summarize diff_method114 if SHORT_T == 0 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
 estadd scalar ymean = r(mean)
 
-eststo: reg diff_method_14 SHORT_T $balance_covariates if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
-summarize diff_method_14 if SHORT_T == 0 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
+eststo: reg diff_method114 SHORT_T $balance_covariates if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
+summarize diff_method114 if SHORT_T == 0 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
 estadd scalar ymean = r(mean)
 	
-eststo: reg diff_method_116 SHORT_T if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
-summarize diff_method_116 if SHORT_T == 0 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
+eststo: reg diff_method116 SHORT_T if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
+summarize diff_method116 if SHORT_T == 0 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
 estadd scalar ymean = r(mean)
 	
-eststo: reg diff_method_116 SHORT_T $balance_covariates if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
-summarize diff_method_116 if SHORT_T == 0 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
+eststo: reg diff_method116 SHORT_T $balance_covariates if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
+summarize diff_method116 if SHORT_T == 0 & COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/
 estadd scalar ymean = r(mean)
 
 eststo: reg diff_method_8 SHORT_T if COUN__FV_1 == 1 /*& !mi(FUP_curr_method)*/, vce(robust) 
