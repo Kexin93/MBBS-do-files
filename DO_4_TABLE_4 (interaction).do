@@ -26,7 +26,7 @@ keep if COUN__FV_1 == 1
 	drop if PHO_103 == 1 | HOME_103 == 1 //638
 
 	eststo clear
-foreach var of varlist women_own_house_a women_earn_more women_decide_her_m women_child_edu husb_supports_fp husb_want_more husb_sat{
+foreach var of varlist women_own_house_a women_earn_more women_decide_her_m women_child_edu husb_supports_fp husb_want_more{
 preserve
 eststo `var'_Y1: reg diff_method_8 HUSB_T `var' c.HUSB_T#c.`var' $balance_covariates if COUN__FV_1 == 1, vce(robust) 
 summarize diff_method_8 if HUSB_T == 0 & COUN__FV_1 == 1 

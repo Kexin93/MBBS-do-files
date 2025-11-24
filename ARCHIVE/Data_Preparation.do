@@ -3032,7 +3032,7 @@ drop CLIN_104C CLIN_106 CLIN_107 CLIN_108 CLIN_204 CLIN_205 CLIN_206 CLIN_118
 
 * Some final changes
 drop cont_use PHO_method HOM_method CLIN_method CLIN_ideal_method ///
-FUP_ideal_method PHO_switchto_method HOM_switchto_method FUP_switchto_method ///
+PHO_switchto_method HOM_switchto_method FUP_switchto_method ///
 COUN_switchto_method switchto_method_b baseline_afterswitch_method
 
 drop w1_w03_w3361 w1_w03_w3362 w1_w03_w3363 w1_w03_w3364 w1_w03_w3365 ///
@@ -3062,5 +3062,23 @@ label var treatment3 "T3: Tailored Counseling, Partner Invitations"
 
 clonevar HUSB_T_comp = COUN__husb_cons
 replace HUSB_T_comp = 0 if COUN__husb_cons == 0 | mi(COUN__husb_cons)
+
+*=======================================================
+*================= 2025-11-21 ==========================
+*=======================================================
+drop  tailored_method1 tailored_method2 tailored_method3 tailored_method4 tailored_method5 tailored_method6 tailored_method7
+drop method_inlist_95 method_inlist_96 method_inlist_97 method_inlist_98 method_inlist_99 method_inlist_100 method_inlist_101
+drop PHO_111D0 PHO_111D1 PHO_111D2 PHO_111D3 PHO_111D4 PHO_111D5 PHO_111D6 PHO_111D7 PHO_111D8 PHO_111D15 PHO_111D9 PHO_111D10 PHO_111D11 PHO_111D12 PHO_111D13 PHO_111D14 PHO_111D16 PHO_111D17 PHO_111D18 PHO_111D19 PHO_111D20 PHO_111D21 PHO_111D96 PHO_111D88 PHO_111D99 PHO_111Dextra PHO_111D_O HOME_111D0 HOME_111D1 HOME_111D2 HOME_111D3 HOME_111D4 HOME_111D5 HOME_111D6 HOME_111D7 HOME_111D8 HOME_111D15 HOME_111D9 HOME_111D10 HOME_111D11 HOME_111D12 HOME_111D13 HOME_111D14 HOME_111D16 HOME_111D17 HOME_111D18 HOME_111D19 HOME_111D20 HOME_111D21 HOME_111D96 HOME_111D88 HOME_111D99 HOME_111Dextra HOME_111D_O CLIN_106C1 CLIN_106C2 CLIN_106C3 CLIN_106C4 CLIN_106C5 CLIN_106C6 CLIN_106C7 CLIN_106C8 CLIN_106C9 CLIN_106C10 CLIN_106C11 CLIN_106C12 CLIN_106C13 CLIN_106C14 CLIN_106C15 CLIN_106C16 CLIN_106C17 CLIN_106C18 CLIN_106C19 CLIN_106C20 CLIN_106C21 CLIN_106C22 CLIN_106C23 CLIN_106C24 CLIN_106C25 CLIN_106CW709A_2626 CLIN_106C27 CLIN_106C28 CLIN_106C96 CLIN_106C88 CLIN_106C99 CLIN_106C0 CLIN_106Cextra CLIN_106C_O CLIN_107B CLIN_107C1 CLIN_107C2 CLIN_107C3 CLIN_107C4 CLIN_107C5 CLIN_107C6 CLIN_107C7 CLIN_107C8 CLIN_107C9 CLIN_107C10 CLIN_107C11 CLIN_107C12 CLIN_107C13 CLIN_107C14 CLIN_107C15 CLIN_107C16 CLIN_107C17 CLIN_107C18 CLIN_107C19 CLIN_107C20 CLIN_107C21 CLIN_107C22 CLIN_107C23 CLIN_107C24 CLIN_107C25 CLIN_107CW709A_2626 CLIN_107C27 CLIN_107C28 CLIN_107C96 CLIN_107C88 CLIN_107C99 CLIN_107C0 CLIN_107Cextra CLIN_107C_O CLIN_108C1 CLIN_108C2 CLIN_108C3 CLIN_108C4 CLIN_108C5 CLIN_108C6 CLIN_108C7 CLIN_108C8 CLIN_108C9 CLIN_108C10 CLIN_108C11 CLIN_108C12 CLIN_108C13 CLIN_108C14 CLIN_108C15 CLIN_108C16 CLIN_108C17 CLIN_108C18 CLIN_108C19 CLIN_108C20 CLIN_108C21 CLIN_108C22 CLIN_108C23 CLIN_108C24 CLIN_108C25 CLIN_108CW709A_2626 CLIN_108C27 CLIN_108C28 CLIN_108C96 CLIN_108C88 CLIN_108C99 CLIN_108C0 CLIN_108Cextra CLIN_108C_O
+
+drop deferral access_choice told_side_effects want_switch_adopt inj_3_months women_satisfaction women_dissatisfaction discuss_kids_husb husb_sat husb_dissat women_big_purchase women_decide_husb_m women_decide_health women_decide_daily women_decide_visits women_own_money women_own_land_a discussed_FP prior_knowledge_bi attribute_wgt_variation attribute_wgt_var_bi number_attributes number_attributes_bi FUP_ideal_LARC COUN_ideal_LARC diff_method_ideal_LARC_r diff_method_ideal_LARC FUP_SARC_ideal COUN_SARC_ideal diff_method_SARC_ideal_r diff_method_SARC_ideal FUP_LARC_use COUN_LARC_use diff_method_LARC_use_r diff_method_LARC_use FUP_SARC_use COUN_SARC_use diff_method_SARC_use_r diff_method_SARC_use POST_COUN_ideal_LARC diff_LARC_ID_r diff_LARC_ID POST_COUN_ideal_SARC diff_SARC_ID_r diff_SARC_ID diff_LARC_CD_r diff_LARC_CD diff_SARC_CD_r diff_SARC_CD diff_method_r114 diff_method_r116 FUP_ideal_method_NoClinic diff_method_8_noCLI diff_method_5_noCLI postIdeal_implants postIdeal_injectables postIdeal_pills postIdeal_Others FUPmethod_implants FUPmethod_injectables FUPmethod_pills FUPmethod_Others uptake_injectables uptake_pills uptake_implants uptake_Others FUPIdeal_implants FUPIdeal_injectables FUPIdeal_pills FUPIdeal_Others concordance_injectables concordance_pills concordance_implants concordance_Others pre_Coun_short method_attribute_con4
+
+drop cont_wom_decide 
+
+drop  w1_w03_w3011 w1_w03_w3012 w1_w03_w3013 w1_w03_w3014 w1_w03_w3015 w1_w03_w3016 w1_w03_w3017 w1_w03_w3018 w1_w03_w3019 w1_w03_w30110 w1_w03_w30111 w1_w03_w30112 w1_w03_w30113 w1_w03_w30114 w1_w03_w30115 w1_w03_w30116 w1_w03_w303 w1_w03_w3040 w1_w03_w3043 w1_w03_w3044 w1_w03_w3045 w1_w03_w3046 w1_w03_w3047 w1_w03_w30411 w1_w03_w30414 w1_w03_w30416 w1_w03_w308b w1_w07_w724c w1_w03_w343 w1_w07_w724d w1_w09_w925 w1_w09_wom_work w1_treatment COUN_311 PHO_ideal_method_from_counseling cohab_time cohab_longer8 BL_Ideal_Method1 BL_Ideal_Method3 BL_Ideal_Method6 BL_Ideal_Method7 BL_Ideal_Method11 BL_Ideal_Method14 BL_Ideal_Method15 BL_Ideal_Method16 top_attribute_freq diff_method_20 diff_method_17 diff_method_18 diff_method_9 diff_method_5 diff_method_16 diff_method_12 diff_method_21 diff_method_23 baseline_hormonal w1_area
+
+* Replication package: drop all the unused variables for all the tables
+drop  w1_tot_child w1_w03_w338_1_2 w1_w03_w338_2_2 w1_w03_w338_3_2 counselor COUN__HUSB_1211 COUN__HUSB_1212 COUN__HUSB_1213 COUN__HUSB_1216 COUN__HUSB_1217 COUN__HUSB_1218 COUN__HUSB_1219 COUN__HUSB_12110 COUN__HUSB_12111 COUN__HUSB_12112 COUN__HUSB_12113 COUN__HUSB_12114 COUN__HUSB_12115 COUN__HUSB_12116 COUN_3081 mergeCVF mergePHO mergeHOM base_fup_span ever_use wom_educ HUSB_supp ethnicity_Chewa BASE_husb_FP attribute_2_wgt attribute_3_wgt COUN__HUSB_1221 modern_methods304 traditional_methods304 husb_ideal_method COUN_129_modern COUN_129_traditional COUN_129_None COUN_129_inj COUN_129_implants coun_curr_method_modern coun_curr_method_traditional coun_curr_method_None coun_curr_method_inj coun_curr_method_implants w1_w03_attribute_116 w1_w03_attribute_118 counseling_time counseling_time2 counseling_time3 attribute_1 COUN_attribute method1 method2 method3 method4 method5 method6 method7 method8 method9 method10 method11 method12 same_method_9 same_method_5 
+
+run "E:\5. Malawi Behavioral Biases Study\GitHub\MBBS-do-files\ARCHIVE\label_do-file.do"
 
 save "$data\MBBS_Analysis_data.dta", replace
