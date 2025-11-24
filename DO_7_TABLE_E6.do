@@ -4,7 +4,7 @@
 ***November 21, 2025
 
 clear all
-
+timer on 14
 use "$data\MBBS_Analysis_data.dta"
 
 *==============================================================================
@@ -103,3 +103,5 @@ mtitles("Clinic" "Home" "Phone" "Clinic" "Home" "Phone" "(1)-(4)" "(2)-(5)" "(3)
 posthead("\midrule &\multicolumn{9}{c}{\textbf{Tailored Counseling}}\\") nogaps ///
 postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Notes: Panel A displays the summary statistics of variables across the three survey modes by the intervention of partner invitations. Panel B displays the summary statistics of the same variables across survey modes by the intervention of tailored counseling. Variable definitions are presented in Table \ref{tab: variable_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}") nogaps
 
+timer off 14
+timer list

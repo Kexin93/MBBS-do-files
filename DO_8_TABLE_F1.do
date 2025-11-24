@@ -5,8 +5,8 @@
 ***November 21, 2025
 
 version 13
-
 clear all
+timer on 15
 
 use "$data\MBBS_Analysis_data.dta"
 
@@ -99,3 +99,5 @@ se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab)
 stats(N ymean, fmt(0 2) labels("N" "Dep. mean")) ///
 posthead("\midrule \multicolumn{3}{c}{\textbf{D: Contemporaneous Concordance}} \\\\[-1ex]") ///
 postfoot("\midrule Balancing controls & & x \\\bottomrule \end{tabular}}\end{center}\footnotesize{Notes: Each panel presents regression results for the primary outcome that is specified. Columns (1) presents the baseline estimation results for the interaction effects between tailored counseling and partner invitations. Column (2) controls for baseline level balancing variables that include a woman's age, her contraceptive use, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are described in Section 3 and are defined in more detail in Table \ref{tab: variable_descriptions}. Heteroskedastic-robust standard errors are presented in brackets. ***1\%, ** 5\%, * 10\%.} \end{table}") nogaps collabels(none) 
+timer off 15
+timer list

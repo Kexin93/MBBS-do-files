@@ -5,7 +5,7 @@
 
 version 13
 clear all
-
+timer on 4
 use "$data\MBBS_Analysis_data.dta"
 
 global balance_covariates "age_binary cont_use1 eff_attribute"
@@ -86,3 +86,5 @@ esttab husb_supports_fp_Y1 husb_supports_fp_Y2 husb_supports_fp_Y3 husb_supports
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(HUSB_T c.HUSB_T#c.husb_supports_fp) ///
 stats(N pvalue1, fmt(%9.0f %9.3f) labels("N" "\makecell[l]{PI + PI $\times$ Husband supports FP = 0}"))  ///
 coeflabel(c.HUSB_T#c.husb_supports_fp "\makecell[l]{PI $\times$ Husband supports FP}") nomtitles collabels(none) nonumbers postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are presented in Table \ref{tab: variable_descriptions}. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+timer off 4
+timer list

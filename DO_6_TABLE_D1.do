@@ -8,7 +8,7 @@
 version 13
 
 clear all
-
+timer on 10
 use "$data\MBBS_Analysis_data.dta"
 
 keep if w1_mergeRand == 3 //782
@@ -61,3 +61,5 @@ tab COUN_126
 
 * Follow-up
 tab want_to_switch_FUP
+timer off 10
+timer list

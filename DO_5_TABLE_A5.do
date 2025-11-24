@@ -5,7 +5,7 @@
 
 version 13
 clear all
-
+timer on 8
 use "$data\MBBS_Analysis_data.dta"
 
 global balance_covariates "age_binary cont_use1 eff_attribute"
@@ -72,3 +72,5 @@ posthead("\midrule") ///
 mtitles("BL preferred" "\makecell{Post-counseling \\ preferred}" "Husband preferred" "BL preferred" "\makecell{Post-counseling \\ preferred}" "BL preferred" "\makecell{Post-counseling \\ preferred}" "(1)-(4)" "(2)-(5)" "(1)-(6)" "(2)-(7)") ///
 prehead("\begin{table}\begin{center} \caption{Distribution of Method Use and Stated Preferred Contraceptive Method }\label{tab: MethodMix}\tabcolsep=0.1cm\scalebox{0.57}{\begin{tabular}{lccccccccccc}\toprule") ///
 postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Note: Column (1) shows women's baseline stated preferred method among the 106 women who were prompted with the option to invite their male partner and who had their partner participate; column (2) displays women's post-counseling stated preferred method among the 106 women; column (3) presents the distribution of male partner's stated preferred contraceptive method; column (4) presents women's stated preferred method among the 262 women who were prompted with the option to invite their partner but whose partner did not participate; column (5) presents women's post-counseling stated preferred method among the 262 women; column (6) presents the distribution of women's stated preferred method at the baseline among the 270 women who were not prompted with the option to invite their male partner to counseling; column (7) presents the distribution of women's post-counseling stated preferrd method among the 270 women; columns (8)-(11) display the p-values for the differences between the columns that are specified in the column titles. "}\end{table}) 
+timer off 8
+timer list

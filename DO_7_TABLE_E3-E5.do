@@ -7,7 +7,7 @@
 version 13
 
 clear all
-
+timer on 13
 use "$data\MBBS_Analysis_data.dta"
 
 keep if w1_mergeRand == 3
@@ -108,3 +108,5 @@ posthead("\midrule\textbf{Visited the Good Health Kauma Clinic?} \\\\[-1ex]") no
 	posthead("\textbf{Visited Any Clinic?} \\\\[-1ex]") nogaps ///
 	postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Notes: Among the 782 women who were interviewed at the baseline, 701 women attended a counseling session, among whom 682 women received a follow-up interview either through phone surveys, home visit surveys, or clinic visit surveys. Variable definitions are presented in Table \ref{tab: variable_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}") nogaps
 
+timer off 13
+timer list

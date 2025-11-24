@@ -6,7 +6,7 @@
 
 version 13
 clear all
-
+timer on 2
 use "$data\MBBS_Analysis_data.dta"
 
 global balance_covariates "age_binary cont_use1 eff_attribute"
@@ -124,3 +124,4 @@ se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab)
 stats(N ymean, fmt(0 2) labels("N" "Control mean")) ///
 posthead("\midrule \multicolumn{5}{c}{\textbf{D: Contemporaneous Concordance}} \\\\[-1ex]") ///
 postfoot("\midrule Balancing controls & & x & & x \\\bottomrule \end{tabular}}\end{center}\footnotesize{Notes: Each panel presents regression results for the primary outcome that is specified. Columns (1) and (2) present results for the tailored counseling intervention, and columns (3) and (4) present results for the partner invitation intervention. Columns (2) and (4) control for baseline level balancing variables that include a woman's age, her contraceptive use, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are described in Section 3 and are defined in more detail in Appendix A1. Heteroskedastic-robust standard errors are presented in brackets. ***1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+timer off 2

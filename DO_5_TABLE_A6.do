@@ -6,7 +6,7 @@
 
 version 13
 clear all
-
+timer on 9
 use "$data\MBBS_Analysis_data.dta"
 
 global balance_covariates "age_binary cont_use1 eff_attribute"
@@ -59,3 +59,5 @@ stats(N ymean, fmt(0 2) labels("N" "Control mean"))  ///
 prehead("\begin{table}\begin{center}\caption{Treatment Effect of Tailored Counseling on Changes in Stated Preferred Method across Time}\label{tab: TCstatedpreferred}\tabcolsep=0.3cm\scalebox{0.85}{\begin{tabular}{lcccccc}\toprule") ///
 posthead("\midrule") nogaps mgroups("\makecell[c]{Pre-counseling to \\ Post-counseling}" "\makecell[c]{Post-counseling to \\ Follow-up}" "\makecell[c]{Pre-counseling to \\ Follow-up}", pattern(1 0 1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) collabels(none) nomtitles ///
 postfoot("\midrule Balancing controls & & x & & x & &x\\\bottomrule \end{tabular}}\end{center}\footnotesize{Notes: This table presents the treatment effects of tailored counseling intervention on changes in stated preferred methods between different stages. The outcome variable for columns (1) and (2) are changes in stated preferred method between pre-counseling and post-counseling stages. The outcome variable for columns (3) and (4) are changes in stated preferred method between post-counseling and follow-up stages. The outcome variable for columns (5) and (6) are changes in stated preferred method between pre-counseling and follow-up stages. Columns (2), (4), and (6) control for baseline level balancing variables that include a woman's age, her contraceptive use, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are described in Section 3 and are defined in more detail in Appendix A1. Heteroskedastic-robust standard errors are presented in brackets. ***1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+timer off 9
+timer list

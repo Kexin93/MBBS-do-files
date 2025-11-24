@@ -5,7 +5,7 @@
 ***NOVEMBER 21, 2025
 
 clear all
-
+timer on 1
 use "$data\MBBS_Analysis_data.dta"
 
 *==============================================================================
@@ -67,3 +67,4 @@ stats(F_pvalue N, label("F-test of joint significance: p-value" "F-test: Number 
 nonumbers append collabels(none) compress style(tab) ///
 posthead("\textbf{B. Short, Tailored Counseling Group} \\\\[-1ex]") nogaps ///
 postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Notes: Variable definitions are presented in Table \ref{variable\_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}") nogaps
+timer off 1

@@ -8,7 +8,7 @@
 version 13
 
 clear all
-
+timer on 11
 use "$data\MBBS_Analysis_data.dta"
 
 keep if w1_mergeRand == 3
@@ -62,3 +62,5 @@ nonumbers append collabels(none) compress style(tab) starlevels(* 0.1 ** 0.05 **
 stats(F_pvalue F_Obs, label("F-test of joint significance: p-value" "F-test: Number of observations" ) fmt( %9.3f  %9.0f )) ///
 posthead("\textbf{B. Short, Tailored Counseling Group} \\\\[-1ex]") nogaps ///
 postfoot("\bottomrule\end{tabular}}\end{center}\footnotesize{Notes: Among 782 women who were interviewed at the baseline, 107 women attrited from the sample either at counseling or at the follow-up (through phone surveys, home surveys, or clinic visit surveys). Variable definitions are presented in Table \ref{tab: variable_descriptions}. *** 1\%, ** 5\%, * 10\%.}\end{table}") nogaps
+timer off 11
+timer list

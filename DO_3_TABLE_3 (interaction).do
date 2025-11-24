@@ -6,6 +6,7 @@
 version 13
 clear all
 
+timer on 3
 use "$data\MBBS_Analysis_data.dta"
 
 global balance_covariates "age_binary cont_use1 eff_attribute"
@@ -77,3 +78,5 @@ esttab method_attribute_con5_Y1 method_attribute_con5_Y2 method_attribute_con5_Y
 cells(b(star fmt(%9.3f)) se(par( [ ] ) fmt(%9.3f))) starlevels(* 0.2 ** 0.1 *** 0.02) compress style(tab) keep(SHORT_T c.SHORT_T#c.method_attribute_con5) ///
 stats(N pvalue1, labels("N" "\makecell[l]{TC + TC $\times$ Stated preferred method $\ne$ method use \\ in taiored list = 0}") fmt(%9.0f %9.3f))  ///
 coeflabel(c.SHORT_T#c.method_attribute_con5 "TC $\times$ Stated preferred method $\ne$ method use in tailored list") nomtitles collabels(none) nonumbers postfoot("\bottomrule \end{tabular}} \end{center}\footnotesize{Notes: Balancing control variables include a woman's age, her contraceptive use at baseline, and whether her most valued attribute was contraceptive effectiveness. Variable definitions are presented in Table \ref{tab: variable_descriptions}. Heteroskedastic-robust standard errors are presented in brackets. *** 1\%, ** 5\%, * 10\%.} \end{table}") nogaps
+
+timer off 3
