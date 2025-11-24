@@ -9,36 +9,36 @@ label var caseid "Identification number / Case ID"
 * TABLE 1
 order age tot_child wom_des_fam_size preprimary educ_primary educ_second educ_higher wom_work cohab_age curr_use baseline_inj baseline_implants top_attribute top_attribute_wgt want_to_switch husband_support prior_knowledge base_fup_span2, after(caseid)
 
-label var age "Woman's age (in years)"
-label var tot_child "Total number of children"
-label var wom_des_fam_size "Women's desired number of children"
-label var preprimary "Education: None (1=yes)"
-label var educ_primary "Education: Primary (1=yes)"
-label var educ_second "Education: Secondary (1=yes)"
-label var educ_higher "Education: Higher (1=yes)"
-label var wom_work "Woman is currently working (1=yes)"
-label var cohab_age "Age at first cohabitation (1=yes)"
-label var curr_use "Current use of FP (1=yes)"
+label var age "Baseline: Woman's age (in years)"
+label var tot_child "Baseline: Total number of children"
+label var wom_des_fam_size "Baseline: Women's desired number of children"
+label var preprimary "Education at baseline: None (1=yes)"
+label var educ_primary "Education at baseline: Primary (1=yes)"
+label var educ_second "Education at baseline: Secondary (1=yes)"
+label var educ_higher "Education at baseline: Higher (1=yes)"
+label var wom_work "Woman is currently working at baseline (1=yes)"
+label var cohab_age "Baseline: Age at first cohabitation (1=yes)"
+label var curr_use "Current use of FP at baseline (1=yes)"
 label var baseline_inj "Baseline FP method: Injectables (1=yes)"
 label var baseline_implants "Baseline FP method: Implants (1=yes)"
-label var top_attribute "Top attribute: Effectiveness (1=yes)"
-label var top_attribute_wgt "Weight given to top attribute"
+label var top_attribute "Top attribute in choosing a FP method at baseline: Effectiveness (1=yes)"
+label var top_attribute_wgt "Weight given to top attribute at baseline"
 label var want_to_switch "Wants to switch methods at baseline (1=yes)"
 label var husband_support "Partner supports FP at baseline (1=yes)"
-label var prior_knowledge "Women's prior knowledge about FP (number of FP methods women ever heard of at BL)"
+label var prior_knowledge "Women's prior knowledge about FP at baseline(number of FP methods women ever heard of)"
 label var base_fup_span2 "Days between Baseline and Follow-up"
 
 * TABLE 2
 order age_binary cont_use1 eff_attribute w1_mergeRand COUN__FV_1 PHO_REC_4 HOME_REV_20 mergeCLI COUN_118 PHO_103 HOME_103 SHORT_T HUSB_T diff_method_8 diff_method_3 intertemperal_concordance contemp_concordance, after(base_fup_span2)
 
-label var age_binary "Stratifying variable: Women's age not older than 26 (1=yes)"
-label var cont_use1 "Stratifying variable: Contraceptive use at the baseline (injectable use over 5 months is considered not using, 1=yes)"
-label var eff_attribute "Stratifying variable: Top method attribute being effectiveness (1=yes)"
+label var age_binary "Stratifying variable: Women's age not older than 26 at baseline (1=yes)"
+label var cont_use1 "Stratifying variable: Contraceptive use at baseline (injectable use over 5 months is considered not using, 1=yes)"
+label var eff_attribute "Stratifying variable: Top method attribute in choosing a FP method at baseline being effectiveness (1=yes)"
 label var w1_mergeRand "Women were included for randomization (1= baseline only, 2 = randomization only, 3 = both)"
 label var COUN__FV_1 "Women attended the counseling session (1=yes)"
 label var PHO_REC_4 "Women consent to participate in the phone interview (1=yes)"
 label var HOME_REV_20 "Women consent to participate in the home-based interview (1=yes)"
-label var mergeCLI "Women went to the Good Health Kauma Clinic to pick up FP services (3=yes, 1=no)"
+label var mergeCLI "Women went to the Good Health Kauma Clinic to pick up FP services during the one-month service period (3=yes, 1=no)"
 label var COUN_118 "Women were pregnant at counseling (1=yes, 0=no, 88=don't know)"
 label var PHO_103 "Women reached by phone were pregnant at the follow-up (1=yes, 0=no)"
 label var HOME_103 "Women reached at home were pregnant at the follow-up (1=yes, 0=no)"
@@ -61,12 +61,12 @@ label var method_attribute_con5 "Pre-counseling stated preferred method is DIFFE
 
 * TABLE 4
 order women_own_house_a women_earn_more women_decide_her_m women_child_edu husb_supports_fp husb_want_more, after(method_attribute_con5)
-label var women_own_house_a "Women own at least one house alone (1=yes)"
-label var women_earn_more "Women earn no less than male partner (1=yes)"
-label var women_decide_her_m "Women decide how her earnings should be used (1=yes)"
-label var women_child_edu "Women deide over children's education (1=yes)"
-label var husb_supports_fp "Male partners strongly support family planning (1=yes)"
-label var husb_want_more "Male partners want more children than their wives (1=yes)"
+label var women_own_house_a "Baseline: Women own at least one house alone (1=yes)"
+label var women_earn_more "Baseline: Women earn no less than male partner (1=yes)"
+label var women_decide_her_m "Baseline: Women decide how her earnings should be used (1=yes)"
+label var women_child_edu "Baseline: Women deide over children's education (1=yes)"
+label var husb_supports_fp "Baseline: Male partners strongly support family planning (1=yes)"
+label var husb_want_more "Baseline: Male partners want more children than their wives (1=yes)"
 	label val women_own_house_a women_earn_more women_decide_her_m women_child_edu husb_supports_fp husb_want_more yes
 
 * TABLE A2
@@ -151,7 +151,7 @@ label var attrited "Women who attrited from the sample at the counseling or foll
 * TABLE E3-E5
 order COUN_available COUN__husb_cons PHO_REC_1 HOM_REC_1 anyClinic, after(attrited)
 label var COUN_available "Woman is available for counseling (1=yes)"
-label var COUN__husb_cons "Male partners consent to participate in the study (1=yes)"
+label var COUN__husb_cons "Male partners consent to participate in counseling (1=yes)"
 label var PHO_REC_1 "Woman is available for the phone-based interview (1=yes)"
 label var HOM_REC_1 "Woman is available for the home-based interview (1=yes)"
 label var anyClinic "In the past month, woman visited the Good Health (Kauma clinic), a pharmacy, or hospital to receive any family planning services (1=yes)"
@@ -160,7 +160,7 @@ label var anyClinic "In the past month, woman visited the Good Health (Kauma cli
 order BL_long_acting_method husb_satisfied, after(anyClinic)
 
 label var BL_long_acting_method "Method use at baseline is a long-acting method (IUD/injectables/implants (1=yes))"
-label var husb_satisfied "Male partners were very satisfied or somewhat satisfied with their wives' current contraceptive method at baseline (1=yes)"
+label var husb_satisfied "Baseline: Male partners were very satisfied or somewhat satisfied with their wives' current contraceptive method (1=yes)"
 	label val BL_long_acting_method husb_satisfied yes
 
 * TABLE F1
